@@ -1,0 +1,2496 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Surah Az-Zumar 39:1 — The Revelation of the Book</title>
+  <meta name="description" content="An interactive, visually stunning exploration of Surah Az-Zumar 39:1 with grammar, morphology, and quiz.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ══════════════════════════════════════════════════════════
+       CASCADE LAYERS
+       ══════════════════════════════════════════════════════════ */
+    @layer reset, base, theme, components, animations, utilities;
+
+    /* ══════════════════════════════════════════════════════════
+       KFGQPC UTHMANIC HAFS FONT — King Fahad Madinah Mushaf
+       ══════════════════════════════════════════════════════════ */
+    @font-face {
+      font-family: 'KFGQPC';
+      src: url('https://cdn.jsdelivr.net/gh/nicedoc/quran-fonts@master/fonts/uthmanic/UthmanicHafs_v22.woff2') format('woff2'),
+           url('https://cdn.jsdelivr.net/gh/thetruetruth/quran-data-kfgqpc@main/hafs-smart/font/hafssmart.8.woff2') format('woff2');
+      font-display: swap;
+      unicode-range: U+0600-06FF, U+FB50-FDFF, U+FE70-FEFF;
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       CUSTOM PROPERTIES (ANIMATABLE)
+       ══════════════════════════════════════════════════════════ */
+    @property --glow-intensity {
+      syntax: '<number>';
+      inherits: false;
+      initial-value: 0;
+    }
+
+    @property --particle-hue {
+      syntax: '<angle>';
+      inherits: false;
+      initial-value: 38deg;
+    }
+
+    @property --gradient-pos {
+      syntax: '<percentage>';
+      inherits: false;
+      initial-value: 0%;
+    }
+
+    @property --reveal-progress {
+      syntax: '<percentage>';
+      inherits: false;
+      initial-value: 0%;
+    }
+
+    @property --card-glow {
+      syntax: '<color>';
+      inherits: false;
+      initial-value: transparent;
+    }
+
+    @property --shimmer-x {
+      syntax: '<percentage>';
+      inherits: false;
+      initial-value: -100%;
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       RESET LAYER
+       ══════════════════════════════════════════════════════════ */
+    @layer reset {
+      *, *::before, *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        interpolate-size: allow-keywords;
+        text-size-adjust: 100%;
+      }
+
+      body {
+        min-block-size: 100dvh;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      img, picture, video, canvas, svg {
+        display: block;
+        max-inline-size: 100%;
+      }
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       BASE LAYER
+       ══════════════════════════════════════════════════════════ */
+    @layer base {
+      :root {
+        /* Color system */
+        --bg-deep: #050520;
+        --bg-surface: oklch(0.15 0.03 260);
+        --bg-card: oklch(0.13 0.04 260 / 0.85);
+        --bg-card-hover: oklch(0.16 0.05 260 / 0.9);
+
+        --text-primary: #f0e6d3;
+        --text-secondary: oklch(0.78 0.02 60);
+        --text-muted: oklch(0.6 0.02 260);
+
+        /* Grammar color system */
+        --clr-subject: oklch(0.78 0.12 70);       /* Gold — Subject */
+        --clr-genitive: oklch(0.75 0.12 175);      /* Teal — Genitive */
+        --clr-preposition: oklch(0.72 0.04 250);    /* Silver — Preposition */
+        --clr-divine: oklch(0.68 0.15 270);         /* Blue — Divine Name */
+        --clr-attribute: oklch(0.72 0.14 310);      /* Purple — Attributes */
+
+        --clr-gold: #d4a574;
+        --clr-gold-bright: #f5d394;
+        --clr-accent: oklch(0.7 0.15 50);
+
+        /* Spacing */
+        --space-xs: clamp(0.25rem, 0.5vw, 0.5rem);
+        --space-sm: clamp(0.5rem, 1vw, 1rem);
+        --space-md: clamp(1rem, 2vw, 2rem);
+        --space-lg: clamp(2rem, 4vw, 4rem);
+        --space-xl: clamp(3rem, 6vw, 6rem);
+        --space-2xl: clamp(4rem, 8vw, 8rem);
+
+        /* Typography */
+        --font-arabic: 'KFGQPC', 'Scheherazade New', 'Traditional Arabic', serif;
+        --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+        --font-size-arabic: clamp(2rem, 5vw, 4.5rem);
+        --font-size-arabic-word: clamp(1.8rem, 4vw, 3.5rem);
+
+        /* Transitions */
+        --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+        --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+        --ease-out: cubic-bezier(0, 0, 0.2, 1);
+
+        /* Border radius */
+        --radius-sm: 0.5rem;
+        --radius-md: 1rem;
+        --radius-lg: 1.5rem;
+        --radius-pill: 100vmax;
+      }
+
+      body {
+        font-family: var(--font-body);
+        background: var(--bg-deep);
+        color: var(--text-primary);
+        line-height: 1.7;
+        overflow-x: hidden;
+      }
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       THEME LAYER
+       ══════════════════════════════════════════════════════════ */
+    @layer theme {
+      /* Global selection */
+      ::selection {
+        background: oklch(0.5 0.12 50 / 0.4);
+        color: var(--clr-gold-bright);
+      }
+
+      /* Scrollbar */
+      ::-webkit-scrollbar {
+        inline-size: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--bg-deep);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: oklch(0.35 0.08 50);
+        border-radius: var(--radius-pill);
+      }
+
+      /* Focus visible */
+      :focus-visible {
+        outline: 2px solid var(--clr-gold);
+        outline-offset: 3px;
+        border-radius: var(--radius-sm);
+      }
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       ANIMATIONS LAYER
+       ══════════════════════════════════════════════════════════ */
+    @layer animations {
+      /* ── Preloader ── */
+      @keyframes preloader-spin {
+        to { rotate: 360deg; }
+      }
+
+      @keyframes preloader-pulse {
+        0%, 100% { opacity: 0.4; scale: 0.95; }
+        50% { opacity: 1; scale: 1.05; }
+      }
+
+      @keyframes preloader-exit {
+        to {
+          opacity: 0;
+          backdrop-filter: blur(0px);
+          visibility: hidden;
+        }
+      }
+
+      /* ── Hero text breathing glow ── */
+      @keyframes breathe {
+        0%, 100% {
+          --glow-intensity: 0.3;
+          text-shadow:
+            0 0 20px oklch(0.7 0.12 50 / var(--glow-intensity)),
+            0 0 60px oklch(0.6 0.1 50 / calc(var(--glow-intensity) * 0.5));
+        }
+        50% {
+          --glow-intensity: 0.7;
+          text-shadow:
+            0 0 30px oklch(0.7 0.12 50 / var(--glow-intensity)),
+            0 0 80px oklch(0.6 0.1 50 / calc(var(--glow-intensity) * 0.5)),
+            0 0 120px oklch(0.5 0.08 50 / calc(var(--glow-intensity) * 0.3));
+        }
+      }
+
+      /* ── Word stagger entrance ── */
+      @keyframes word-appear {
+        from {
+          opacity: 0;
+          translate: 0 30px;
+          scale: 0.9;
+          filter: blur(8px);
+        }
+        to {
+          opacity: 1;
+          translate: 0 0;
+          scale: 1;
+          filter: blur(0px);
+        }
+      }
+
+      /* ── Floating decoration ── */
+      @keyframes float-y {
+        0%, 100% { translate: 0 0; }
+        50% { translate: 0 -15px; }
+      }
+
+      @keyframes float-rotate {
+        0% { rotate: 0deg; }
+        100% { rotate: 360deg; }
+      }
+
+      /* ── Shimmer ── */
+      @keyframes shimmer {
+        from { --shimmer-x: -100%; }
+        to { --shimmer-x: 200%; }
+      }
+
+      /* ── Scroll indicator ── */
+      @keyframes scroll-hint {
+        0%, 100% { opacity: 0.4; translate: 0 0; }
+        50% { opacity: 1; translate: 0 8px; }
+      }
+
+      /* ── Section reveal (scroll-driven) ── */
+      @keyframes reveal-up {
+        from {
+          opacity: 0;
+          translate: 0 60px;
+          filter: blur(4px);
+        }
+        to {
+          opacity: 1;
+          translate: 0 0;
+          filter: blur(0);
+        }
+      }
+
+      /* ── Card entrance ── */
+      @keyframes card-pop {
+        from {
+          opacity: 0;
+          scale: 0.85;
+          translate: 0 40px;
+        }
+        to {
+          opacity: 1;
+          scale: 1;
+          translate: 0 0;
+        }
+      }
+
+      /* ── Root letter extraction ── */
+      @keyframes extract-letter {
+        0% {
+          opacity: 0;
+          scale: 0.5;
+          translate: 0 20px;
+        }
+        60% {
+          opacity: 1;
+          scale: 1.15;
+          translate: 0 -5px;
+        }
+        100% {
+          opacity: 1;
+          scale: 1;
+          translate: 0 0;
+        }
+      }
+
+      /* ── Quiz feedback ── */
+      @keyframes correct-pulse {
+        0% { box-shadow: 0 0 0 0 oklch(0.7 0.15 145 / 0.5); }
+        70% { box-shadow: 0 0 0 15px oklch(0.7 0.15 145 / 0); }
+        100% { box-shadow: 0 0 0 0 oklch(0.7 0.15 145 / 0); }
+      }
+
+      @keyframes wrong-shake {
+        0%, 100% { translate: 0 0; }
+        20% { translate: -8px 0; }
+        40% { translate: 8px 0; }
+        60% { translate: -5px 0; }
+        80% { translate: 5px 0; }
+      }
+
+      @keyframes confetti-fall {
+        0% {
+          translate: 0 0;
+          rotate: 0deg;
+          opacity: 1;
+        }
+        100% {
+          translate: var(--x-drift) 400px;
+          rotate: var(--spin);
+          opacity: 0;
+        }
+      }
+
+      /* ── Gradient border animation ── */
+      @keyframes border-spin {
+        to { --gradient-pos: 100%; }
+      }
+
+      /* ── Progress bar ── */
+      @keyframes progress-fill {
+        from { inline-size: 0; }
+      }
+
+      /* ── Scroll-driven section reveals ── */
+      @media (prefers-reduced-motion: no-preference) {
+        @supports ((animation-timeline: view()) and (animation-range: entry)) {
+          .scroll-reveal {
+            animation: reveal-up auto var(--ease-out) backwards;
+            animation-timeline: view();
+            animation-range: entry 0% entry 100%;
+          }
+        }
+      }
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       COMPONENTS LAYER
+       ══════════════════════════════════════════════════════════ */
+    @layer components {
+
+      /* ── PRELOADER ── */
+      .preloader {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: grid;
+        place-items: center;
+        background: var(--bg-deep);
+        backdrop-filter: blur(20px);
+        transition: opacity 0.8s var(--ease-smooth), visibility 0.8s;
+
+        &.hidden {
+          opacity: 0;
+          visibility: hidden;
+          pointer-events: none;
+        }
+
+        .preloader__ornament {
+          position: relative;
+          inline-size: 100px;
+          aspect-ratio: 1;
+
+          &::before,
+          &::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 2px solid transparent;
+            border-radius: 50%;
+          }
+
+          &::before {
+            border-block-start-color: var(--clr-gold);
+            border-inline-end-color: var(--clr-gold);
+            animation: preloader-spin 1.5s linear infinite;
+          }
+
+          &::after {
+            inset: 10px;
+            border-block-end-color: var(--clr-gold-bright);
+            border-inline-start-color: var(--clr-gold-bright);
+            animation: preloader-spin 1s linear infinite reverse;
+          }
+        }
+
+        .preloader__text {
+          font-family: var(--font-arabic);
+          font-size: 1.5rem;
+          color: var(--clr-gold);
+          margin-block-start: var(--space-md);
+          animation: preloader-pulse 2s ease-in-out infinite;
+          text-wrap: balance;
+        }
+      }
+
+      /* ── COSMIC BACKGROUND (Canvas) ── */
+      .cosmic-canvas {
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        pointer-events: none;
+      }
+
+      /* ── DECORATIVE GEOMETRIC FLOATERS ── */
+      .geo-floater {
+        position: fixed;
+        pointer-events: none;
+        opacity: 0.04;
+        z-index: -1;
+
+        &.octagram {
+          inline-size: clamp(100px, 20vw, 300px);
+          aspect-ratio: 1;
+          border: 1px solid var(--clr-gold);
+          rotate: 22.5deg;
+          animation: float-rotate 60s linear infinite;
+
+          &::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 1px solid var(--clr-gold);
+            rotate: 45deg;
+          }
+        }
+
+        &.top-right {
+          inset-block-start: 10%;
+          inset-inline-end: -5%;
+        }
+
+        &.bottom-left {
+          inset-block-end: 15%;
+          inset-inline-start: -8%;
+          animation-direction: reverse;
+          animation-duration: 80s;
+        }
+      }
+
+      /* ── NAVIGATION ── */
+      .top-nav {
+        position: fixed;
+        inset-block-start: 0;
+        inset-inline: 0;
+        z-index: 100;
+        display: flex;
+        justify-content: center;
+        padding: var(--space-sm) var(--space-md);
+        background: oklch(0.05 0.02 260 / 0.7);
+        backdrop-filter: blur(20px) saturate(1.5);
+        border-block-end: 1px solid oklch(0.3 0.05 50 / 0.15);
+        transition: translate 0.4s var(--ease-smooth);
+
+        &.hidden {
+          translate: 0 -100%;
+        }
+
+        .nav-links {
+          display: flex;
+          gap: var(--space-sm);
+          list-style: none;
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+
+        .nav-link {
+          font-size: 0.8rem;
+          font-weight: 500;
+          letter-spacing: 0.05em;
+          text-transform: uppercase;
+          color: var(--text-secondary);
+          text-decoration: none;
+          padding: 0.4em 0.8em;
+          border-radius: var(--radius-pill);
+          transition: all 0.3s var(--ease-smooth);
+
+          &:hover,
+          &:focus-visible {
+            color: var(--clr-gold);
+            background: oklch(0.5 0.1 50 / 0.1);
+          }
+        }
+      }
+
+      /* ── HERO SECTION ── */
+      .hero {
+        position: relative;
+        min-block-size: 100dvh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: var(--space-2xl) var(--space-md);
+        text-align: center;
+        overflow: hidden;
+
+        .hero__surah-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: var(--space-xs);
+          padding: 0.4em 1.2em;
+          border: 1px solid oklch(0.5 0.1 50 / 0.3);
+          border-radius: var(--radius-pill);
+          font-size: 0.85rem;
+          font-weight: 500;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          color: var(--clr-gold);
+          background: oklch(0.15 0.05 50 / 0.3);
+          backdrop-filter: blur(10px);
+          margin-block-end: var(--space-lg);
+          opacity: 0;
+          animation: word-appear 1s var(--ease-out) 0.5s forwards;
+        }
+
+        .hero__ayah {
+          font-family: var(--font-arabic);
+          font-size: var(--font-size-arabic);
+          line-height: 2;
+          color: var(--clr-gold-bright);
+          direction: rtl;
+          text-wrap: balance;
+          animation: breathe 4s ease-in-out infinite;
+          max-inline-size: 90vw;
+
+          .hero__word {
+            display: inline-block;
+            opacity: 0;
+            animation: word-appear 0.8s var(--ease-spring) forwards;
+            cursor: default;
+            padding-inline: 0.1em;
+            transition: scale 0.3s var(--ease-spring), filter 0.3s;
+
+            &:hover {
+              scale: 1.08;
+              filter: brightness(1.3);
+            }
+          }
+
+          @for $i from 1 through 6 {
+            .hero__word:nth-child(#{$i}) {
+              animation-delay: calc(1s + #{$i} * 0.2s);
+            }
+          }
+        }
+
+        .hero__translation {
+          font-size: clamp(1rem, 2vw, 1.4rem);
+          font-weight: 300;
+          color: var(--text-secondary);
+          max-inline-size: 600px;
+          margin-block-start: var(--space-lg);
+          text-wrap: balance;
+          opacity: 0;
+          animation: word-appear 1s var(--ease-out) 2.5s forwards;
+          letter-spacing: 0.02em;
+          line-height: 1.8;
+        }
+
+        .hero__scroll-hint {
+          position: absolute;
+          inset-block-end: var(--space-lg);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: var(--space-xs);
+          color: var(--text-muted);
+          font-size: 0.75rem;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          opacity: 0;
+          animation: word-appear 1s var(--ease-out) 3.2s forwards;
+
+          .scroll-arrow {
+            inline-size: 20px;
+            block-size: 30px;
+            border: 1.5px solid var(--text-muted);
+            border-radius: 10px;
+            position: relative;
+
+            &::after {
+              content: '';
+              position: absolute;
+              inset-block-start: 6px;
+              inset-inline-start: 50%;
+              translate: -50% 0;
+              inline-size: 3px;
+              block-size: 6px;
+              background: var(--clr-gold);
+              border-radius: var(--radius-pill);
+              animation: scroll-hint 2s ease-in-out infinite;
+            }
+          }
+        }
+      }
+
+      /* ── Hero word stagger delays (applied via style attribute) ── */
+
+      /* ── SECTION CONTAINER ── */
+      .section {
+        padding-block: var(--space-2xl);
+        padding-inline: var(--space-md);
+        max-inline-size: 1100px;
+        margin-inline: auto;
+      }
+
+      .section__header {
+        text-align: center;
+        margin-block-end: var(--space-xl);
+
+        .section__number {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          inline-size: 2.5rem;
+          block-size: 2.5rem;
+          border: 1px solid oklch(0.5 0.1 50 / 0.3);
+          border-radius: 50%;
+          font-size: 0.85rem;
+          font-weight: 600;
+          color: var(--clr-gold);
+          margin-block-end: var(--space-sm);
+        }
+
+        .section__title {
+          font-size: clamp(1.5rem, 3vw, 2.5rem);
+          font-weight: 700;
+          background: linear-gradient(135deg, var(--clr-gold-bright), var(--clr-gold), oklch(0.65 0.1 30));
+          background-clip: text;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          text-wrap: balance;
+        }
+
+        .section__subtitle {
+          font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+          color: var(--text-secondary);
+          margin-block-start: var(--space-xs);
+          max-inline-size: 600px;
+          margin-inline: auto;
+          text-wrap: balance;
+        }
+      }
+
+      /* ── DIVIDER ── */
+      .divider {
+        block-size: 1px;
+        max-inline-size: 300px;
+        margin-inline: auto;
+        margin-block: var(--space-xl);
+        background: linear-gradient(90deg, transparent, var(--clr-gold), transparent);
+        opacity: 0.3;
+      }
+
+      /* ── COLOR LEGEND ── */
+      .color-legend {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: var(--space-sm) var(--space-md);
+        margin-block-end: var(--space-lg);
+        padding: var(--space-sm) var(--space-md);
+        background: var(--bg-card);
+        border-radius: var(--radius-lg);
+        border: 1px solid oklch(0.3 0.05 260 / 0.3);
+
+        .legend-item {
+          display: flex;
+          align-items: center;
+          gap: var(--space-xs);
+          font-size: 0.85rem;
+          color: var(--text-secondary);
+
+          .legend-dot {
+            inline-size: 10px;
+            block-size: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+          }
+        }
+      }
+
+      /* ── WORD ANALYSIS CARDS ── */
+      .word-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+        gap: var(--space-md);
+      }
+
+      .word-card {
+        position: relative;
+        background: var(--bg-card);
+        border: 1px solid oklch(0.25 0.04 260 / 0.5);
+        border-radius: var(--radius-lg);
+        padding: var(--space-md);
+        overflow: hidden;
+        transition: all 0.4s var(--ease-smooth);
+        cursor: default;
+
+        /* Shimmer overlay */
+        &::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(
+            105deg,
+            transparent 40%,
+            oklch(1 0 0 / 0.03) 45%,
+            oklch(1 0 0 / 0.06) 50%,
+            oklch(1 0 0 / 0.03) 55%,
+            transparent 60%
+          );
+          translate: var(--shimmer-x) 0;
+          transition: none;
+          pointer-events: none;
+        }
+
+        &:hover {
+          border-color: var(--card-border-color, oklch(0.4 0.08 50 / 0.5));
+          background: var(--bg-card-hover);
+          translate: 0 -4px;
+          box-shadow: 0 20px 60px oklch(0 0 0 / 0.3),
+                      0 0 40px var(--card-glow-color, oklch(0.5 0.1 50 / 0.05));
+          animation: shimmer 1.5s ease-in-out;
+        }
+
+        .word-card__arabic {
+          font-family: var(--font-arabic);
+          font-size: var(--font-size-arabic-word);
+          direction: rtl;
+          text-align: center;
+          padding-block: var(--space-sm);
+          color: var(--card-arabic-color, var(--clr-gold-bright));
+          transition: text-shadow 0.3s;
+        }
+
+        &:hover .word-card__arabic {
+          text-shadow: 0 0 20px var(--card-glow-color, oklch(0.5 0.1 50 / 0.3));
+        }
+
+        .word-card__meaning {
+          font-size: 1.1rem;
+          font-weight: 600;
+          text-align: center;
+          color: var(--text-primary);
+          margin-block: var(--space-xs);
+        }
+
+        .word-card__details {
+          margin-block-start: var(--space-sm);
+          padding-block-start: var(--space-sm);
+          border-block-start: 1px solid oklch(0.3 0.04 260 / 0.3);
+        }
+
+        .detail-row {
+          display: flex;
+          justify-content: space-between;
+          align-items: baseline;
+          padding-block: 0.3em;
+          font-size: 0.88rem;
+
+          .detail-label {
+            color: var(--text-muted);
+            font-weight: 500;
+          }
+
+          .detail-value {
+            color: var(--text-primary);
+            font-weight: 400;
+            text-align: end;
+          }
+        }
+
+        .word-card__tag {
+          display: inline-block;
+          padding: 0.2em 0.7em;
+          border-radius: var(--radius-pill);
+          font-size: 0.75rem;
+          font-weight: 600;
+          letter-spacing: 0.04em;
+          text-transform: uppercase;
+          margin-block-start: var(--space-sm);
+          background: var(--tag-bg, oklch(0.2 0.05 50 / 0.5));
+          color: var(--tag-color, var(--clr-gold));
+          border: 1px solid var(--tag-border, oklch(0.4 0.08 50 / 0.3));
+        }
+      }
+
+      /* ── Grammar role colors per card ── */
+      .word-card[data-role="subject"] {
+        --card-arabic-color: var(--clr-subject);
+        --card-glow-color: oklch(0.78 0.12 70 / 0.15);
+        --card-border-color: oklch(0.78 0.12 70 / 0.4);
+        --tag-bg: oklch(0.78 0.12 70 / 0.15);
+        --tag-color: var(--clr-subject);
+        --tag-border: oklch(0.78 0.12 70 / 0.3);
+      }
+
+      .word-card[data-role="genitive"] {
+        --card-arabic-color: var(--clr-genitive);
+        --card-glow-color: oklch(0.75 0.12 175 / 0.15);
+        --card-border-color: oklch(0.75 0.12 175 / 0.4);
+        --tag-bg: oklch(0.75 0.12 175 / 0.15);
+        --tag-color: var(--clr-genitive);
+        --tag-border: oklch(0.75 0.12 175 / 0.3);
+      }
+
+      .word-card[data-role="preposition"] {
+        --card-arabic-color: var(--clr-preposition);
+        --card-glow-color: oklch(0.72 0.04 250 / 0.15);
+        --card-border-color: oklch(0.72 0.04 250 / 0.4);
+        --tag-bg: oklch(0.72 0.04 250 / 0.15);
+        --tag-color: var(--clr-preposition);
+        --tag-border: oklch(0.72 0.04 250 / 0.3);
+      }
+
+      .word-card[data-role="divine"] {
+        --card-arabic-color: var(--clr-divine);
+        --card-glow-color: oklch(0.68 0.15 270 / 0.15);
+        --card-border-color: oklch(0.68 0.15 270 / 0.4);
+        --tag-bg: oklch(0.68 0.15 270 / 0.15);
+        --tag-color: var(--clr-divine);
+        --tag-border: oklch(0.68 0.15 270 / 0.3);
+      }
+
+      .word-card[data-role="attribute"] {
+        --card-arabic-color: var(--clr-attribute);
+        --card-glow-color: oklch(0.72 0.14 310 / 0.15);
+        --card-border-color: oklch(0.72 0.14 310 / 0.4);
+        --tag-bg: oklch(0.72 0.14 310 / 0.15);
+        --tag-color: var(--clr-attribute);
+        --tag-border: oklch(0.72 0.14 310 / 0.3);
+      }
+
+      /* ── SARF (MORPHOLOGY) SECTION ── */
+      .sarf-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+        gap: var(--space-md);
+      }
+
+      .sarf-card {
+        background: var(--bg-card);
+        border: 1px solid oklch(0.25 0.04 260 / 0.5);
+        border-radius: var(--radius-lg);
+        padding: var(--space-md);
+        transition: all 0.4s var(--ease-smooth);
+
+        &:hover {
+          translate: 0 -3px;
+          box-shadow: 0 15px 40px oklch(0 0 0 / 0.3);
+        }
+
+        .sarf-card__header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-block-end: var(--space-sm);
+          padding-block-end: var(--space-sm);
+          border-block-end: 1px solid oklch(0.3 0.04 260 / 0.3);
+        }
+
+        .sarf-card__word {
+          font-family: var(--font-arabic);
+          font-size: 1.8rem;
+          direction: rtl;
+          color: var(--clr-gold-bright);
+        }
+
+        .sarf-card__pattern {
+          font-family: var(--font-arabic);
+          font-size: 1.2rem;
+          direction: rtl;
+          color: var(--text-muted);
+          padding: 0.2em 0.6em;
+          border: 1px solid oklch(0.3 0.04 260 / 0.4);
+          border-radius: var(--radius-sm);
+        }
+
+        .root-display {
+          display: flex;
+          justify-content: center;
+          gap: var(--space-sm);
+          margin-block: var(--space-md);
+
+          .root-letter {
+            display: grid;
+            place-items: center;
+            inline-size: 3.5rem;
+            block-size: 3.5rem;
+            font-family: var(--font-arabic);
+            font-size: 1.6rem;
+            color: var(--clr-gold-bright);
+            border: 2px solid var(--clr-gold);
+            border-radius: var(--radius-md);
+            background: oklch(0.15 0.06 50 / 0.3);
+            opacity: 0;
+            transition: all 0.5s var(--ease-spring);
+
+            &.visible {
+              opacity: 1;
+              animation: extract-letter 0.6s var(--ease-spring) forwards;
+            }
+          }
+        }
+
+        .sarf-info {
+          font-size: 0.88rem;
+
+          .sarf-row {
+            display: flex;
+            justify-content: space-between;
+            padding-block: 0.4em;
+            border-block-end: 1px solid oklch(0.2 0.02 260 / 0.3);
+
+            &:last-child {
+              border: none;
+            }
+
+            .sarf-label {
+              color: var(--text-muted);
+              font-weight: 500;
+            }
+
+            .sarf-value {
+              color: var(--text-primary);
+              text-align: end;
+            }
+          }
+        }
+      }
+
+      /* ── SENTENCE STRUCTURE DIAGRAM ── */
+      .sentence-diagram {
+        max-inline-size: 800px;
+        margin-inline: auto;
+        padding: var(--space-lg);
+        background: var(--bg-card);
+        border-radius: var(--radius-lg);
+        border: 1px solid oklch(0.25 0.04 260 / 0.5);
+
+        .diagram-ayah {
+          font-family: var(--font-arabic);
+          font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+          direction: rtl;
+          text-align: center;
+          line-height: 2.2;
+          margin-block-end: var(--space-lg);
+
+          .d-word {
+            display: inline-block;
+            position: relative;
+            padding-inline: 0.15em;
+            cursor: default;
+            transition: all 0.3s var(--ease-spring);
+
+            &::after {
+              content: attr(data-label);
+              position: absolute;
+              inset-block-end: -2em;
+              inset-inline: 0;
+              font-family: var(--font-body);
+              font-size: 0.55rem;
+              font-weight: 600;
+              letter-spacing: 0.06em;
+              text-transform: uppercase;
+              text-align: center;
+              direction: ltr;
+              opacity: 0;
+              translate: 0 -5px;
+              transition: all 0.3s var(--ease-out);
+            }
+
+            &:hover {
+              scale: 1.1;
+
+              &::after {
+                opacity: 1;
+                translate: 0 0;
+              }
+            }
+
+            &[data-role="subject"] {
+              color: var(--clr-subject);
+              &::after { color: var(--clr-subject); }
+            }
+            &[data-role="genitive"] {
+              color: var(--clr-genitive);
+              &::after { color: var(--clr-genitive); }
+            }
+            &[data-role="preposition"] {
+              color: var(--clr-preposition);
+              &::after { color: var(--clr-preposition); }
+            }
+            &[data-role="divine"] {
+              color: var(--clr-divine);
+              &::after { color: var(--clr-divine); }
+            }
+            &[data-role="attribute"] {
+              color: var(--clr-attribute);
+              &::after { color: var(--clr-attribute); }
+            }
+          }
+        }
+
+        .diagram-structure {
+          display: grid;
+          grid-template-columns: 1fr auto 1fr;
+          gap: var(--space-sm);
+          align-items: center;
+          text-align: center;
+
+          .structure-box {
+            padding: var(--space-sm) var(--space-md);
+            border-radius: var(--radius-md);
+            border: 1px solid oklch(0.3 0.05 260 / 0.4);
+            background: oklch(0.1 0.03 260 / 0.5);
+
+            .struct-label {
+              font-size: 0.7rem;
+              font-weight: 600;
+              text-transform: uppercase;
+              letter-spacing: 0.08em;
+              margin-block-end: 0.3em;
+            }
+
+            .struct-arabic {
+              font-family: var(--font-arabic);
+              font-size: 1.3rem;
+              direction: rtl;
+            }
+
+            .struct-english {
+              font-size: 0.8rem;
+              color: var(--text-secondary);
+              margin-block-start: 0.2em;
+            }
+
+            &.subject-box {
+              .struct-label { color: var(--clr-subject); }
+              .struct-arabic { color: var(--clr-subject); }
+              border-color: oklch(0.78 0.12 70 / 0.3);
+            }
+
+            &.predicate-box {
+              .struct-label { color: var(--clr-divine); }
+              .struct-arabic { color: var(--clr-divine); }
+              border-color: oklch(0.68 0.15 270 / 0.3);
+            }
+          }
+
+          .structure-connector {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+          }
+        }
+      }
+
+      /* ── THEMES SECTION ── */
+      .themes-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+        gap: var(--space-md);
+      }
+
+      .theme-card {
+        padding: var(--space-md);
+        background: var(--bg-card);
+        border-radius: var(--radius-lg);
+        border: 1px solid oklch(0.25 0.04 260 / 0.5);
+        text-align: center;
+        transition: all 0.4s var(--ease-smooth);
+
+        &:hover {
+          translate: 0 -4px;
+          box-shadow: 0 15px 40px oklch(0 0 0 / 0.3);
+          border-color: oklch(0.4 0.08 50 / 0.3);
+        }
+
+        .theme-icon {
+          font-size: 2.5rem;
+          margin-block-end: var(--space-sm);
+          filter: grayscale(0.2);
+        }
+
+        .theme-title {
+          font-size: 1.1rem;
+          font-weight: 600;
+          color: var(--clr-gold);
+          margin-block-end: var(--space-xs);
+        }
+
+        .theme-desc {
+          font-size: 0.9rem;
+          color: var(--text-secondary);
+          line-height: 1.6;
+        }
+      }
+
+      /* ── QUIZ SECTION ── */
+      .quiz-container {
+        max-inline-size: 700px;
+        margin-inline: auto;
+      }
+
+      .quiz-progress {
+        display: flex;
+        align-items: center;
+        gap: var(--space-sm);
+        margin-block-end: var(--space-md);
+
+        .quiz-progress__bar {
+          flex: 1;
+          block-size: 6px;
+          background: oklch(0.2 0.03 260);
+          border-radius: var(--radius-pill);
+          overflow: hidden;
+
+          .quiz-progress__fill {
+            block-size: 100%;
+            background: linear-gradient(90deg, var(--clr-gold), var(--clr-gold-bright));
+            border-radius: var(--radius-pill);
+            transition: inline-size 0.5s var(--ease-spring);
+          }
+        }
+
+        .quiz-progress__text {
+          font-size: 0.85rem;
+          color: var(--text-muted);
+          font-weight: 600;
+          white-space: nowrap;
+        }
+      }
+
+      .quiz-card {
+        background: var(--bg-card);
+        border: 1px solid oklch(0.25 0.04 260 / 0.5);
+        border-radius: var(--radius-lg);
+        padding: var(--space-lg);
+        opacity: 0;
+        translate: 0 20px;
+        transition: all 0.5s var(--ease-spring);
+
+        &.active {
+          opacity: 1;
+          translate: 0 0;
+        }
+
+        .quiz-question {
+          font-size: clamp(1rem, 2vw, 1.2rem);
+          font-weight: 600;
+          color: var(--text-primary);
+          margin-block-end: var(--space-md);
+          text-wrap: balance;
+          line-height: 1.6;
+        }
+
+        .quiz-options {
+          display: grid;
+          gap: var(--space-sm);
+        }
+
+        .quiz-option {
+          display: flex;
+          align-items: center;
+          gap: var(--space-sm);
+          padding: var(--space-sm) var(--space-md);
+          background: oklch(0.12 0.03 260 / 0.8);
+          border: 1.5px solid oklch(0.3 0.04 260 / 0.4);
+          border-radius: var(--radius-md);
+          cursor: pointer;
+          transition: all 0.3s var(--ease-smooth);
+          font-size: 0.95rem;
+          font-family: var(--font-body);
+          color: var(--text-primary);
+          text-align: start;
+
+          .option-letter {
+            display: grid;
+            place-items: center;
+            inline-size: 2rem;
+            block-size: 2rem;
+            border-radius: 50%;
+            background: oklch(0.2 0.04 260);
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            flex-shrink: 0;
+            transition: all 0.3s;
+          }
+
+          &:hover:not(.disabled) {
+            border-color: var(--clr-gold);
+            background: oklch(0.15 0.05 50 / 0.3);
+
+            .option-letter {
+              background: oklch(0.3 0.08 50);
+              color: var(--clr-gold-bright);
+            }
+          }
+
+          &.correct {
+            border-color: oklch(0.7 0.15 145);
+            background: oklch(0.7 0.15 145 / 0.1);
+            animation: correct-pulse 0.8s ease-out;
+
+            .option-letter {
+              background: oklch(0.7 0.15 145);
+              color: white;
+            }
+          }
+
+          &.wrong {
+            border-color: oklch(0.65 0.2 25);
+            background: oklch(0.65 0.2 25 / 0.1);
+            animation: wrong-shake 0.5s ease-out;
+
+            .option-letter {
+              background: oklch(0.65 0.2 25);
+              color: white;
+            }
+          }
+
+          &.disabled {
+            pointer-events: none;
+            opacity: 0.6;
+          }
+
+          &.correct.disabled {
+            opacity: 1;
+          }
+        }
+
+        .quiz-feedback {
+          margin-block-start: var(--space-md);
+          padding: var(--space-sm) var(--space-md);
+          border-radius: var(--radius-md);
+          font-size: 0.9rem;
+          font-weight: 500;
+          opacity: 0;
+          translate: 0 10px;
+          transition: all 0.4s var(--ease-spring);
+
+          &.show {
+            opacity: 1;
+            translate: 0 0;
+          }
+
+          &.correct-feedback {
+            background: oklch(0.7 0.15 145 / 0.1);
+            border: 1px solid oklch(0.7 0.15 145 / 0.3);
+            color: oklch(0.8 0.12 145);
+          }
+
+          &.wrong-feedback {
+            background: oklch(0.65 0.2 25 / 0.1);
+            border: 1px solid oklch(0.65 0.2 25 / 0.3);
+            color: oklch(0.8 0.15 25);
+          }
+        }
+
+        .quiz-next {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.4em;
+          margin-block-start: var(--space-md);
+          padding: 0.6em 1.5em;
+          background: linear-gradient(135deg, var(--clr-gold), oklch(0.65 0.12 50));
+          color: var(--bg-deep);
+          font-family: var(--font-body);
+          font-size: 0.9rem;
+          font-weight: 600;
+          border: none;
+          border-radius: var(--radius-pill);
+          cursor: pointer;
+          opacity: 0;
+          translate: 0 10px;
+          transition: all 0.4s var(--ease-spring);
+
+          &.show {
+            opacity: 1;
+            translate: 0 0;
+          }
+
+          &:hover {
+            scale: 1.05;
+            box-shadow: 0 5px 20px oklch(0.6 0.1 50 / 0.3);
+          }
+        }
+      }
+
+      /* ── Quiz Results ── */
+      .quiz-results {
+        text-align: center;
+        padding: var(--space-xl);
+        background: var(--bg-card);
+        border-radius: var(--radius-lg);
+        border: 1px solid oklch(0.25 0.04 260 / 0.5);
+        display: none;
+
+        &.show {
+          display: block;
+          animation: card-pop 0.6s var(--ease-spring);
+        }
+
+        .results-score {
+          font-size: clamp(3rem, 6vw, 5rem);
+          font-weight: 700;
+          background: linear-gradient(135deg, var(--clr-gold-bright), var(--clr-gold));
+          background-clip: text;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+
+        .results-label {
+          font-size: 1.1rem;
+          color: var(--text-secondary);
+          margin-block-start: var(--space-xs);
+        }
+
+        .results-message {
+          font-size: 1rem;
+          color: var(--text-primary);
+          margin-block-start: var(--space-md);
+          line-height: 1.6;
+        }
+
+        .results-retry {
+          display: inline-flex;
+          margin-block-start: var(--space-md);
+          padding: 0.7em 2em;
+          background: linear-gradient(135deg, var(--clr-gold), oklch(0.65 0.12 50));
+          color: var(--bg-deep);
+          font-family: var(--font-body);
+          font-size: 1rem;
+          font-weight: 600;
+          border: none;
+          border-radius: var(--radius-pill);
+          cursor: pointer;
+          transition: all 0.3s var(--ease-spring);
+
+          &:hover {
+            scale: 1.05;
+            box-shadow: 0 5px 25px oklch(0.6 0.1 50 / 0.3);
+          }
+        }
+      }
+
+      /* ── Confetti container ── */
+      .confetti-container {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 1000;
+        overflow: hidden;
+
+        .confetti-piece {
+          position: absolute;
+          inset-block-start: -10px;
+          inline-size: 10px;
+          block-size: 10px;
+          border-radius: 2px;
+          animation: confetti-fall 2s ease-in forwards;
+        }
+      }
+
+      /* ── FOOTER ── */
+      .site-footer {
+        text-align: center;
+        padding: var(--space-lg) var(--space-md);
+        border-block-start: 1px solid oklch(0.2 0.03 260 / 0.5);
+        margin-block-start: var(--space-xl);
+
+        .footer-ayah {
+          font-family: var(--font-arabic);
+          font-size: 1.3rem;
+          direction: rtl;
+          color: var(--clr-gold);
+          margin-block-end: var(--space-sm);
+          opacity: 0.6;
+        }
+
+        .footer-ref {
+          font-size: 0.85rem;
+          color: var(--text-muted);
+          margin-block-end: var(--space-sm);
+        }
+
+        .footer-version {
+          font-size: 0.75rem;
+          color: var(--text-muted);
+          opacity: 0.6;
+        }
+      }
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       UTILITIES LAYER
+       ══════════════════════════════════════════════════════════ */
+    @layer utilities {
+      .visually-hidden {
+        position: absolute;
+        inline-size: 1px;
+        block-size: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+
+      .text-balance {
+        text-wrap: balance;
+      }
+
+      .dir-rtl {
+        direction: rtl;
+      }
+
+      .font-arabic {
+        font-family: var(--font-arabic);
+      }
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       RESPONSIVE
+       ══════════════════════════════════════════════════════════ */
+    @media (max-width: 640px) {
+      .top-nav .nav-links {
+        gap: 0.25rem;
+      }
+      .top-nav .nav-link {
+        font-size: 0.7rem;
+        padding: 0.3em 0.5em;
+      }
+      .word-card {
+        padding: var(--space-sm);
+      }
+      .sentence-diagram {
+        padding: var(--space-sm);
+      }
+      .diagram-structure {
+        grid-template-columns: 1fr !important;
+        gap: var(--space-xs) !important;
+      }
+      .structure-connector {
+        rotate: 90deg;
+      }
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       REDUCED MOTION
+       ══════════════════════════════════════════════════════════ */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .hero__ayah {
+        animation: none !important;
+      }
+      .hero__word {
+        opacity: 1 !important;
+        animation: none !important;
+      }
+      .hero__translation,
+      .hero__surah-badge,
+      .hero__scroll-hint {
+        opacity: 1 !important;
+        animation: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ═══════════════════ PRELOADER ═══════════════════ -->
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div style="text-align: center;">
+      <div class="preloader__ornament"></div>
+      <div class="preloader__text">بِسْمِ ٱللَّهِ</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ COSMIC CANVAS ═══════════════════ -->
+  <canvas class="cosmic-canvas" id="cosmicCanvas" aria-hidden="true"></canvas>
+
+  <!-- ═══════════════════ DECORATIVE FLOATERS ═══════════════════ -->
+  <div class="geo-floater octagram top-right" aria-hidden="true"></div>
+  <div class="geo-floater octagram bottom-left" aria-hidden="true"></div>
+
+  <!-- ═══════════════════ TOP NAV ═══════════════════ -->
+  <nav class="top-nav" id="topNav" aria-label="Page sections">
+    <ul class="nav-links">
+      <li><a class="nav-link" href="#hero">Verse</a></li>
+      <li><a class="nav-link" href="#grammar">Grammar</a></li>
+      <li><a class="nav-link" href="#sarf">Morphology</a></li>
+      <li><a class="nav-link" href="#structure">Structure</a></li>
+      <li><a class="nav-link" href="#themes">Themes</a></li>
+      <li><a class="nav-link" href="#quiz">Quiz</a></li>
+    </ul>
+  </nav>
+
+  <!-- ═══════════════════ HERO ═══════════════════ -->
+  <section class="hero" id="hero">
+    <div class="hero__surah-badge">
+      <span>Surah Az-Zumar</span>
+      <span style="opacity:0.4">•</span>
+      <span>39 : 1</span>
+    </div>
+
+    <h1 class="visually-hidden">Surah Az-Zumar, Verse 1</h1>
+
+    <div class="hero__ayah" aria-label="Arabic text of Surah Az-Zumar verse 1">
+      <span class="hero__word" style="animation-delay: 1s;">تَنزِيلُ</span>
+      <span class="hero__word" style="animation-delay: 1.25s;">ٱلْكِتَـٰبِ</span>
+      <span class="hero__word" style="animation-delay: 1.5s;">مِنَ</span>
+      <span class="hero__word" style="animation-delay: 1.75s;">ٱللَّهِ</span>
+      <span class="hero__word" style="animation-delay: 2s;">ٱلْعَزِيزِ</span>
+      <span class="hero__word" style="animation-delay: 2.25s;">ٱلْحَكِيمِ</span>
+    </div>
+
+    <p class="hero__translation">
+      "The revelation of the Book is from Allah,<br>
+      the Almighty, the All-Wise."
+    </p>
+
+    <div class="hero__scroll-hint" aria-hidden="true">
+      <div class="scroll-arrow"></div>
+      <span>Explore</span>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ GRAMMAR SECTION ═══════════════════ -->
+  <section class="section scroll-reveal" id="grammar">
+    <div class="section__header">
+      <div class="section__number">1</div>
+      <h2 class="section__title">Word-by-Word Grammar</h2>
+      <p class="section__subtitle">Every word color-coded by its grammatical role — hover each card to explore</p>
+    </div>
+
+    <!-- Color Legend -->
+    <div class="color-legend scroll-reveal">
+      <div class="legend-item">
+        <span class="legend-dot" style="background: var(--clr-subject);"></span>
+        <span>Subject</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-dot" style="background: var(--clr-genitive);"></span>
+        <span>Genitive (Possessive)</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-dot" style="background: var(--clr-preposition);"></span>
+        <span>Preposition</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-dot" style="background: var(--clr-divine);"></span>
+        <span>Divine Name</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-dot" style="background: var(--clr-attribute);"></span>
+        <span>Divine Attribute</span>
+      </div>
+    </div>
+
+    <!-- Word Cards -->
+    <div class="word-grid">
+
+      <!-- Word 1: تَنزِيلُ -->
+      <div class="word-card scroll-reveal" data-role="subject">
+        <div class="word-card__arabic">تَنزِيلُ</div>
+        <div class="word-card__meaning">The Sending Down</div>
+        <div class="word-card__details">
+          <div class="detail-row">
+            <span class="detail-label">Role</span>
+            <span class="detail-value">Subject (Mubtada)</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Case</span>
+            <span class="detail-value">Nominative (Marfu') — ـُ</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Relation</span>
+            <span class="detail-value">First part of possession (Mudaf)</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Word Type</span>
+            <span class="detail-value">Verbal Noun (Masdar)</span>
+          </div>
+        </div>
+        <span class="word-card__tag">Subject</span>
+      </div>
+
+      <!-- Word 2: ٱلْكِتَـٰبِ -->
+      <div class="word-card scroll-reveal" data-role="genitive">
+        <div class="word-card__arabic">ٱلْكِتَـٰبِ</div>
+        <div class="word-card__meaning">The Book</div>
+        <div class="word-card__details">
+          <div class="detail-row">
+            <span class="detail-label">Role</span>
+            <span class="detail-value">Possessive (Mudaf Ilayhi)</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Case</span>
+            <span class="detail-value">Genitive (Majrur) — ـِ</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Why Genitive?</span>
+            <span class="detail-value">Second part of a possessive phrase</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Refers To</span>
+            <span class="detail-value">The Quran</span>
+          </div>
+        </div>
+        <span class="word-card__tag">Genitive</span>
+      </div>
+
+      <!-- Word 3: مِنَ -->
+      <div class="word-card scroll-reveal" data-role="preposition">
+        <div class="word-card__arabic">مِنَ</div>
+        <div class="word-card__meaning">From</div>
+        <div class="word-card__details">
+          <div class="detail-row">
+            <span class="detail-label">Role</span>
+            <span class="detail-value">Preposition (Harf Jarr)</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Case</span>
+            <span class="detail-value">Indeclinable (does not change)</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Effect</span>
+            <span class="detail-value">Makes the next word genitive</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Note</span>
+            <span class="detail-value">The fathah (ـَ) is for smooth pronunciation</span>
+          </div>
+        </div>
+        <span class="word-card__tag">Preposition</span>
+      </div>
+
+      <!-- Word 4: ٱللَّهِ -->
+      <div class="word-card scroll-reveal" data-role="divine">
+        <div class="word-card__arabic">ٱللَّهِ</div>
+        <div class="word-card__meaning">Allah (God)</div>
+        <div class="word-card__details">
+          <div class="detail-row">
+            <span class="detail-label">Role</span>
+            <span class="detail-value">Object of Preposition (Majrur)</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Case</span>
+            <span class="detail-value">Genitive (Majrur) — ـِ</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Sentence Role</span>
+            <span class="detail-value">"From Allah" = Predicate (Khabar)</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Note</span>
+            <span class="detail-value">The name "Allah" is unique — not derived</span>
+          </div>
+        </div>
+        <span class="word-card__tag">Divine Name</span>
+      </div>
+
+      <!-- Word 5: ٱلْعَزِيزِ -->
+      <div class="word-card scroll-reveal" data-role="attribute">
+        <div class="word-card__arabic">ٱلْعَزِيزِ</div>
+        <div class="word-card__meaning">The Almighty</div>
+        <div class="word-card__details">
+          <div class="detail-row">
+            <span class="detail-label">Role</span>
+            <span class="detail-value">Adjective (Sifah / Attribute)</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Describes</span>
+            <span class="detail-value">Allah — matches in case & definiteness</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Case</span>
+            <span class="detail-value">Genitive (Majrur) — ـِ</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Core Meaning</span>
+            <span class="detail-value">Unmatched power & might</span>
+          </div>
+        </div>
+        <span class="word-card__tag">Attribute</span>
+      </div>
+
+      <!-- Word 6: ٱلْحَكِيمِ -->
+      <div class="word-card scroll-reveal" data-role="attribute">
+        <div class="word-card__arabic">ٱلْحَكِيمِ</div>
+        <div class="word-card__meaning">The All-Wise</div>
+        <div class="word-card__details">
+          <div class="detail-row">
+            <span class="detail-label">Role</span>
+            <span class="detail-value">Adjective (Sifah / Attribute)</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Describes</span>
+            <span class="detail-value">Allah — follows the same case</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Case</span>
+            <span class="detail-value">Genitive (Majrur) — ـِ</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Core Meaning</span>
+            <span class="detail-value">Perfect wisdom in every decree</span>
+          </div>
+        </div>
+        <span class="word-card__tag">Attribute</span>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider scroll-reveal"></div>
+
+  <!-- ═══════════════════ SARF (MORPHOLOGY) SECTION ═══════════════════ -->
+  <section class="section scroll-reveal" id="sarf">
+    <div class="section__header">
+      <div class="section__number">2</div>
+      <h2 class="section__title">Morphology — Word Roots & Patterns</h2>
+      <p class="section__subtitle">See how each word is built from its root letters and follows classical Arabic patterns</p>
+    </div>
+
+    <div class="sarf-grid">
+
+      <!-- Sarf: تَنزِيلُ -->
+      <div class="sarf-card scroll-reveal" data-sarf-word="tanzeel">
+        <div class="sarf-card__header">
+          <div class="sarf-card__word">تَنزِيلُ</div>
+          <div class="sarf-card__pattern">تَفْعِيل</div>
+        </div>
+        <div class="root-display">
+          <div class="root-letter" data-delay="0">ن</div>
+          <div class="root-letter" data-delay="1">ز</div>
+          <div class="root-letter" data-delay="2">ل</div>
+        </div>
+        <div class="sarf-info">
+          <div class="sarf-row">
+            <span class="sarf-label">Root</span>
+            <span class="sarf-value" style="font-family: var(--font-arabic); font-size: 1.1rem;">ن - ز - ل</span>
+          </div>
+          <div class="sarf-row">
+            <span class="sarf-label">Root Meaning</span>
+            <span class="sarf-value">to descend, come down</span>
+          </div>
+          <div class="sarf-row">
+            <span class="sarf-label">Verb Form</span>
+            <span class="sarf-value">Form II — intensifies the action</span>
+          </div>
+          <div class="sarf-row">
+            <span class="sarf-label">Form II Verb</span>
+            <span class="sarf-value" style="font-family: var(--font-arabic); font-size: 1.1rem;">نَزَّلَ</span>
+          </div>
+          <div class="sarf-row">
+            <span class="sarf-label">Meaning</span>
+            <span class="sarf-value">to send down gradually, in stages</span>
+          </div>
+          <div class="sarf-row">
+            <span class="sarf-label">Word Type</span>
+            <span class="sarf-value">Verbal Noun (Masdar) of Form II</span>
+          </div>
+          <div class="sarf-row">
+            <span class="sarf-label">Key Insight</span>
+            <span class="sarf-value">Form II shows the Quran was sent down <em>gradually</em> — not all at once</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sarf: ٱلْكِتَـٰبِ -->
+      <div class="sarf-card scroll-reveal" data-sarf-word="kitab">
+        <div class="sarf-card__header">
+          <div class="sarf-card__word">ٱلْكِتَـٰبِ</div>
+          <div class="sarf-card__pattern">فِعَال</div>
+        </div>
+        <div class="root-display">
+          <div class="root-letter" data-delay="0">ك</div>
+          <div class="root-letter" data-delay="1">ت</div>
+          <div class="root-letter" data-delay="2">ب</div>
+        </div>
+        <div class="sarf-info">
+          <div class="sarf-row">
+            <span class="sarf-label">Root</span>
+            <span class="sarf-value" style="font-family: var(--font-arabic); font-size: 1.1rem;">ك - ت - ب</span>
+          </div>
+          <div class="sarf-row">
+            <span class="sarf-label">Root Meaning</span>
+            <span class="sarf-value">to write</span>
+          </div>
+          <div class="sarf-row">
+            <span class="sarf-label">Word Type</span>
+            <span class="sarf-value">Noun (Ism)</span>
+          </div>
+          <div class="sarf-row">
+            <span class="sarf-label">Meaning</span>
+            <span class="sarf-value">book, scripture, written record</span>
+          </div>
+          <div class="sarf-row">
+            <span class="sarf-label">Key Insight</span>
+            <span class="sarf-value">Called "The Book" with "Al" — it is <em>the</em> ultimate Book</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sarf: ٱلْعَزِيزِ -->
+      <div class="sarf-card scroll-reveal" data-sarf-word="aziz">
+        <div class="sarf-card__header">
+          <div class="sarf-card__word">ٱلْعَزِيزِ</div>
+          <div class="sarf-card__pattern">فَعِيل</div>
+        </div>
+        <div class="root-display">
+          <div class="root-letter" data-delay="0">ع</div>
+          <div class="root-letter" data-delay="1">ز</div>
+          <div class="root-letter" data-delay="2">ز</div>
+        </div>
+        <div class="sarf-info">
+          <div class="sarf-row">
+            <span class="sarf-label">Root</span>
+            <span class="sarf-value" style="font-family: var(--font-arabic); font-size: 1.1rem;">ع - ز - ز</span>
+          </div>
+          <div class="sarf-row">
+            <span class="sarf-label">Root Meaning</span>
+            <span class="sarf-value">to be mighty, powerful, rare</span>
+          </div>
+          <div class="sarf-row">
+            <span class="sarf-label">Pattern</span>
+            <span class="sarf-value">Fa'eel — intensive adjective</span>
+          </div>
+          <div class="sarf-row">
+            <span class="sarf-label">Word Type</span>
+            <span class="sarf-value">Intensive Adjective (Sifah Mushabbaha)</span>
+          </div>
+          <div class="sarf-row">
+            <span class="sarf-label">Key Insight</span>
+            <span class="sarf-value">Not just "mighty" — <em>intensely</em> and <em>permanently</em> mighty</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sarf: ٱلْحَكِيمِ -->
+      <div class="sarf-card scroll-reveal" data-sarf-word="hakeem">
+        <div class="sarf-card__header">
+          <div class="sarf-card__word">ٱلْحَكِيمِ</div>
+          <div class="sarf-card__pattern">فَعِيل</div>
+        </div>
+        <div class="root-display">
+          <div class="root-letter" data-delay="0">ح</div>
+          <div class="root-letter" data-delay="1">ك</div>
+          <div class="root-letter" data-delay="2">م</div>
+        </div>
+        <div class="sarf-info">
+          <div class="sarf-row">
+            <span class="sarf-label">Root</span>
+            <span class="sarf-value" style="font-family: var(--font-arabic); font-size: 1.1rem;">ح - ك - م</span>
+          </div>
+          <div class="sarf-row">
+            <span class="sarf-label">Root Meaning</span>
+            <span class="sarf-value">to judge, to be wise, to govern</span>
+          </div>
+          <div class="sarf-row">
+            <span class="sarf-label">Pattern</span>
+            <span class="sarf-value">Fa'eel — intensive adjective</span>
+          </div>
+          <div class="sarf-row">
+            <span class="sarf-label">Word Type</span>
+            <span class="sarf-value">Intensive Adjective (Sifah Mushabbaha)</span>
+          </div>
+          <div class="sarf-row">
+            <span class="sarf-label">Key Insight</span>
+            <span class="sarf-value">Both "Al-Aziz" and "Al-Hakeem" share the <em>same</em> Fa'eel pattern — power paired with wisdom</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider scroll-reveal"></div>
+
+  <!-- ═══════════════════ SENTENCE STRUCTURE ═══════════════════ -->
+  <section class="section scroll-reveal" id="structure">
+    <div class="section__header">
+      <div class="section__number">3</div>
+      <h2 class="section__title">Sentence Structure</h2>
+      <p class="section__subtitle">This verse is a nominal sentence — a subject paired with a predicate, no verb needed</p>
+    </div>
+
+    <div class="sentence-diagram scroll-reveal">
+      <div class="diagram-ayah">
+        <span class="d-word" data-role="subject" data-label="Subject">تَنزِيلُ</span>
+        <span class="d-word" data-role="genitive" data-label="Possessive">ٱلْكِتَـٰبِ</span>
+        <span class="d-word" data-role="preposition" data-label="Preposition">مِنَ</span>
+        <span class="d-word" data-role="divine" data-label="Divine Name">ٱللَّهِ</span>
+        <span class="d-word" data-role="attribute" data-label="Attribute">ٱلْعَزِيزِ</span>
+        <span class="d-word" data-role="attribute" data-label="Attribute">ٱلْحَكِيمِ</span>
+      </div>
+
+      <div class="diagram-structure">
+        <div class="structure-box subject-box">
+          <div class="struct-label">Subject (Mubtada)</div>
+          <div class="struct-arabic">تَنزِيلُ ٱلْكِتَـٰبِ</div>
+          <div class="struct-english">The revelation of the Book</div>
+        </div>
+
+        <div class="structure-connector">⟵⟶</div>
+
+        <div class="structure-box predicate-box">
+          <div class="struct-label">Predicate (Khabar)</div>
+          <div class="struct-arabic">مِنَ ٱللَّهِ ٱلْعَزِيزِ ٱلْحَكِيمِ</div>
+          <div class="struct-english">is from Allah, the Almighty, the All-Wise</div>
+        </div>
+      </div>
+
+      <div style="margin-block-start: var(--space-md); padding: var(--space-sm); background: oklch(0.5 0.1 50 / 0.05); border-radius: var(--radius-md); border: 1px solid oklch(0.5 0.1 50 / 0.1);">
+        <p style="font-size: 0.88rem; color: var(--text-secondary); text-align: center; text-wrap: balance;">
+          <strong style="color: var(--clr-gold);">Notice:</strong> There is no verb in this verse. In Arabic, a nominal sentence (a sentence that starts with a noun) makes a timeless, factual statement — this revelation is from Allah, always was, and always will be.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider scroll-reveal"></div>
+
+  <!-- ═══════════════════ THEMES ═══════════════════ -->
+  <section class="section scroll-reveal" id="themes">
+    <div class="section__header">
+      <div class="section__number">4</div>
+      <h2 class="section__title">Key Themes</h2>
+      <p class="section__subtitle">The deep meanings embedded in just six words</p>
+    </div>
+
+    <div class="themes-grid">
+      <div class="theme-card scroll-reveal">
+        <div class="theme-icon">📖</div>
+        <div class="theme-title">Divine Origin</div>
+        <div class="theme-desc">The Quran is not the work of a human being. It is a revelation sent down directly from the Creator of everything.</div>
+      </div>
+
+      <div class="theme-card scroll-reveal">
+        <div class="theme-icon">⏳</div>
+        <div class="theme-title">Gradual Revelation</div>
+        <div class="theme-desc">The word "Tanzeel" (Form II) tells us the Quran was sent down stage by stage over 23 years — not all at once — to guide people step by step.</div>
+      </div>
+
+      <div class="theme-card scroll-reveal">
+        <div class="theme-icon">⚡</div>
+        <div class="theme-title">Power and Wisdom Together</div>
+        <div class="theme-desc">Allah pairs "The Almighty" with "The All-Wise" — His power is never random. Every decree is backed by perfect wisdom.</div>
+      </div>
+
+      <div class="theme-card scroll-reveal">
+        <div class="theme-icon">🔗</div>
+        <div class="theme-title">Authority of the Message</div>
+        <div class="theme-desc">By opening the Surah this way, Allah establishes that everything that follows carries the highest possible authority — it is from Him.</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider scroll-reveal"></div>
+
+  <!-- ═══════════════════ QUIZ ═══════════════════ -->
+  <section class="section scroll-reveal" id="quiz">
+    <div class="section__header">
+      <div class="section__number">5</div>
+      <h2 class="section__title">Test Your Understanding</h2>
+      <p class="section__subtitle">8 questions to see how well you've understood this verse</p>
+    </div>
+
+    <div class="quiz-container" id="quizContainer">
+      <div class="quiz-progress">
+        <div class="quiz-progress__bar">
+          <div class="quiz-progress__fill" id="quizProgressFill" style="inline-size: 0%;"></div>
+        </div>
+        <div class="quiz-progress__text" id="quizProgressText">1 / 8</div>
+      </div>
+
+      <div class="quiz-card active" id="quizCard">
+        <!-- Populated by JS -->
+      </div>
+
+      <div class="quiz-results" id="quizResults">
+        <div class="results-score" id="resultsScore"></div>
+        <div class="results-label">Questions Correct</div>
+        <div class="results-message" id="resultsMessage"></div>
+        <button class="results-retry" id="retryBtn">Try Again</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ CONFETTI ═══════════════════ -->
+  <div class="confetti-container" id="confettiContainer" aria-hidden="true"></div>
+
+  <!-- ═══════════════════ FOOTER ═══════════════════ -->
+  <footer class="site-footer">
+    <div class="footer-ayah">تَنزِيلُ ٱلْكِتَـٰبِ مِنَ ٱللَّهِ ٱلْعَزِيزِ ٱلْحَكِيمِ</div>
+    <div class="footer-ref">Surah Az-Zumar (39:1)</div>
+    <div class="footer-version" id="footerVersion">v1.0.0 (updated 2026-09-06 23:13)</div>
+  </footer>
+
+  <!-- ═══════════════════ JAVASCRIPT ═══════════════════ -->
+  <script>
+    /* ══════════════════════════════════════════════════════════
+       COSMIC PARTICLE CANVAS
+       Represents "Tanzeel" — revelation descending from above
+       ══════════════════════════════════════════════════════════ */
+    (() => {
+      const canvas = document.getElementById('cosmicCanvas');
+      const ctx = canvas.getContext('2d');
+      let particles = [];
+      let stars = [];
+      let animId;
+      let dpr = Math.min(window.devicePixelRatio ?? 1, 2);
+
+      function resize() {
+        dpr = Math.min(window.devicePixelRatio ?? 1, 2);
+        canvas.width = innerWidth * dpr;
+        canvas.height = innerHeight * dpr;
+        canvas.style.width = innerWidth + 'px';
+        canvas.style.height = innerHeight + 'px';
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+
+      function initStars(count = 200) {
+        stars = Array.from({ length: count }, () => ({
+          x: Math.random() * innerWidth,
+          y: Math.random() * innerHeight,
+          r: Math.random() * 1.2 + 0.3,
+          alpha: Math.random() * 0.6 + 0.2,
+          twinkleSpeed: Math.random() * 0.01 + 0.003,
+          twinkleOffset: Math.random() * Math.PI * 2,
+        }));
+      }
+
+      function initParticles(count = 60) {
+        particles = Array.from({ length: count }, () => createParticle());
+      }
+
+      function createParticle() {
+        return {
+          x: Math.random() * innerWidth,
+          y: -10 - Math.random() * innerHeight * 0.3,
+          vy: Math.random() * 0.4 + 0.15,
+          vx: (Math.random() - 0.5) * 0.3,
+          r: Math.random() * 2 + 0.5,
+          alpha: Math.random() * 0.5 + 0.2,
+          hue: 38 + Math.random() * 15,
+          life: 0,
+          maxLife: Math.random() * 600 + 400,
+        };
+      }
+
+      function draw(time) {
+        ctx.clearRect(0, 0, innerWidth, innerHeight);
+
+        // Background gradient
+        const bgGrad = ctx.createRadialGradient(
+          innerWidth * 0.5, innerHeight * 0.3, 0,
+          innerWidth * 0.5, innerHeight * 0.3, innerWidth * 0.8
+        );
+        bgGrad.addColorStop(0, '#0a0a35');
+        bgGrad.addColorStop(0.5, '#070722');
+        bgGrad.addColorStop(1, '#050520');
+        ctx.fillStyle = bgGrad;
+        ctx.fillRect(0, 0, innerWidth, innerHeight);
+
+        // Stars
+        for (const s of stars) {
+          const twinkle = Math.sin(time * s.twinkleSpeed + s.twinkleOffset);
+          const alpha = s.alpha + twinkle * 0.2;
+          ctx.beginPath();
+          ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(220, 210, 190, ${Math.max(0, alpha)})`;
+          ctx.fill();
+        }
+
+        // Particles (tanzeel — descending)
+        for (const p of particles) {
+          p.x += p.vx;
+          p.y += p.vy;
+          p.life++;
+
+          const lifeRatio = p.life / p.maxLife;
+          const fadeIn = Math.min(lifeRatio * 5, 1);
+          const fadeOut = lifeRatio > 0.7 ? 1 - (lifeRatio - 0.7) / 0.3 : 1;
+          const alpha = p.alpha * fadeIn * fadeOut;
+
+          // Glow
+          const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 4);
+          grad.addColorStop(0, `hsla(${p.hue}, 60%, 70%, ${alpha})`);
+          grad.addColorStop(0.4, `hsla(${p.hue}, 50%, 55%, ${alpha * 0.4})`);
+          grad.addColorStop(1, `hsla(${p.hue}, 40%, 40%, 0)`);
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r * 4, 0, Math.PI * 2);
+          ctx.fillStyle = grad;
+          ctx.fill();
+
+          // Core
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = `hsla(${p.hue}, 70%, 80%, ${alpha})`;
+          ctx.fill();
+
+          // Reset particle
+          if (p.life >= p.maxLife || p.y > innerHeight + 20) {
+            Object.assign(p, createParticle());
+          }
+        }
+
+        animId = requestAnimationFrame(draw);
+      }
+
+      resize();
+      initStars();
+      initParticles();
+      draw(0);
+
+      window.addEventListener('resize', () => {
+        resize();
+        initStars();
+      });
+
+      // Reduce animation when tab not visible
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+          cancelAnimationFrame(animId);
+        } else {
+          draw(0);
+        }
+      });
+    })();
+
+    /* ══════════════════════════════════════════════════════════
+       PRELOADER
+       ══════════════════════════════════════════════════════════ */
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('preloader').classList.add('hidden');
+      }, 1200);
+    });
+
+    /* ══════════════════════════════════════════════════════════
+       SCROLL-REVEAL FALLBACK (for browsers without scroll-driven animations)
+       ══════════════════════════════════════════════════════════ */
+    if (!CSS.supports?.('(animation-timeline: view()) and (animation-range: entry)')) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              entry.target.style.opacity = '1';
+              entry.target.style.translate = '0 0';
+              entry.target.style.filter = 'blur(0)';
+              observer.unobserve(entry.target);
+            }
+          }
+        },
+        { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+      );
+
+      document.querySelectorAll('.scroll-reveal').forEach((el) => {
+        el.style.opacity = '0';
+        el.style.translate = '0 40px';
+        el.style.filter = 'blur(4px)';
+        el.style.transition = 'opacity 0.8s cubic-bezier(0,0,0.2,1), translate 0.8s cubic-bezier(0,0,0.2,1), filter 0.8s cubic-bezier(0,0,0.2,1)';
+        observer.observe(el);
+      });
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       ROOT LETTER ANIMATION (SARF SECTION)
+       ══════════════════════════════════════════════════════════ */
+    {
+      const serfObserver = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              const letters = entry.target.querySelectorAll('.root-letter');
+              letters.forEach((letter, i) => {
+                const delay = Number(letter.dataset.delay ?? 0);
+                setTimeout(() => letter.classList.add('visible'), 200 + delay * 250);
+              });
+              serfObserver.unobserve(entry.target);
+            }
+          }
+        },
+        { threshold: 0.3 }
+      );
+
+      document.querySelectorAll('.sarf-card').forEach((card) => {
+        serfObserver.observe(card);
+      });
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       NAVBAR SCROLL BEHAVIOR
+       ══════════════════════════════════════════════════════════ */
+    {
+      const nav = document.getElementById('topNav');
+      let lastScroll = 0;
+
+      window.addEventListener('scroll', () => {
+        const current = window.scrollY;
+        if (current > 300) {
+          nav.classList.toggle('hidden', current > lastScroll && current > 400);
+        } else {
+          nav.classList.remove('hidden');
+        }
+        lastScroll = current;
+      }, { passive: true });
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       QUIZ ENGINE
+       ══════════════════════════════════════════════════════════ */
+    {
+      const questions = [
+        {
+          q: 'What does the word "Tanzeel" (تَنزِيل) specifically mean?',
+          options: [
+            'The reading aloud',
+            'The gradual sending down (revelation)',
+            'The writing down',
+            'The memorisation'
+          ],
+          answer: 1,
+          explanation: '"Tanzeel" is a verbal noun from Form II, meaning to send down gradually — in stages — over time.'
+        },
+        {
+          q: 'What are the root letters of "Al-Kitab" (ٱلْكِتَـٰب)?',
+          options: [
+            'ك - ل - م',
+            'ك - ت - ب',
+            'ق - ر - أ',
+            'ع - ل - م'
+          ],
+          answer: 1,
+          explanation: 'The root is ك-ت-ب (k-t-b) which carries the meaning of "writing." That is why a book is called "Kitab."'
+        },
+        {
+          q: 'What grammatical role does "Tanzeel" play in this verse?',
+          options: [
+            'Object of the verb',
+            'Predicate (Khabar)',
+            'Subject (Mubtada)',
+            'Adjective (Sifah)'
+          ],
+          answer: 2,
+          explanation: '"Tanzeel" is the Subject (Mubtada) of this nominal sentence. It carries the dammah ending (ـُ) because it is in the nominative case.'
+        },
+        {
+          q: 'Which verb form does "Tanzeel" come from?',
+          options: [
+            'Form I — the basic form',
+            'Form II — the intensive/causative form',
+            'Form IV — the transitive form',
+            'Form V — the reflexive form'
+          ],
+          answer: 1,
+          explanation: 'Form II (fa\'\'ala / فَعَّلَ) adds intensity and gradualness. "Nazzala" means to send down repeatedly or stage by stage, unlike "anzala" (Form IV) which can mean all at once.'
+        },
+        {
+          q: 'What Arabic pattern do both "Al-Aziz" and "Al-Hakeem" share?',
+          options: [
+            'Fa\'il (فَاعِل) — doer',
+            'Maf\'ul (مَفْعُول) — done to',
+            'Fa\'eel (فَعِيل) — intensive',
+            'Fa\'\'al (فَعَّال) — habitual doer'
+          ],
+          answer: 2,
+          explanation: 'Both words follow the Fa\'eel (فَعِيل) pattern, which creates an intensive adjective — showing these qualities are deeply permanent, not temporary.'
+        },
+        {
+          q: 'Where is the predicate (Khabar) in this verse?',
+          options: [
+            'تَنزِيلُ alone',
+            'ٱلْكِتَـٰبِ alone',
+            'مِنَ ٱللَّهِ (from Allah)',
+            'ٱلْعَزِيزِ ٱلْحَكِيمِ'
+          ],
+          answer: 2,
+          explanation: 'The prepositional phrase "from Allah" (مِنَ ٱللَّهِ) serves as the predicate. It tells us WHERE the subject (the revelation of the Book) comes from.'
+        },
+        {
+          q: 'Why does "Al-Kitab" (ٱلْكِتَـٰبِ) end with a kasrah (ـِ)?',
+          options: [
+            'It is the subject of the sentence',
+            'It is the object of a verb',
+            'It is the second part of a possessive phrase (Mudaf Ilayhi)',
+            'It is an adjective'
+          ],
+          answer: 2,
+          explanation: 'Al-Kitab is in the genitive case because it is the Mudaf Ilayhi (the second part of a possessive phrase). "The revelation OF the Book" — "of the Book" is possessive.'
+        },
+        {
+          q: 'Why is there no verb in this verse?',
+          options: [
+            'It was lost in translation',
+            'It is a nominal sentence — making a timeless factual statement',
+            'The verb is hidden at the end',
+            'Arabic sentences never use verbs'
+          ],
+          answer: 1,
+          explanation: 'This is a nominal sentence (Jumlah Ismiyyah). In Arabic, starting a sentence with a noun instead of a verb makes it a timeless fact — this revelation is from Allah, always was, and always will be.'
+        }
+      ];
+
+      let currentQ = 0;
+      let score = 0;
+      let answered = false;
+
+      const card = document.getElementById('quizCard');
+      const progressFill = document.getElementById('quizProgressFill');
+      const progressText = document.getElementById('quizProgressText');
+      const resultsEl = document.getElementById('quizResults');
+      const resultsScore = document.getElementById('resultsScore');
+      const resultsMessage = document.getElementById('resultsMessage');
+      const retryBtn = document.getElementById('retryBtn');
+
+      function renderQuestion() {
+        const q = questions[currentQ];
+        answered = false;
+
+        progressFill.style.inlineSize = `${((currentQ) / questions.length) * 100}%`;
+        progressText.textContent = `${currentQ + 1} / ${questions.length}`;
+
+        card.classList.remove('active');
+
+        // Small delay for transition
+        requestAnimationFrame(() => {
+          card.innerHTML = `
+            <div class="quiz-question">${q.q}</div>
+            <div class="quiz-options">
+              ${q.options.map((opt, i) => `
+                <button class="quiz-option" data-index="${i}" type="button">
+                  <span class="option-letter">${String.fromCodePoint(65 + i)}</span>
+                  <span>${opt}</span>
+                </button>
+              `).join('')}
+            </div>
+            <div class="quiz-feedback" id="qFeedback"></div>
+            <button class="quiz-next" id="qNext" type="button">Next Question →</button>
+          `;
+
+          requestAnimationFrame(() => card.classList.add('active'));
+
+          // Bind click handlers
+          card.querySelectorAll('.quiz-option').forEach((btn) => {
+            btn.addEventListener('click', () => handleAnswer(Number(btn.dataset.index)));
+          });
+
+          document.getElementById('qNext').addEventListener('click', nextQuestion);
+        });
+      }
+
+      function handleAnswer(index) {
+        if (answered) return;
+        answered = true;
+
+        const q = questions[currentQ];
+        const options = card.querySelectorAll('.quiz-option');
+        const feedback = document.getElementById('qFeedback');
+        const nextBtn = document.getElementById('qNext');
+
+        // Disable all options
+        options.forEach((opt) => opt.classList.add('disabled'));
+
+        // Highlight correct
+        options[q.answer].classList.add('correct');
+
+        if (index === q.answer) {
+          score++;
+          feedback.className = 'quiz-feedback correct-feedback show';
+          feedback.textContent = `✓ Correct! ${q.explanation}`;
+          spawnConfetti();
+        } else {
+          options[index].classList.add('wrong');
+          feedback.className = 'quiz-feedback wrong-feedback show';
+          feedback.textContent = `✗ Not quite. ${q.explanation}`;
+        }
+
+        nextBtn.classList.add('show');
+        nextBtn.textContent = currentQ < questions.length - 1 ? 'Next Question →' : 'See Results →';
+      }
+
+      function nextQuestion() {
+        currentQ++;
+        if (currentQ < questions.length) {
+          renderQuestion();
+        } else {
+          showResults();
+        }
+      }
+
+      function showResults() {
+        card.classList.remove('active');
+        card.style.display = 'none';
+        progressFill.style.inlineSize = '100%';
+        progressText.textContent = 'Complete!';
+
+        resultsScore.textContent = `${score} / ${questions.length}`;
+
+        const pct = score / questions.length;
+        if (pct === 1) {
+          resultsMessage.textContent = 'Incredible! You have mastered every detail of this verse. May Allah bless your knowledge.';
+          spawnConfetti(40);
+        } else if (pct >= 0.75) {
+          resultsMessage.textContent = 'Excellent work! You have a strong understanding. Review the ones you missed to perfect your knowledge.';
+        } else if (pct >= 0.5) {
+          resultsMessage.textContent = 'Good effort! Go back through the grammar and morphology sections and try again.';
+        } else {
+          resultsMessage.textContent = 'Keep learning! Read through each section carefully and try the quiz again. Every attempt brings more knowledge.';
+        }
+
+        resultsEl.classList.add('show');
+      }
+
+      function resetQuiz() {
+        currentQ = 0;
+        score = 0;
+        answered = false;
+        card.style.display = '';
+        resultsEl.classList.remove('show');
+        renderQuestion();
+      }
+
+      retryBtn.addEventListener('click', resetQuiz);
+
+      // Init
+      renderQuestion();
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       CONFETTI
+       ══════════════════════════════════════════════════════════ */
+    function spawnConfetti(count = 20) {
+      const container = document.getElementById('confettiContainer');
+      const colors = ['#d4a574', '#f5d394', '#4ecdc4', '#7b93db', '#b896d9', '#e8b96d'];
+
+      for (let i = 0; i < count; i++) {
+        const piece = document.createElement('div');
+        piece.classList.add('confetti-piece');
+        piece.style.insetInlineStart = Math.random() * 100 + '%';
+        piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+        piece.style.setProperty('--x-drift', (Math.random() - 0.5) * 200 + 'px');
+        piece.style.setProperty('--spin', Math.random() * 720 - 360 + 'deg');
+        piece.style.animationDelay = Math.random() * 0.5 + 's';
+        piece.style.animationDuration = Math.random() * 1 + 1.5 + 's';
+        piece.style.width = Math.random() * 8 + 5 + 'px';
+        piece.style.height = Math.random() * 8 + 5 + 'px';
+        container.appendChild(piece);
+
+        // Cleanup
+        piece.addEventListener('animationend', () => piece.remove());
+      }
+    }
+  </script>
+
+</body>
+</html>
