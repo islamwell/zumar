@@ -1379,6 +1379,98 @@
         }
       }
 
+      /* ── VERSE BANNER ── */
+      .verse-banner {
+        text-align: center;
+        padding: var(--space-xl) var(--space-md);
+        margin-block-end: var(--space-lg);
+        position: relative;
+
+        .verse-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: var(--space-xs);
+          padding: 0.3em 1em;
+          border: 1px solid oklch(0.5 0.1 50 / 0.25);
+          border-radius: var(--radius-pill);
+          font-size: 0.8rem;
+          font-weight: 600;
+          letter-spacing: 0.06em;
+          text-transform: uppercase;
+          color: var(--clr-gold);
+          background: oklch(0.12 0.04 50 / 0.3);
+          margin-block-end: var(--space-md);
+        }
+
+        .verse-arabic {
+          font-family: var(--font-arabic);
+          font-size: clamp(1.5rem, 4vw, 3rem);
+          line-height: 2;
+          direction: rtl;
+          color: var(--clr-gold-bright);
+          text-wrap: balance;
+          max-inline-size: 90vw;
+          margin-inline: auto;
+        }
+
+        .verse-translation {
+          font-size: clamp(0.95rem, 1.5vw, 1.15rem);
+          font-weight: 300;
+          color: var(--text-secondary);
+          max-inline-size: 700px;
+          margin-inline: auto;
+          margin-block-start: var(--space-md);
+          text-wrap: balance;
+          line-height: 1.8;
+        }
+      }
+
+      /* ── Additional grammar role colors ── */
+      .word-card[data-role="verb"] {
+        --card-arabic-color: oklch(0.75 0.14 145);
+        --card-glow-color: oklch(0.75 0.14 145 / 0.15);
+        --card-border-color: oklch(0.75 0.14 145 / 0.4);
+        --tag-bg: oklch(0.75 0.14 145 / 0.15);
+        --tag-color: oklch(0.75 0.14 145);
+        --tag-border: oklch(0.75 0.14 145 / 0.3);
+      }
+
+      .word-card[data-role="particle"] {
+        --card-arabic-color: oklch(0.7 0.1 200);
+        --card-glow-color: oklch(0.7 0.1 200 / 0.15);
+        --card-border-color: oklch(0.7 0.1 200 / 0.4);
+        --tag-bg: oklch(0.7 0.1 200 / 0.15);
+        --tag-color: oklch(0.7 0.1 200);
+        --tag-border: oklch(0.7 0.1 200 / 0.3);
+      }
+
+      .word-card[data-role="hal"] {
+        --card-arabic-color: oklch(0.75 0.12 90);
+        --card-glow-color: oklch(0.75 0.12 90 / 0.15);
+        --card-border-color: oklch(0.75 0.12 90 / 0.4);
+        --tag-bg: oklch(0.75 0.12 90 / 0.15);
+        --tag-color: oklch(0.75 0.12 90);
+        --tag-border: oklch(0.75 0.12 90 / 0.3);
+      }
+
+      .word-card[data-role="object"] {
+        --card-arabic-color: oklch(0.72 0.13 30);
+        --card-glow-color: oklch(0.72 0.13 30 / 0.15);
+        --card-border-color: oklch(0.72 0.13 30 / 0.4);
+        --tag-bg: oklch(0.72 0.13 30 / 0.15);
+        --tag-color: oklch(0.72 0.13 30);
+        --tag-border: oklch(0.72 0.13 30 / 0.3);
+      }
+
+      .word-card[data-role="conditional"] {
+        --card-arabic-color: oklch(0.68 0.1 220);
+        --card-glow-color: oklch(0.68 0.1 220 / 0.15);
+        --card-border-color: oklch(0.68 0.1 220 / 0.4);
+        --tag-bg: oklch(0.68 0.1 220 / 0.15);
+        --tag-color: oklch(0.68 0.1 220);
+        --tag-border: oklch(0.68 0.1 220 / 0.3);
+      }
+
       /* ── Confetti container ── */
       .confetti-container {
         position: fixed;
@@ -1528,10 +1620,11 @@
   <!-- ═══════════════════ TOP NAV ═══════════════════ -->
   <nav class="top-nav" id="topNav" aria-label="Page sections">
     <ul class="nav-links">
-      <li><a class="nav-link" href="#hero">Verse</a></li>
-      <li><a class="nav-link" href="#grammar">Grammar</a></li>
-      <li><a class="nav-link" href="#sarf">Morphology</a></li>
-      <li><a class="nav-link" href="#structure">Structure</a></li>
+      <li><a class="nav-link" href="#hero">39:1</a></li>
+      <li><a class="nav-link" href="#verse2">39:2</a></li>
+      <li><a class="nav-link" href="#verse3">39:3</a></li>
+      <li><a class="nav-link" href="#verse4">39:4</a></li>
+      <li><a class="nav-link" href="#flow">Flow</a></li>
       <li><a class="nav-link" href="#themes">Themes</a></li>
       <li><a class="nav-link" href="#quiz">Quiz</a></li>
     </ul>
@@ -1608,20 +1701,20 @@
         <div class="word-card__meaning">The Sending Down</div>
         <div class="word-card__details">
           <div class="detail-row">
-            <span class="detail-label">Role</span>
-            <span class="detail-value">Subject (Mubtada)</span>
+            <span class="detail-label">Sentence Role</span>
+            <span class="detail-value">Main Subject (the starting focus)</span>
           </div>
           <div class="detail-row">
-            <span class="detail-label">Case</span>
-            <span class="detail-value">Nominative (Marfu') — ـُ</span>
+            <span class="detail-label">Ending Sound</span>
+            <span class="detail-value">Subject vowel — ـُ (u-sound)</span>
           </div>
           <div class="detail-row">
-            <span class="detail-label">Relation</span>
-            <span class="detail-value">First part of possession (Mudaf)</span>
+            <span class="detail-label">Word Link</span>
+            <span class="detail-value">First part of possession: "The sending down of..."</span>
           </div>
           <div class="detail-row">
             <span class="detail-label">Word Type</span>
-            <span class="detail-value">Verbal Noun (Masdar)</span>
+            <span class="detail-value">Action Noun (an ongoing descent from above)</span>
           </div>
         </div>
         <span class="word-card__tag">Subject</span>
@@ -1633,23 +1726,23 @@
         <div class="word-card__meaning">The Book</div>
         <div class="word-card__details">
           <div class="detail-row">
-            <span class="detail-label">Role</span>
-            <span class="detail-value">Possessive (Mudaf Ilayhi)</span>
+            <span class="detail-label">Sentence Role</span>
+            <span class="detail-value">Possessive (what is being sent down)</span>
           </div>
           <div class="detail-row">
-            <span class="detail-label">Case</span>
-            <span class="detail-value">Genitive (Majrur) — ـِ</span>
+            <span class="detail-label">Ending Sound</span>
+            <span class="detail-value">Possessive vowel — ـِ (i-sound)</span>
           </div>
           <div class="detail-row">
-            <span class="detail-label">Why Genitive?</span>
-            <span class="detail-value">Second part of a possessive phrase</span>
+            <span class="detail-label">Why Possessive?</span>
+            <span class="detail-value">Completes the phrase: "...of the Book"</span>
           </div>
           <div class="detail-row">
             <span class="detail-label">Refers To</span>
-            <span class="detail-value">The Quran</span>
+            <span class="detail-value">The Holy Quran</span>
           </div>
         </div>
-        <span class="word-card__tag">Genitive</span>
+        <span class="word-card__tag">Possessive</span>
       </div>
 
       <!-- Word 3: مِنَ -->
@@ -1658,23 +1751,23 @@
         <div class="word-card__meaning">From</div>
         <div class="word-card__details">
           <div class="detail-row">
-            <span class="detail-label">Role</span>
-            <span class="detail-value">Preposition (Harf Jarr)</span>
+            <span class="detail-label">Sentence Role</span>
+            <span class="detail-value">Linking Word (Preposition)</span>
           </div>
           <div class="detail-row">
-            <span class="detail-label">Case</span>
-            <span class="detail-value">Indeclinable (does not change)</span>
+            <span class="detail-label">Function</span>
+            <span class="detail-value">Points to the ultimate source</span>
           </div>
           <div class="detail-row">
             <span class="detail-label">Effect</span>
-            <span class="detail-value">Makes the next word genitive</span>
+            <span class="detail-value">Gives the following word an i-sound ending</span>
           </div>
           <div class="detail-row">
-            <span class="detail-label">Note</span>
-            <span class="detail-value">The fathah (ـَ) is for smooth pronunciation</span>
+            <span class="detail-label">Pronunciation</span>
+            <span class="detail-value">The a-sound (ـَ) enables smooth flow into "Allah"</span>
           </div>
         </div>
-        <span class="word-card__tag">Preposition</span>
+        <span class="word-card__tag">Linking Word</span>
       </div>
 
       <!-- Word 4: ٱللَّهِ -->
@@ -1683,20 +1776,20 @@
         <div class="word-card__meaning">Allah (God)</div>
         <div class="word-card__details">
           <div class="detail-row">
-            <span class="detail-label">Role</span>
-            <span class="detail-value">Object of Preposition (Majrur)</span>
-          </div>
-          <div class="detail-row">
-            <span class="detail-label">Case</span>
-            <span class="detail-value">Genitive (Majrur) — ـِ</span>
-          </div>
-          <div class="detail-row">
             <span class="detail-label">Sentence Role</span>
-            <span class="detail-value">"From Allah" = Predicate (Khabar)</span>
+            <span class="detail-value">Connected Name (Object of "from")</span>
           </div>
           <div class="detail-row">
-            <span class="detail-label">Note</span>
-            <span class="detail-value">The name "Allah" is unique — not derived</span>
+            <span class="detail-label">Ending Sound</span>
+            <span class="detail-value">Connecting vowel — ـِ (i-sound)</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Core Meaning</span>
+            <span class="detail-value">"From Allah" completes the sentence information</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Special Nature</span>
+            <span class="detail-value">The unique personal name of the Creator</span>
           </div>
         </div>
         <span class="word-card__tag">Divine Name</span>
@@ -1708,23 +1801,23 @@
         <div class="word-card__meaning">The Almighty</div>
         <div class="word-card__details">
           <div class="detail-row">
-            <span class="detail-label">Role</span>
-            <span class="detail-value">Adjective (Sifah / Attribute)</span>
+            <span class="detail-label">Sentence Role</span>
+            <span class="detail-value">Describing Word (Divine Attribute)</span>
           </div>
           <div class="detail-row">
             <span class="detail-label">Describes</span>
-            <span class="detail-value">Allah — matches in case & definiteness</span>
+            <span class="detail-value">Allah — matches in definition and i-sound ending</span>
           </div>
           <div class="detail-row">
-            <span class="detail-label">Case</span>
-            <span class="detail-value">Genitive (Majrur) — ـِ</span>
+            <span class="detail-label">Ending Sound</span>
+            <span class="detail-value">Descriptive match — ـِ (i-sound)</span>
           </div>
           <div class="detail-row">
             <span class="detail-label">Core Meaning</span>
-            <span class="detail-value">Unmatched power & might</span>
+            <span class="detail-value">Unmatched power, invincibility, and majesty</span>
           </div>
         </div>
-        <span class="word-card__tag">Attribute</span>
+        <span class="word-card__tag">Divine Quality</span>
       </div>
 
       <!-- Word 6: ٱلْحَكِيمِ -->
@@ -1733,23 +1826,23 @@
         <div class="word-card__meaning">The All-Wise</div>
         <div class="word-card__details">
           <div class="detail-row">
-            <span class="detail-label">Role</span>
-            <span class="detail-value">Adjective (Sifah / Attribute)</span>
+            <span class="detail-label">Sentence Role</span>
+            <span class="detail-value">Second Describing Word (Divine Attribute)</span>
           </div>
           <div class="detail-row">
             <span class="detail-label">Describes</span>
-            <span class="detail-value">Allah — follows the same case</span>
+            <span class="detail-value">Allah — paired directly with "The Almighty"</span>
           </div>
           <div class="detail-row">
-            <span class="detail-label">Case</span>
-            <span class="detail-value">Genitive (Majrur) — ـِ</span>
+            <span class="detail-label">Ending Sound</span>
+            <span class="detail-value">Descriptive match — ـِ (i-sound)</span>
           </div>
           <div class="detail-row">
             <span class="detail-label">Core Meaning</span>
-            <span class="detail-value">Perfect wisdom in every decree</span>
+            <span class="detail-value">Absolute wisdom placed into every single creation and decree</span>
           </div>
         </div>
-        <span class="word-card__tag">Attribute</span>
+        <span class="word-card__tag">Divine Quality</span>
       </div>
 
     </div>
@@ -1964,37 +2057,1177 @@
 
   <div class="divider scroll-reveal"></div>
 
+  <!-- ═══════════════════ VERSE 2 (39:2) ═══════════════════ -->
+  <section class="section scroll-reveal" id="verse2">
+    <div class="verse-banner scroll-reveal">
+      <div class="verse-badge">Surah Az-Zumar • 39 : 2</div>
+      <div class="verse-arabic">إِنَّآ أَنزَلْنَآ إِلَيْكَ ٱلْكِتَـٰبَ بِٱلْحَقِّ فَٱعْبُدِ ٱللَّهَ مُخْلِصًۭا لَّهُ ٱلدِّينَ</div>
+      <p class="verse-translation">"Indeed, We have sent down the Book to you with the truth, so worship Allah, being sincere to Him in religion."</p>
+    </div>
+
+    <div class="section__header scroll-reveal">
+      <div class="section__number">2</div>
+      <h2 class="section__title">Verse 2 — Word-by-Word Analysis</h2>
+      <p class="section__subtitle">Every word explained with plain-English grammar and root word origins (starting from right)</p>
+    </div>
+
+    <!-- Color Legend for Verse 2 -->
+    <div class="color-legend scroll-reveal">
+      <div class="legend-item">
+        <span class="legend-dot" style="background: oklch(0.7 0.1 200);"></span>
+        <span>Certainty / Emphasis</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-dot" style="background: oklch(0.75 0.14 145);"></span>
+        <span>Action Word (Verb)</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-dot" style="background: var(--clr-preposition);"></span>
+        <span>Linking Word</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-dot" style="background: oklch(0.72 0.13 30);"></span>
+        <span>Target of Action (Object)</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-dot" style="background: var(--clr-divine);"></span>
+        <span>The Divine Name</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-dot" style="background: oklch(0.75 0.12 90);"></span>
+        <span>State of the Heart</span>
+      </div>
+    </div>
+
+    <div class="word-grid">
+
+      <!-- Word 1: إِنَّا -->
+      <div class="word-card scroll-reveal" data-role="particle">
+        <div class="word-card__arabic">إِنَّآ</div>
+        <div class="word-card__meaning">Indeed, We</div>
+        <div class="word-card__details">
+          <div class="detail-row">
+            <span class="detail-label">Sentence Role</span>
+            <span class="detail-value">Certainty Word + Royal Pronoun</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">What it Does</span>
+            <span class="detail-value">Removes any doubt: "Listen with full certainty"</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Word Makeup</span>
+            <span class="detail-value">Certainty marker + Majestic "We" (referring to Allah)</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Why "We"?</span>
+            <span class="detail-value">Royal majestic address expressing supreme grandeur</span>
+          </div>
+        </div>
+        <span class="word-card__tag">Certainty</span>
+      </div>
+
+      <!-- Word 2: أَنزَلْنَا -->
+      <div class="word-card scroll-reveal" data-role="verb">
+        <div class="word-card__arabic">أَنزَلْنَآ</div>
+        <div class="word-card__meaning">We have sent down</div>
+        <div class="word-card__details">
+          <div class="detail-row">
+            <span class="detail-label">Sentence Role</span>
+            <span class="detail-value">Action Word (Past Tense Verb)</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Doer</span>
+            <span class="detail-value">"We" — Allah the Almighty</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Root Letters</span>
+            <span class="detail-value" style="font-family: var(--font-arabic); font-size: 1.1rem;">ن - ز - ل</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Root Meaning</span>
+            <span class="detail-value">To descend, step down from height</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Word Shape</span>
+            <span class="detail-value">Caused action — sending down as an entire decree</span>
+          </div>
+        </div>
+        <span class="word-card__tag">Action Word</span>
+      </div>
+
+      <!-- Word 3: إِلَيْكَ -->
+      <div class="word-card scroll-reveal" data-role="preposition">
+        <div class="word-card__arabic">إِلَيْكَ</div>
+        <div class="word-card__meaning">to you</div>
+        <div class="word-card__details">
+          <div class="detail-row">
+            <span class="detail-label">Sentence Role</span>
+            <span class="detail-value">Direction Link + Personal Address</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Word Makeup</span>
+            <span class="detail-value">"To" + "You" (Prophet Muhammad)</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Function</span>
+            <span class="detail-value">Identifies the direct human recipient of revelation</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Significance</span>
+            <span class="detail-value">Honors the Prophet as the trusted messenger</span>
+          </div>
+        </div>
+        <span class="word-card__tag">Linking Word</span>
+      </div>
+
+      <!-- Word 4: ٱلْكِتَـٰبَ -->
+      <div class="word-card scroll-reveal" data-role="object">
+        <div class="word-card__arabic">ٱلْكِتَـٰبَ</div>
+        <div class="word-card__meaning">the Book</div>
+        <div class="word-card__details">
+          <div class="detail-row">
+            <span class="detail-label">Sentence Role</span>
+            <span class="detail-value">Target of Action (Direct Object)</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Ending Sound</span>
+            <span class="detail-value">Target vowel — ـَ (a-sound)</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Root Letters</span>
+            <span class="detail-value" style="font-family: var(--font-arabic); font-size: 1.1rem;">ك - ت - ب</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Root Meaning</span>
+            <span class="detail-value">To write, bind together, preserve</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Grammar Shift</span>
+            <span class="detail-value">In verse 1 it ended with ـِ; here with ـَ because it receives the action</span>
+          </div>
+        </div>
+        <span class="word-card__tag">Target Object</span>
+      </div>
+
+      <!-- Word 5: بِٱلْحَقِّ -->
+      <div class="word-card scroll-reveal" data-role="preposition">
+        <div class="word-card__arabic">بِٱلْحَقِّ</div>
+        <div class="word-card__meaning">with the truth</div>
+        <div class="word-card__details">
+          <div class="detail-row">
+            <span class="detail-label">Sentence Role</span>
+            <span class="detail-value">Manner Link: explains HOW it is sent</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Word Makeup</span>
+            <span class="detail-value">"With / In" + "The Truth"</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Root Letters</span>
+            <span class="detail-value" style="font-family: var(--font-arabic); font-size: 1.1rem;">ح - ق - ق</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Root Meaning</span>
+            <span class="detail-value">To be real, established, just, and binding</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Key Message</span>
+            <span class="detail-value">The revelation is woven with truth, purpose, and justice</span>
+          </div>
+        </div>
+        <span class="word-card__tag">Manner</span>
+      </div>
+
+      <!-- Word 6: فَٱعْبُدِ -->
+      <div class="word-card scroll-reveal" data-role="verb">
+        <div class="word-card__arabic">فَٱعْبُدِ</div>
+        <div class="word-card__meaning">so worship!</div>
+        <div class="word-card__details">
+          <div class="detail-row">
+            <span class="detail-label">Sentence Role</span>
+            <span class="detail-value">Connecting "So" + Command Action Word</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Word Makeup</span>
+            <span class="detail-value">"Therefore / So" + "Worship!"</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Root Letters</span>
+            <span class="detail-value" style="font-family: var(--font-arabic); font-size: 1.1rem;">ع - ب - د</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Root Meaning</span>
+            <span class="detail-value">To serve, humble oneself, show ultimate devotion</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Logical Link</span>
+            <span class="detail-value">Because the Book is the pure truth, worship its Sender alone</span>
+          </div>
+        </div>
+        <span class="word-card__tag">Direct Command</span>
+      </div>
+
+      <!-- Word 7: ٱللَّهَ -->
+      <div class="word-card scroll-reveal" data-role="divine">
+        <div class="word-card__arabic">ٱللَّهَ</div>
+        <div class="word-card__meaning">Allah</div>
+        <div class="word-card__details">
+          <div class="detail-row">
+            <span class="detail-label">Sentence Role</span>
+            <span class="detail-value">The Divine Name (Target of Worship)</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Ending Sound</span>
+            <span class="detail-value">Target vowel — ـَ (a-sound)</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Grammar Shift</span>
+            <span class="detail-value">In verse 1 it was "from Allah" (ـِ); here He is the One to be worshipped (ـَ)</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Key Message</span>
+            <span class="detail-value">Worship belongs solely to the One true Creator</span>
+          </div>
+        </div>
+        <span class="word-card__tag">Divine Name</span>
+      </div>
+
+      <!-- Word 8: مُخْلِصًا -->
+      <div class="word-card scroll-reveal" data-role="hal">
+        <div class="word-card__arabic">مُخْلِصًۭا</div>
+        <div class="word-card__meaning">being completely sincere</div>
+        <div class="word-card__details">
+          <div class="detail-row">
+            <span class="detail-label">Sentence Role</span>
+            <span class="detail-value">State of the Heart (Condition of Action)</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Ending Sound</span>
+            <span class="detail-value">State vowel — ـً (an-sound)</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Root Letters</span>
+            <span class="detail-value" style="font-family: var(--font-arabic); font-size: 1.1rem;">خ - ل - ص</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Root Meaning</span>
+            <span class="detail-value">To be pure, untainted, free of mixture</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Word Shape</span>
+            <span class="detail-value">The one who actively purifies their intentions from show or pride</span>
+          </div>
+        </div>
+        <span class="word-card__tag">State of Heart</span>
+      </div>
+
+      <!-- Word 9: لَّهُ -->
+      <div class="word-card scroll-reveal" data-role="preposition">
+        <div class="word-card__arabic">لَّهُ</div>
+        <div class="word-card__meaning">to Him alone</div>
+        <div class="word-card__details">
+          <div class="detail-row">
+            <span class="detail-label">Sentence Role</span>
+            <span class="detail-value">Dedication Link + Pronoun</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Word Makeup</span>
+            <span class="detail-value">"For / To" + "Him" (referring to Allah)</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Placement Note</span>
+            <span class="detail-value">Placed before "religion" to emphasize exclusivity</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Core Meaning</span>
+            <span class="detail-value">No partner, idol, or creature receives a fraction of this devotion</span>
+          </div>
+        </div>
+        <span class="word-card__tag">Dedication</span>
+      </div>
+
+      <!-- Word 10: ٱلدِّينَ -->
+      <div class="word-card scroll-reveal" data-role="object">
+        <div class="word-card__arabic">ٱلدِّينَ</div>
+        <div class="word-card__meaning">the religion / devotion</div>
+        <div class="word-card__details">
+          <div class="detail-row">
+            <span class="detail-label">Sentence Role</span>
+            <span class="detail-value">Target of Sincerity (What is Kept Pure)</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Ending Sound</span>
+            <span class="detail-value">Target vowel — ـَ (a-sound)</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Root Letters</span>
+            <span class="detail-value" style="font-family: var(--font-arabic); font-size: 1.1rem;">د - ي - ن</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Root Meaning</span>
+            <span class="detail-value">To obey, be indebted, submit, follow a path</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Broad Meaning</span>
+            <span class="detail-value">Your complete way of life, worship, and inner obedience</span>
+          </div>
+        </div>
+        <span class="word-card__tag">Devotion</span>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider scroll-reveal"></div>
+
+  <!-- ═══════════════════ VERSE 3 (39:3) ═══════════════════ -->
+  <section class="section scroll-reveal" id="verse3">
+    <div class="verse-banner scroll-reveal">
+      <div class="verse-badge">Surah Az-Zumar • 39 : 3</div>
+      <div class="verse-arabic">أَلَا لِلَّهِ ٱلدِّينُ ٱلْخَالِصُ ۚ وَٱلَّذِينَ ٱتَّخَذُوا۟ مِن دُونِهِۦٓ أَوْلِيَآءَ مَا نَعْبُدُهُمْ إِلَّا لِيُقَرِّبُونَآ إِلَى ٱللَّهِ زُلْفَىٰٓ إِنَّ ٱللَّهَ يَحْكُمُ بَيْنَهُمْ فِى مَا هُمْ فِيهِ يَخْتَلِفُونَ ۗ إِنَّ ٱللَّهَ لَا يَهْدِى مَنْ هُوَ كَـٰذِبٌۭ كَفَّارٌۭ</div>
+      <p class="verse-translation">"Unquestionably, for Allah alone is the pure religion. And those who take protectors besides Him [say], 'We only worship them so that they may bring us nearer to Allah.' Indeed, Allah will judge between them concerning that over which they differ. Indeed, Allah does not guide one who is a persistent liar and deeply ungrateful."</p>
+    </div>
+
+    <div class="section__header scroll-reveal">
+      <div class="section__number">3</div>
+      <h2 class="section__title">Verse 3 — Word-by-Word Analysis</h2>
+      <p class="section__subtitle">The dismantling of false intercessors explained in everyday language (starting from right)</p>
+    </div>
+
+    <div class="word-grid">
+
+      <!-- أَلَا -->
+      <div class="word-card scroll-reveal" data-role="particle">
+        <div class="word-card__arabic">أَلَا</div>
+        <div class="word-card__meaning">Unquestionably! Pay attention!</div>
+        <div class="word-card__details">
+          <div class="detail-row">
+            <span class="detail-label">Sentence Role</span>
+            <span class="detail-value">Opening Awakener Tool</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">What it Does</span>
+            <span class="detail-value">Alerts the human heart: a foundational truth is being announced</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Key Message</span>
+            <span class="detail-value">What follows is non-negotiable and absolute</span>
+          </div>
+        </div>
+        <span class="word-card__tag">Awakener</span>
+      </div>
+
+      <!-- لِلَّهِ -->
+      <div class="word-card scroll-reveal" data-role="divine">
+        <div class="word-card__arabic">لِلَّهِ</div>
+        <div class="word-card__meaning">belongs to Allah alone</div>
+        <div class="word-card__details">
+          <div class="detail-row">
+            <span class="detail-label">Sentence Role</span>
+            <span class="detail-value">Ownership Link + Divine Name</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Word Makeup</span>
+            <span class="detail-value">"Belongs to" + "Allah"</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Sentence Order</span>
+            <span class="detail-value">Brought to the front of the sentence to declare exclusive right</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Core Meaning</span>
+            <span class="detail-value">No partner or intermediary has any share in this devotion</span>
+          </div>
+        </div>
+        <span class="word-card__tag">Divine Ownership</span>
+      </div>
+
+      <!-- ٱلدِّينُ -->
+      <div class="word-card scroll-reveal" data-role="subject">
+        <div class="word-card__arabic">ٱلدِّينُ</div>
+        <div class="word-card__meaning">the religion / devotion</div>
+        <div class="word-card__details">
+          <div class="detail-row">
+            <span class="detail-label">Sentence Role</span>
+            <span class="detail-value">Main Sentence Subject</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Ending Sound</span>
+            <span class="detail-value">Subject vowel — ـُ (u-sound)</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Root Letters</span>
+            <span class="detail-value" style="font-family: var(--font-arabic); font-size: 1.1rem;">د - ي - ن</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Root Meaning</span>
+            <span class="detail-value">To submit, surrender willingly, follow a sacred law</span>
+          </div>
+        </div>
+        <span class="word-card__tag">Subject</span>
+      </div>
+
+      <!-- ٱلْخَالِصُ -->
+      <div class="word-card scroll-reveal" data-role="attribute">
+        <div class="word-card__arabic">ٱلْخَالِصُ</div>
+        <div class="word-card__meaning">the pure / unadulterated</div>
+        <div class="word-card__details">
+          <div class="detail-row">
+            <span class="detail-label">Sentence Role</span>
+            <span class="detail-value">Describing Quality (Attribute of Religion)</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Ending Sound</span>
+            <span class="detail-value">Descriptive match — ـُ (u-sound)</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Root Letters</span>
+            <span class="detail-value" style="font-family: var(--font-arabic); font-size: 1.1rem;">خ - ل - ص</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Root Meaning</span>
+            <span class="detail-value">Pure, unmixed, 100% spotless</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Insight</span>
+            <span class="detail-value">Devotion mixed with any other entity is rejected</span>
+          </div>
+        </div>
+        <span class="word-card__tag">Pure Quality</span>
+      </div>
+
+      <!-- وَٱلَّذِينَ -->
+      <div class="word-card scroll-reveal" data-role="particle">
+        <div class="word-card__arabic">وَٱلَّذِينَ</div>
+        <div class="word-card__meaning">And those who</div>
+        <div class="word-card__details">
+          <div class="detail-row">
+            <span class="detail-label">Sentence Role</span>
+            <span class="detail-value">Connector + Group Pointer Word</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Word Makeup</span>
+            <span class="detail-value">"And" + "Those who"</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Function</span>
+            <span class="detail-value">Introduces the idolaters and their mistaken mindset</span>
+          </div>
+        </div>
+        <span class="word-card__tag">Connector</span>
+      </div>
+
+      <!-- ٱتَّخَذُوا۟ -->
+      <div class="word-card scroll-reveal" data-role="verb">
+        <div class="word-card__arabic">ٱتَّخَذُوا۟</div>
+        <div class="word-card__meaning">they have taken / adopted</div>
+        <div class="word-card__details">
+          <div class="detail-row">
+            <span class="detail-label">Sentence Role</span>
+            <span class="detail-value">Action Word (Past Tense, Group Doer)</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Root Letters</span>
+            <span class="detail-value" style="font-family: var(--font-arabic); font-size: 1.1rem;">أ - خ - ذ</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Root Meaning</span>
+            <span class="detail-value">To take hold of, seize, adopt</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Word Shape</span>
+            <span class="detail-value">Deliberate personal choice — they chose this path for themselves</span>
+          </div>
+        </div>
+        <span class="word-card__tag">Action Word</span>
+      </div>
+
+      <!-- مِن دُونِهِۦٓ -->
+      <div class="word-card scroll-reveal" data-role="preposition">
+        <div class="word-card__arabic">مِن دُونِهِۦٓ</div>
+        <div class="word-card__meaning">besides Him / other than Him</div>
+        <div class="word-card__details">
+          <div class="detail-row">
+            <span class="detail-label">Sentence Role</span>
+            <span class="detail-value">Exclusion Link + Pronoun</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Word Makeup</span>
+            <span class="detail-value">"From" + "Other than" + "Him (Allah)"</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Key Message</span>
+            <span class="detail-value">They bypassed the Creator to cling to created things</span>
+          </div>
+        </div>
+        <span class="word-card__tag">Linking Word</span>
+      </div>
+
+      <!-- أَوْلِيَآءَ -->
+      <div class="word-card scroll-reveal" data-role="object">
+        <div class="word-card__arabic">أَوْلِيَآءَ</div>
+        <div class="word-card__meaning">protectors / allies / intercessors</div>
+        <div class="word-card__details">
+          <div class="detail-row">
+            <span class="detail-label">Sentence Role</span>
+            <span class="detail-value">Target of Action (What they took)</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Ending Sound</span>
+            <span class="detail-value">Target vowel — ـَ (a-sound)</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Root Letters</span>
+            <span class="detail-value" style="font-family: var(--font-arabic); font-size: 1.1rem;">و - ل - ي</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Root Meaning</span>
+            <span class="detail-value">To be close, guardian, loyal ally, protector</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Context</span>
+            <span class="detail-value">False deities, statues, and spiritual intermediaries</span>
+          </div>
+        </div>
+        <span class="word-card__tag">Target Object</span>
+      </div>
+
+      <!-- مَا نَعْبُدُهُمْ إِلَّا -->
+      <div class="word-card scroll-reveal" data-role="verb">
+        <div class="word-card__arabic">مَا نَعْبُدُهُمْ إِلَّا</div>
+        <div class="word-card__meaning">[saying:] "We only worship them..."</div>
+        <div class="word-card__details">
+          <div class="detail-row">
+            <span class="detail-label">Sentence Role</span>
+            <span class="detail-value">Restriction Sentence (Their Claim)</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Word Makeup</span>
+            <span class="detail-value">"Not" + "We worship them" + "Except" = "We only worship them"</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Root of Verb</span>
+            <span class="detail-value" style="font-family: var(--font-arabic); font-size: 1.1rem;">ع - ب - د</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Psychological Insight</span>
+            <span class="detail-value">They knew idols didn't create the universe — they used them as excuses for closeness</span>
+          </div>
+        </div>
+        <span class="word-card__tag">Their Excuse</span>
+      </div>
+
+      <!-- لِيُقَرِّبُونَآ -->
+      <div class="word-card scroll-reveal" data-role="verb">
+        <div class="word-card__arabic">لِيُقَرِّبُونَآ</div>
+        <div class="word-card__meaning">so that they bring us closer</div>
+        <div class="word-card__details">
+          <div class="detail-row">
+            <span class="detail-label">Sentence Role</span>
+            <span class="detail-value">Purpose Connector + Present Action Verb</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Word Makeup</span>
+            <span class="detail-value">"In order that" + "They bring near" + "Us"</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Root Letters</span>
+            <span class="detail-value" style="font-family: var(--font-arabic); font-size: 1.1rem;">ق - ر - ب</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Root Meaning</span>
+            <span class="detail-value">To be near, intimate, accessible</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Word Shape</span>
+            <span class="detail-value">Causing closeness — trying to use intermediaries to reach God</span>
+          </div>
+        </div>
+        <span class="word-card__tag">Stated Purpose</span>
+      </div>
+
+      <!-- إِلَى ٱللَّهِ -->
+      <div class="word-card scroll-reveal" data-role="divine">
+        <div class="word-card__arabic">إِلَى ٱللَّهِ</div>
+        <div class="word-card__meaning">to Allah</div>
+        <div class="word-card__details">
+          <div class="detail-row">
+            <span class="detail-label">Sentence Role</span>
+            <span class="detail-value">Direction Link + Divine Name</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Ending Sound</span>
+            <span class="detail-value">Connected vowel — ـِ (i-sound)</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Crucial Flaw</span>
+            <span class="detail-value">Allah is closer to His servant than their jugular vein — intermediaries are completely unnecessary</span>
+          </div>
+        </div>
+        <span class="word-card__tag">Divine Name</span>
+      </div>
+
+      <!-- زُلْفَىٰٓ -->
+      <div class="word-card scroll-reveal" data-role="hal">
+        <div class="word-card__arabic">زُلْفَىٰٓ</div>
+        <div class="word-card__meaning">in high nearness / rank</div>
+        <div class="word-card__details">
+          <div class="detail-row">
+            <span class="detail-label">Sentence Role</span>
+            <span class="detail-value">Degree Noun: defines the desired closeness</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Root Letters</span>
+            <span class="detail-value" style="font-family: var(--font-arabic); font-size: 1.1rem;">ز - ل - ف</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Root Meaning</span>
+            <span class="detail-value">To advance in rank, draw into close favor</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Word Nature</span>
+            <span class="detail-value">An intensive noun meaning high proximity and elevated standing</span>
+          </div>
+        </div>
+        <span class="word-card__tag">Nearness Degree</span>
+      </div>
+
+      <!-- إِنَّ ٱللَّهَ يَحْكُمُ بَيْنَهُمْ -->
+      <div class="word-card scroll-reveal" data-role="verb">
+        <div class="word-card__arabic">إِنَّ ٱللَّهَ يَحْكُمُ بَيْنَهُمْ</div>
+        <div class="word-card__meaning">Indeed, Allah will judge between them</div>
+        <div class="word-card__details">
+          <div class="detail-row">
+            <span class="detail-label">Sentence Role</span>
+            <span class="detail-value">Divine Decree (Certainty + Action Word)</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Action Word</span>
+            <span class="detail-value">"He judges / decides with authority"</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Root of Verb</span>
+            <span class="detail-value" style="font-family: var(--font-arabic); font-size: 1.1rem;">ح - ك - م</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Verbal Harmony</span>
+            <span class="detail-value">Shares the exact same root as "The All-Wise" from verse 1!</span>
+          </div>
+        </div>
+        <span class="word-card__tag">Divine Judgment</span>
+      </div>
+
+      <!-- فِى مَا هُمْ فِيهِ يَخْتَلِفُونَ -->
+      <div class="word-card scroll-reveal" data-role="verb">
+        <div class="word-card__arabic">فِى مَا هُمْ فِيهِ يَخْتَلِفُونَ</div>
+        <div class="word-card__meaning">regarding what they dispute about</div>
+        <div class="word-card__details">
+          <div class="detail-row">
+            <span class="detail-label">Sentence Role</span>
+            <span class="detail-value">Scope of Judgment</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Core Verb</span>
+            <span class="detail-value">"They differ / dispute continuously"</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Root of Verb</span>
+            <span class="detail-value" style="font-family: var(--font-arabic); font-size: 1.1rem;">خ - ل - ف</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Root Meaning</span>
+            <span class="detail-value">To diverge, contradict, take opposite paths</span>
+          </div>
+        </div>
+        <span class="word-card__tag">Dispute Scope</span>
+      </div>
+
+      <!-- إِنَّ ٱللَّهَ لَا يَهْدِى -->
+      <div class="word-card scroll-reveal" data-role="verb">
+        <div class="word-card__arabic">إِنَّ ٱللَّهَ لَا يَهْدِى</div>
+        <div class="word-card__meaning">Indeed, Allah does not guide</div>
+        <div class="word-card__details">
+          <div class="detail-row">
+            <span class="detail-label">Sentence Role</span>
+            <span class="detail-value">Certainty + Negated Action Word</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Core Verb</span>
+            <span class="detail-value">"Does not guide" (ongoing spiritual law)</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Root of Verb</span>
+            <span class="detail-value" style="font-family: var(--font-arabic); font-size: 1.1rem;">ه - د - ي</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Root Meaning</span>
+            <span class="detail-value">To show the right path with kindness and clarity</span>
+          </div>
+        </div>
+        <span class="word-card__tag">Divine Law</span>
+      </div>
+
+      <!-- مَنْ هُوَ كَاذِبٌ كَفَّارٌ -->
+      <div class="word-card scroll-reveal" data-role="attribute">
+        <div class="word-card__arabic">مَنْ هُوَ كَـٰذِبٌۭ كَفَّارٌۭ</div>
+        <div class="word-card__meaning">the one who is a persistent liar and deeply ungrateful</div>
+        <div class="word-card__details">
+          <div class="detail-row">
+            <span class="detail-label">Sentence Role</span>
+            <span class="detail-value">Two Intensive Describing Qualities</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">First Quality</span>
+            <span class="detail-value">A liar: invents false claims about God (Root ك - ذ - ب)</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Second Quality</span>
+            <span class="detail-value">Deeply ungrateful: buries truth & blessings (Root ك - ف - ر)</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Word Shape</span>
+            <span class="detail-value">Intensive shape — not a one-time slip, but an ingrained lifestyle of denial</span>
+          </div>
+        </div>
+        <span class="word-card__tag">Warning Qualities</span>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider scroll-reveal"></div>
+
+  <!-- ═══════════════════ VERSE 4 (39:4) ═══════════════════ -->
+  <section class="section scroll-reveal" id="verse4">
+    <div class="verse-banner scroll-reveal">
+      <div class="verse-badge">Surah Az-Zumar • 39 : 4</div>
+      <div class="verse-arabic">لَّوْ أَرَادَ ٱللَّهُ أَن يَتَّخِذَ وَلَدًۭا لَّٱصْطَفَىٰ مِمَّا يَخْلُقُ مَا يَشَآءُ ۚ سُبْحَـٰنَهُۥ ۖ هُوَ ٱللَّهُ ٱلْوَٰحِدُ ٱلْقَهَّـٰرُ</div>
+      <p class="verse-translation">"If Allah had willed to take a child, He could have chosen from what He creates whatever He wills. Glory be to Him! He is Allah, the One, the Supreme."</p>
+    </div>
+
+    <div class="section__header scroll-reveal">
+      <div class="section__number">4</div>
+      <h2 class="section__title">Verse 4 — Word-by-Word Analysis</h2>
+      <p class="section__subtitle">A powerful logical argument dismantling the concept of divine offspring (starting from right)</p>
+    </div>
+
+    <div class="word-grid">
+
+      <!-- لَّوْ -->
+      <div class="word-card scroll-reveal" data-role="conditional">
+        <div class="word-card__arabic">لَّوْ</div>
+        <div class="word-card__meaning">If (an impossible premise)</div>
+        <div class="word-card__details">
+          <div class="detail-row">
+            <span class="detail-label">Sentence Role</span>
+            <span class="detail-value">Hypothetical Particle for Impossible Scenarios</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">What it Means</span>
+            <span class="detail-value">"If this were true (which it never was and never could be)..."</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Rhetorical Purpose</span>
+            <span class="detail-value">Allows the opponent's claim for a split second just to prove its logical impossibility</span>
+          </div>
+        </div>
+        <span class="word-card__tag">Hypothetical</span>
+      </div>
+
+      <!-- أَرَادَ -->
+      <div class="word-card scroll-reveal" data-role="verb">
+        <div class="word-card__arabic">أَرَادَ</div>
+        <div class="word-card__meaning">He had willed / intended</div>
+        <div class="word-card__details">
+          <div class="detail-row">
+            <span class="detail-label">Sentence Role</span>
+            <span class="detail-value">Action Word (Past Tense)</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Doer</span>
+            <span class="detail-value">Allah the Almighty</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Root Letters</span>
+            <span class="detail-value" style="font-family: var(--font-arabic); font-size: 1.1rem;">ر - و - د</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Root Meaning</span>
+            <span class="detail-value">To seek, intend, will with decisive purpose</span>
+          </div>
+        </div>
+        <span class="word-card__tag">Action Word</span>
+      </div>
+
+      <!-- ٱللَّهُ -->
+      <div class="word-card scroll-reveal" data-role="divine">
+        <div class="word-card__arabic">ٱللَّهُ</div>
+        <div class="word-card__meaning">Allah</div>
+        <div class="word-card__details">
+          <div class="detail-row">
+            <span class="detail-label">Sentence Role</span>
+            <span class="detail-value">The Doer of the Will (Subject)</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Ending Sound</span>
+            <span class="detail-value">Doer vowel — ـُ (u-sound)</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Grammar Journey</span>
+            <span class="detail-value">In verse 1: "from Allah" (ـِ); in verse 2: "worship Allah" (ـَ); here: "Allah willed" (ـُ)</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Insight</span>
+            <span class="detail-value">Shows the beauty of Arabic vowel endings marking sentence functions</span>
+          </div>
+        </div>
+        <span class="word-card__tag">Divine Name</span>
+      </div>
+
+      <!-- أَن يَتَّخِذَ -->
+      <div class="word-card scroll-reveal" data-role="verb">
+        <div class="word-card__arabic">أَن يَتَّخِذَ</div>
+        <div class="word-card__meaning">to take / adopt</div>
+        <div class="word-card__details">
+          <div class="detail-row">
+            <span class="detail-label">Sentence Role</span>
+            <span class="detail-value">Connecting Tool + Action Concept</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Root Letters</span>
+            <span class="detail-value" style="font-family: var(--font-arabic); font-size: 1.1rem;">أ - خ - ذ</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Root Meaning</span>
+            <span class="detail-value">To take, choose for oneself</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Connection</span>
+            <span class="detail-value">Same root verb as in verse 3 where idolaters "took" protectors</span>
+          </div>
+        </div>
+        <span class="word-card__tag">Action Concept</span>
+      </div>
+
+      <!-- وَلَدًا -->
+      <div class="word-card scroll-reveal" data-role="object">
+        <div class="word-card__arabic">وَلَدًۭا</div>
+        <div class="word-card__meaning">a child / offspring</div>
+        <div class="word-card__details">
+          <div class="detail-row">
+            <span class="detail-label">Sentence Role</span>
+            <span class="detail-value">Target of the Hypothetical Idea (Object)</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Ending Sound</span>
+            <span class="detail-value">Target vowel — ـً (an-sound)</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Root Letters</span>
+            <span class="detail-value" style="font-family: var(--font-arabic); font-size: 1.1rem;">و - ل - د</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Root Meaning</span>
+            <span class="detail-value">To give birth, produce biological offspring</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Theological Truth</span>
+            <span class="detail-value">Children are born out of need, mortality, or continuation — Allah is eternal and free of all need</span>
+          </div>
+        </div>
+        <span class="word-card__tag">Target Object</span>
+      </div>
+
+      <!-- لَّٱصْطَفَىٰ -->
+      <div class="word-card scroll-reveal" data-role="verb">
+        <div class="word-card__arabic">لَّٱصْطَفَىٰ</div>
+        <div class="word-card__meaning">He surely would have chosen</div>
+        <div class="word-card__details">
+          <div class="detail-row">
+            <span class="detail-label">Sentence Role</span>
+            <span class="detail-value">Result Word + Action Word</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Word Makeup</span>
+            <span class="detail-value">"Then surely" + "He chose the purest"</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Root Letters</span>
+            <span class="detail-value" style="font-family: var(--font-arabic); font-size: 1.1rem;">ص - ف - و</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Root Meaning</span>
+            <span class="detail-value">To be pure, select the elite and clear</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Word Shape</span>
+            <span class="detail-value">Refined selection — handpicking the highest quality</span>
+          </div>
+        </div>
+        <span class="word-card__tag">Action Word</span>
+      </div>
+
+      <!-- مِمَّا يَخْلُقُ -->
+      <div class="word-card scroll-reveal" data-role="verb">
+        <div class="word-card__arabic">مِمَّا يَخْلُقُ</div>
+        <div class="word-card__meaning">from what He creates</div>
+        <div class="word-card__details">
+          <div class="detail-row">
+            <span class="detail-label">Sentence Role</span>
+            <span class="detail-value">Source Link + Present Action Word</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Word Makeup</span>
+            <span class="detail-value">"From" + "What" + "He creates"</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Root Letters</span>
+            <span class="detail-value" style="font-family: var(--font-arabic); font-size: 1.1rem;">خ - ل - ق</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Root Meaning</span>
+            <span class="detail-value">To originate from nothing, measure, shape</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Decisive Logic</span>
+            <span class="detail-value">Even in this hypothetical scenario, anything chosen would still be a CREATION — not a divine equal!</span>
+          </div>
+        </div>
+        <span class="word-card__tag">Source Link</span>
+      </div>
+
+      <!-- مَا يَشَآءُ -->
+      <div class="word-card scroll-reveal" data-role="verb">
+        <div class="word-card__arabic">مَا يَشَآءُ</div>
+        <div class="word-card__meaning">whatever He wills</div>
+        <div class="word-card__details">
+          <div class="detail-row">
+            <span class="detail-label">Sentence Role</span>
+            <span class="detail-value">Universal Object + Present Action Word</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Root Letters</span>
+            <span class="detail-value" style="font-family: var(--font-arabic); font-size: 1.1rem;">ش - ي - أ</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Root Meaning</span>
+            <span class="detail-value">To will, intend, bring into existence</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Meaning</span>
+            <span class="detail-value">His sovereignty is absolute and unrestricted</span>
+          </div>
+        </div>
+        <span class="word-card__tag">Action Word</span>
+      </div>
+
+      <!-- سُبْحَـٰنَهُۥ -->
+      <div class="word-card scroll-reveal" data-role="divine">
+        <div class="word-card__arabic">سُبْحَـٰنَهُۥ</div>
+        <div class="word-card__meaning">Glory be to Him! Far above is He!</div>
+        <div class="word-card__details">
+          <div class="detail-row">
+            <span class="detail-label">Sentence Role</span>
+            <span class="detail-value">Glorification Proclamation + Pronoun</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Root Letters</span>
+            <span class="detail-value" style="font-family: var(--font-arabic); font-size: 1.1rem;">س - ب - ح</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Root Meaning</span>
+            <span class="detail-value">To float high, be completely elevated above any blemish or shortcoming</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Powerful Exclamation</span>
+            <span class="detail-value">Instantly shatters the hypothetical idea: Allah is completely pure from needing family or offspring!</span>
+          </div>
+        </div>
+        <span class="word-card__tag">Glorification</span>
+      </div>
+
+      <!-- هُوَ ٱللَّهُ -->
+      <div class="word-card scroll-reveal" data-role="divine">
+        <div class="word-card__arabic">هُوَ ٱللَّهُ</div>
+        <div class="word-card__meaning">He is Allah</div>
+        <div class="word-card__details">
+          <div class="detail-row">
+            <span class="detail-label">Sentence Role</span>
+            <span class="detail-value">Sovereign Pronoun (Subject) + Divine Name (Predicate)</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Meaning</span>
+            <span class="detail-value">"HE — and none other — is Allah"</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Tone</span>
+            <span class="detail-value">Unshakable, majestic assertion of divine identity</span>
+          </div>
+        </div>
+        <span class="word-card__tag">Divine Statement</span>
+      </div>
+
+      <!-- ٱلْوَٰحِدُ -->
+      <div class="word-card scroll-reveal" data-role="attribute">
+        <div class="word-card__arabic">ٱلْوَٰحِدُ</div>
+        <div class="word-card__meaning">The One / Indivisible</div>
+        <div class="word-card__details">
+          <div class="detail-row">
+            <span class="detail-label">Sentence Role</span>
+            <span class="detail-value">First Divine Quality (Attribute)</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Ending Sound</span>
+            <span class="detail-value">Descriptive match — ـُ (u-sound)</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Root Letters</span>
+            <span class="detail-value" style="font-family: var(--font-arabic); font-size: 1.1rem;">و - ح - د</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Root Meaning</span>
+            <span class="detail-value">To be singular, unique, solitary, without peer</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Logical Completion</span>
+            <span class="detail-value">Having a child requires a second, which contradicts His absolute Oneness</span>
+          </div>
+        </div>
+        <span class="word-card__tag">Divine Quality</span>
+      </div>
+
+      <!-- ٱلْقَهَّـٰرُ -->
+      <div class="word-card scroll-reveal" data-role="attribute">
+        <div class="word-card__arabic">ٱلْقَهَّـٰرُ</div>
+        <div class="word-card__meaning">The Supreme / All-Dominant</div>
+        <div class="word-card__details">
+          <div class="detail-row">
+            <span class="detail-label">Sentence Role</span>
+            <span class="detail-value">Second Divine Quality (Intensive Attribute)</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Ending Sound</span>
+            <span class="detail-value">Descriptive match — ـُ (u-sound)</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Root Letters</span>
+            <span class="detail-value" style="font-family: var(--font-arabic); font-size: 1.1rem;">ق - ه - ر</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Root Meaning</span>
+            <span class="detail-value">To subdue, compel, overpower completely</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Word Shape</span>
+            <span class="detail-value">Intensive shape: His supremacy over all creation is eternal, total, and unchallenged</span>
+          </div>
+        </div>
+        <span class="word-card__tag">Divine Quality</span>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider scroll-reveal"></div>
+
+  <!-- ═══════════════════ THEMATIC FLOW OF VERSES 1–4 ═══════════════════ -->
+  <section class="section scroll-reveal" id="flow">
+    <div class="section__header">
+      <div class="section__number">5</div>
+      <h2 class="section__title">The Cohesive Flow of Verses 1–4</h2>
+      <p class="section__subtitle">How the opening 4 verses build an unbreakable logical journey from revelation to pure monotheism</p>
+    </div>
+
+    <div class="sentence-diagram scroll-reveal">
+      <div style="display: grid; gap: var(--space-md);">
+        <div style="padding: var(--space-md); background: oklch(0.12 0.04 260 / 0.8); border-radius: var(--radius-md); border-left: 4px solid var(--clr-gold);">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; margin-block-end: 0.3em;">
+            <strong style="color: var(--clr-gold); font-size: 1.05rem;">1. Divine Authority (39:1)</strong>
+            <span style="font-family: var(--font-arabic); font-size: 1.2rem; color: var(--clr-gold-bright);">تَنزِيلُ ٱلْكِتَـٰبِ مِنَ ٱللَّهِ ٱلْعَزِيزِ ٱلْحَكِيمِ</span>
+          </div>
+          <p style="font-size: 0.9rem; color: var(--text-secondary); margin: 0;">
+            Establishes the supreme source: The Quran is not human invention — it is a direct revelation from the Almighty and All-Wise.
+          </p>
+        </div>
+
+        <div style="padding: var(--space-md); background: oklch(0.12 0.04 260 / 0.8); border-radius: var(--radius-md); border-left: 4px solid oklch(0.75 0.14 145);">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; margin-block-end: 0.3em;">
+            <strong style="color: oklch(0.75 0.14 145); font-size: 1.05rem;">2. The Human Duty (39:2)</strong>
+            <span style="font-family: var(--font-arabic); font-size: 1.2rem; color: var(--clr-gold-bright);">فَٱعْبُدِ ٱللَّهَ مُخْلِصًۭا لَّهُ ٱلدِّينَ</span>
+          </div>
+          <p style="font-size: 0.9rem; color: var(--text-secondary); margin: 0;">
+            Since the Book is sent down with absolute truth, the only valid response is pure, sincere worship dedicated entirely to Allah alone.
+          </p>
+        </div>
+
+        <div style="padding: var(--space-md); background: oklch(0.12 0.04 260 / 0.8); border-radius: var(--radius-md); border-left: 4px solid oklch(0.75 0.12 175);">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; margin-block-end: 0.3em;">
+            <strong style="color: oklch(0.75 0.12 175); font-size: 1.05rem;">3. Refuting False Intermediaries (39:3)</strong>
+            <span style="font-family: var(--font-arabic); font-size: 1.2rem; color: var(--clr-gold-bright);">أَلَا لِلَّهِ ٱلدِّينُ ٱلْخَالِصُ</span>
+          </div>
+          <p style="font-size: 0.9rem; color: var(--text-secondary); margin: 0;">
+            Pure devotion belongs to Allah alone. The excuse of taking protectors "to bring us closer to Allah" is exposed as false and ungrateful.
+          </p>
+        </div>
+
+        <div style="padding: var(--space-md); background: oklch(0.12 0.04 260 / 0.8); border-radius: var(--radius-md); border-left: 4px solid oklch(0.72 0.14 310);">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; margin-block-end: 0.3em;">
+            <strong style="color: oklch(0.72 0.14 310); font-size: 1.05rem;">4. Absolute Transcendence & Oneness (39:4)</strong>
+            <span style="font-family: var(--font-arabic); font-size: 1.2rem; color: var(--clr-gold-bright);">سُبْحَـٰنَهُۥ ۖ هُوَ ٱللَّهُ ٱلْوَٰحِدُ ٱلْقَهَّـٰرُ</span>
+          </div>
+          <p style="font-size: 0.9rem; color: var(--text-secondary); margin: 0;">
+            Allah is far above having children or partners. He is The One (indivisible) and The Supreme (ruling over every created thing).
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider scroll-reveal"></div>
+
   <!-- ═══════════════════ THEMES ═══════════════════ -->
   <section class="section scroll-reveal" id="themes">
     <div class="section__header">
-      <div class="section__number">4</div>
-      <h2 class="section__title">Key Themes</h2>
-      <p class="section__subtitle">The deep meanings embedded in just six words</p>
+      <div class="section__number">6</div>
+      <h2 class="section__title">Core Themes Across Verses 1–4</h2>
+      <p class="section__subtitle">The profound spiritual and logical journey from divine revelation to pure monotheism</p>
     </div>
 
     <div class="themes-grid">
       <div class="theme-card scroll-reveal">
         <div class="theme-icon">📖</div>
-        <div class="theme-title">Divine Origin</div>
-        <div class="theme-desc">The Quran is not the work of a human being. It is a revelation sent down directly from the Creator of everything.</div>
+        <div class="theme-title">Divine Origin (39:1)</div>
+        <div class="theme-desc">The Quran is not human literature. It is sent down directly by the Almighty and All-Wise Lord of the universe.</div>
       </div>
 
       <div class="theme-card scroll-reveal">
         <div class="theme-icon">⏳</div>
-        <div class="theme-title">Gradual Revelation</div>
-        <div class="theme-desc">The word "Tanzeel" (Form II) tells us the Quran was sent down stage by stage over 23 years — not all at once — to guide people step by step.</div>
+        <div class="theme-title">Gradual Guidance (39:1)</div>
+        <div class="theme-desc">The word for "sending down" reflects a caring, staged revelation over 23 years, lovingly transforming people step by step.</div>
       </div>
 
       <div class="theme-card scroll-reveal">
-        <div class="theme-icon">⚡</div>
-        <div class="theme-title">Power and Wisdom Together</div>
-        <div class="theme-desc">Allah pairs "The Almighty" with "The All-Wise" — His power is never random. Every decree is backed by perfect wisdom.</div>
+        <div class="theme-icon">🤍</div>
+        <div class="theme-title">Pure Sincerity (39:2)</div>
+        <div class="theme-desc">Because the Book is absolute truth, worship cannot be casual or divided. Devotion must be 100% sincere and dedicated exclusively to Allah.</div>
       </div>
 
       <div class="theme-card scroll-reveal">
-        <div class="theme-icon">🔗</div>
-        <div class="theme-title">Authority of the Message</div>
-        <div class="theme-desc">By opening the Surah this way, Allah establishes that everything that follows carries the highest possible authority — it is from Him.</div>
+        <div class="theme-icon">🚫</div>
+        <div class="theme-title">No Middlemen or Proxies (39:3)</div>
+        <div class="theme-desc">The pagan excuse—"we only worship them to get closer to Allah"—is exposed as falsehood. Allah is directly accessible to every seeking heart.</div>
+      </div>
+
+      <div class="theme-card scroll-reveal">
+        <div class="theme-icon">⚖️</div>
+        <div class="theme-title">Final Justice (39:3)</div>
+        <div class="theme-desc">Differences and manufactured falsehoods will not remain unresolved. Allah will definitively judge between all claims with perfect knowledge.</div>
+      </div>
+
+      <div class="theme-card scroll-reveal">
+        <div class="theme-icon">👑</div>
+        <div class="theme-title">The One and Supreme (39:4)</div>
+        <div class="theme-desc">Allah is far above having offspring or equals. He is The Indivisible One and The Overpowering Lord who reigns supreme over all creation.</div>
       </div>
     </div>
   </section>
@@ -2004,9 +3237,9 @@
   <!-- ═══════════════════ QUIZ ═══════════════════ -->
   <section class="section scroll-reveal" id="quiz">
     <div class="section__header">
-      <div class="section__number">5</div>
+      <div class="section__number">7</div>
       <h2 class="section__title">Test Your Understanding</h2>
-      <p class="section__subtitle">8 questions to see how well you've understood this verse</p>
+      <p class="section__subtitle">10 interactive questions covering the meanings, grammar, and roots of Verses 1 to 4</p>
     </div>
 
     <div class="quiz-container" id="quizContainer">
@@ -2014,7 +3247,7 @@
         <div class="quiz-progress__bar">
           <div class="quiz-progress__fill" id="quizProgressFill" style="inline-size: 0%;"></div>
         </div>
-        <div class="quiz-progress__text" id="quizProgressText">1 / 8</div>
+        <div class="quiz-progress__text" id="quizProgressText">1 / 10</div>
       </div>
 
       <div class="quiz-card active" id="quizCard">
@@ -2035,9 +3268,9 @@
 
   <!-- ═══════════════════ FOOTER ═══════════════════ -->
   <footer class="site-footer">
-    <div class="footer-ayah">تَنزِيلُ ٱلْكِتَـٰبِ مِنَ ٱللَّهِ ٱلْعَزِيزِ ٱلْحَكِيمِ</div>
-    <div class="footer-ref">Surah Az-Zumar (39:1)</div>
-    <div class="footer-version" id="footerVersion">v1.0.1 (updated 2026-09-06 23:25)</div>
+    <div class="footer-ayah">تَنزِيلُ ٱلْكِتَـٰبِ مِنَ ٱللَّهِ ٱلْعَزِيزِ ٱلْحَكِيمِ • إِنَّآ أَنزَلْنَآ إِلَيْكَ ٱلْكِتَـٰبَ بِٱلْحَقِّ</div>
+    <div class="footer-ref">Surah Az-Zumar (39:1–4)</div>
+    <div class="footer-version" id="footerVersion">v1.0.2 (updated 2026-09-09 19:35)</div>
   </footer>
 
   <!-- ═══════════════════ JAVASCRIPT ═══════════════════ -->
@@ -2257,92 +3490,114 @@
     {
       const questions = [
         {
-          q: 'What does the word "Tanzeel" (تَنزِيل) specifically mean?',
+          q: 'What does the opening word تَنزِيلُ ("The sending down") specifically tell us about the Quran in Verse 1?',
           options: [
-            'The reading aloud',
-            'The gradual sending down (revelation)',
-            'The writing down',
-            'The memorisation'
+            'It was recited from memory only',
+            'It was revealed gradually in stages over 23 years',
+            'It was written by human philosophers',
+            'It was sent down in one single moment'
           ],
           answer: 1,
-          explanation: '"Tanzeel" is a verbal noun from Form II, meaning to send down gradually — in stages — over time.'
+          explanation: 'The word structure indicates a gradual, step-by-step sending down from on high over 23 years to lovingly guide people through real-life events.'
         },
         {
-          q: 'What are the root letters of "Al-Kitab" (ٱلْكِتَـٰب)?',
+          q: 'What are the root letters of ٱلْكِتَـٰبِ ("The Book")?',
           options: [
-            'ك - ل - م',
-            'ك - ت - ب',
-            'ق - ر - أ',
-            'ع - ل - م'
+            'ك - ل - م (speaking)',
+            'ك - ت - ب (writing and gathering)',
+            'ق - ر - أ (reciting aloud)',
+            'ع - ل - م (knowing)'
           ],
           answer: 1,
-          explanation: 'The root is ك-ت-ب (k-t-b) which carries the meaning of "writing." That is why a book is called "Kitab."'
+          explanation: 'The root is ك-ت-ب which carries the core meaning of writing and gathering parts together into a preserved record.'
         },
         {
-          q: 'What grammatical role does "Tanzeel" play in this verse?',
+          q: 'Why does Verse 1 pair "The Almighty" with "The All-Wise"?',
           options: [
-            'Object of the verb',
-            'Predicate (Khabar)',
-            'Subject (Mubtada)',
-            'Adjective (Sifah)'
+            'To show that supreme power is always guided by flawless wisdom, never arbitrary',
+            'Merely for poetic rhyming',
+            'Because they are the only two divine attributes',
+            'To refer to two separate beings'
           ],
-          answer: 2,
-          explanation: '"Tanzeel" is the Subject (Mubtada) of this nominal sentence. It carries the dammah ending (ـُ) because it is in the nominative case.'
+          answer: 0,
+          explanation: 'Divine power is never reckless or tyrannical; every decree of the Almighty is backed by perfect wisdom and justice.'
         },
         {
-          q: 'Which verb form does "Tanzeel" come from?',
+          q: 'In Verse 2, what immediate command follows the declaration that the Book is sent with truth?',
           options: [
-            'Form I — the basic form',
-            'Form II — the intensive/causative form',
-            'Form IV — the transitive form',
-            'Form V — the reflexive form'
-          ],
-          answer: 1,
-          explanation: 'Form II (fa\'\'ala / فَعَّلَ) adds intensity and gradualness. "Nazzala" means to send down repeatedly or stage by stage, unlike "anzala" (Form IV) which can mean all at once.'
-        },
-        {
-          q: 'What Arabic pattern do both "Al-Aziz" and "Al-Hakeem" share?',
-          options: [
-            'Fa\'il (فَاعِل) — doer',
-            'Maf\'ul (مَفْعُول) — done to',
-            'Fa\'eel (فَعِيل) — intensive',
-            'Fa\'\'al (فَعَّال) — habitual doer'
-          ],
-          answer: 2,
-          explanation: 'Both words follow the Fa\'eel (فَعِيل) pattern, which creates an intensive adjective — showing these qualities are deeply permanent, not temporary.'
-        },
-        {
-          q: 'Where is the predicate (Khabar) in this verse?',
-          options: [
-            'تَنزِيلُ alone',
-            'ٱلْكِتَـٰبِ alone',
-            'مِنَ ٱللَّهِ (from Allah)',
-            'ٱلْعَزِيزِ ٱلْحَكِيمِ'
-          ],
-          answer: 2,
-          explanation: 'The prepositional phrase "from Allah" (مِنَ ٱللَّهِ) serves as the predicate. It tells us WHERE the subject (the revelation of the Book) comes from.'
-        },
-        {
-          q: 'Why does "Al-Kitab" (ٱلْكِتَـٰبِ) end with a kasrah (ـِ)?',
-          options: [
-            'It is the subject of the sentence',
-            'It is the object of a verb',
-            'It is the second part of a possessive phrase (Mudaf Ilayhi)',
-            'It is an adjective'
-          ],
-          answer: 2,
-          explanation: 'Al-Kitab is in the genitive case because it is the Mudaf Ilayhi (the second part of a possessive phrase). "The revelation OF the Book" — "of the Book" is possessive.'
-        },
-        {
-          q: 'Why is there no verb in this verse?',
-          options: [
-            'It was lost in translation',
-            'It is a nominal sentence — making a timeless factual statement',
-            'The verb is hidden at the end',
-            'Arabic sentences never use verbs'
+            'Travel the world for wealth',
+            'Worship Allah, keeping devotion purely sincere to Him alone',
+            'Build massive stone monuments',
+            'Engage in endless debates'
           ],
           answer: 1,
-          explanation: 'This is a nominal sentence (Jumlah Ismiyyah). In Arabic, starting a sentence with a noun instead of a verb makes it a timeless fact — this revelation is from Allah, always was, and always will be.'
+          explanation: 'The direct consequence of receiving divine truth is pure worship — sincere dedication free of all hypocrisy and partners.'
+        },
+        {
+          q: 'In Verse 2, what does the word مُخْلِصًا ("being sincere") describe about worship?',
+          options: [
+            'The physical location of prayer',
+            'The inner state of the worshipper\'s heart during devotion',
+            'The volume of one\'s voice',
+            'The time of day for worship'
+          ],
+          answer: 1,
+          explanation: 'It functions as a state word, describing how the worshipper must purify their heart so devotion is 100% genuine for Allah alone.'
+        },
+        {
+          q: 'Why does ٱلْكِتَـٰبَ end with an "a" sound (ـَ) in Verse 2, but ended with an "i" sound (ـِ) in Verse 1?',
+          options: [
+            'It is a random spelling difference',
+            'In Verse 2 it receives the action as the direct target ("We sent down the Book")',
+            'It became plural in Verse 2',
+            'It transformed into an action word'
+          ],
+          answer: 1,
+          explanation: 'In Verse 1 it was possessive ("the revelation OF the Book"), while in Verse 2 it receives the action of being sent down as the direct object.'
+        },
+        {
+          q: 'In Verse 3, what excuse did the idolaters make for taking protectors and intermediaries?',
+          options: [
+            '"We believe the idols created the universe"',
+            '"We only worship them so they bring us closer to Allah"',
+            '"We do not believe in Allah at all"',
+            '"Our ancestors forced us against our will"'
+          ],
+          answer: 1,
+          explanation: 'The idolaters admitted Allah was the supreme Creator, but wrongly invented intermediaries claiming they would serve as spiritual bridges to Him.'
+        },
+        {
+          q: 'How does Verse 3 describe those who invent intermediaries and refuse sincere devotion?',
+          options: [
+            'Innocent seekers on another path',
+            'Persistent liars and deeply ungrateful',
+            'Forgiven without any accountability',
+            'Accidentally mistaken but correct'
+          ],
+          answer: 1,
+          explanation: 'Verse 3 concludes that Allah does not guide the persistent liar (who invents falsehood about God) and the deeply ungrateful (who rejects God\'s exclusive rights).'
+        },
+        {
+          q: 'Why does Verse 4 open with the hypothetical word لَّوْ ("If")?',
+          options: [
+            'To indicate Allah actually wanted a child',
+            'To set up an impossible "what if" scenario that immediately dismantles the false claim',
+            'To express genuine uncertainty',
+            'To introduce an ancient legend'
+          ],
+          answer: 1,
+          explanation: 'This hypothetical tool sets up a counter-to-reality premise, demonstrating that even hypothetically, any creature chosen would still be a creation, never equal to God.'
+        },
+        {
+          q: 'What two majestic attributes conclude Verse 4, declaring Allah\'s absolute transcendence?',
+          options: [
+            'The First and The Last',
+            'The One (Indivisible) and The Supreme (All-Dominant)',
+            'The Forgiving and The Merciful',
+            'The Creator and The Sustainer'
+          ],
+          answer: 1,
+          explanation: 'Verse 4 ends by proclaiming: "He is Allah, The One (who has no partner or child) and The Supreme (who rules unchallenged over all creation)."'
         }
       ];
 
