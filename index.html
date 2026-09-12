@@ -1471,6 +1471,230 @@
         --tag-border: oklch(0.68 0.1 220 / 0.3);
       }
 
+      /* ── ROOT CONNECTION MAP ── */
+      .rootmap-stage {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 16 / 10;
+        min-height: 480px;
+        max-height: 700px;
+        background: radial-gradient(ellipse at 50% 40%, oklch(0.13 0.03 260) 0%, oklch(0.06 0.015 260) 100%);
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        border: 1px solid oklch(0.2 0.04 260 / 0.4);
+        margin-block-end: var(--space-md);
+        cursor: default;
+      }
+      .rootmap-stage canvas {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+      }
+      .rootmap-svg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        pointer-events: none;
+      }
+      .rootmap-line {
+        fill: none;
+        stroke-width: 1.8;
+        stroke-linecap: round;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      .rootmap-line.visible {
+        opacity: 0.65;
+        stroke-dasharray: var(--line-len);
+        animation: rootmap-draw 0.7s ease-out forwards;
+      }
+      .rootmap-line[data-verse="1"] { stroke: oklch(0.72 0.1 50); }
+      .rootmap-line[data-verse="2"] { stroke: oklch(0.72 0.13 145); }
+      .rootmap-line[data-verse="3"] { stroke: oklch(0.72 0.11 180); }
+      .rootmap-line[data-verse="4"] { stroke: oklch(0.72 0.11 300); }
+      @keyframes rootmap-draw {
+        from { stroke-dashoffset: var(--line-len); }
+        to   { stroke-dashoffset: 0; }
+      }
+
+      .rootmap-node {
+        position: absolute;
+        transform: translate(-50%, -50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        cursor: pointer;
+        z-index: 2;
+        transition: opacity 0.4s, filter 0.4s;
+
+        &.dimmed { opacity: 0.15; filter: grayscale(0.6); }
+      }
+      .rootmap-circle {
+        width: 54px;
+        height: 54px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        font-family: var(--font-arabic);
+        font-size: 0.75rem;
+        color: oklch(0.82 0.06 50);
+        background: oklch(0.1 0.025 260);
+        border: 1.5px solid oklch(0.35 0.07 50 / 0.45);
+        transition: all 0.35s var(--ease-smooth);
+        text-wrap: nowrap;
+      }
+      .rootmap-circle:hover {
+        scale: 1.12;
+        border-color: oklch(0.6 0.12 50);
+        box-shadow: 0 0 22px oklch(0.6 0.1 50 / 0.3);
+      }
+      .rootmap-node.bridge .rootmap-circle {
+        width: 66px;
+        height: 66px;
+        font-size: 0.85rem;
+        border: 2px solid oklch(0.55 0.12 50 / 0.7);
+        box-shadow: 0 0 14px oklch(0.5 0.1 50 / 0.12), inset 0 0 12px oklch(0.3 0.05 50 / 0.1);
+      }
+      .rootmap-node.active .rootmap-circle {
+        scale: 1.2;
+        box-shadow: 0 0 35px oklch(0.7 0.14 50 / 0.55), 0 0 60px oklch(0.6 0.12 50 / 0.2);
+        border-color: oklch(0.7 0.14 50);
+        background: oklch(0.14 0.04 50);
+      }
+      .rootmap-label {
+        font-size: 0.62rem;
+        color: var(--text-muted);
+        text-align: center;
+        max-width: 78px;
+        line-height: 1.25;
+        transition: color 0.3s;
+      }
+      .rootmap-node.active .rootmap-label { color: var(--clr-gold); }
+
+      .rootmap-word {
+        position: absolute;
+        transform: translate(-50%, -50%);
+        z-index: 3;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 3px;
+        opacity: 0;
+        scale: 0.3;
+        transition: all 0.4s var(--ease-spring);
+        pointer-events: none;
+
+        &.visible { opacity: 1; scale: 1; }
+      }
+      .rootmap-word-bubble {
+        padding: 5px 12px;
+        border-radius: var(--radius-pill);
+        font-family: var(--font-arabic);
+        font-size: 1rem;
+        white-space: nowrap;
+        border: 1px solid;
+        backdrop-filter: blur(4px);
+      }
+      .rootmap-word-eng {
+        font-size: 0.58rem;
+        color: var(--text-muted);
+      }
+      .rootmap-word .verse-tag {
+        font-size: 0.52rem;
+        font-weight: 700;
+        padding: 1px 6px;
+        border-radius: 4px;
+      }
+      .rootmap-word[data-verse="1"] .rootmap-word-bubble { background: oklch(0.72 0.1 50 / 0.12); border-color: oklch(0.72 0.1 50 / 0.35); color: oklch(0.88 0.09 50); }
+      .rootmap-word[data-verse="2"] .rootmap-word-bubble { background: oklch(0.72 0.13 145 / 0.12); border-color: oklch(0.72 0.13 145 / 0.35); color: oklch(0.85 0.11 145); }
+      .rootmap-word[data-verse="3"] .rootmap-word-bubble { background: oklch(0.72 0.11 180 / 0.12); border-color: oklch(0.72 0.11 180 / 0.35); color: oklch(0.85 0.09 180); }
+      .rootmap-word[data-verse="4"] .rootmap-word-bubble { background: oklch(0.72 0.11 300 / 0.12); border-color: oklch(0.72 0.11 300 / 0.35); color: oklch(0.85 0.09 300); }
+      .rootmap-word[data-verse="1"] .verse-tag { background: oklch(0.72 0.1 50 / 0.25); color: oklch(0.92 0.07 50); }
+      .rootmap-word[data-verse="2"] .verse-tag { background: oklch(0.72 0.13 145 / 0.25); color: oklch(0.92 0.1 145); }
+      .rootmap-word[data-verse="3"] .verse-tag { background: oklch(0.72 0.11 180 / 0.25); color: oklch(0.92 0.08 180); }
+      .rootmap-word[data-verse="4"] .verse-tag { background: oklch(0.72 0.11 300 / 0.25); color: oklch(0.92 0.08 300); }
+
+      .rootmap-info {
+        min-height: 72px;
+        padding: var(--space-sm) var(--space-md);
+        background: oklch(0.09 0.02 260 / 0.85);
+        border: 1px solid oklch(0.22 0.04 260 / 0.45);
+        border-radius: var(--radius-md);
+        text-align: center;
+        backdrop-filter: blur(6px);
+      }
+      .rootmap-info-prompt { color: var(--text-muted); font-size: 0.85rem; }
+      .rootmap-info-root { font-family: var(--font-arabic); font-size: 1.8rem; color: var(--clr-gold-bright); margin-block-end: 2px; }
+      .rootmap-info-meaning { font-size: 0.95rem; color: var(--text-secondary); margin-block-end: var(--space-xs); }
+      .rootmap-info-words { display: flex; justify-content: center; flex-wrap: wrap; gap: var(--space-sm); }
+      .rootmap-info-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 3px;
+        padding: 8px 14px;
+        border-radius: var(--radius-md);
+        background: oklch(0.12 0.025 260);
+        border: 1px solid oklch(0.22 0.03 260 / 0.5);
+      }
+      .rootmap-info-card .arabic { font-family: var(--font-arabic); font-size: 1.3rem; }
+      .rootmap-info-card .eng { font-size: 0.72rem; color: var(--text-muted); }
+      .rootmap-info-card .vtag { font-size: 0.62rem; font-weight: 700; padding: 2px 8px; border-radius: 4px; }
+      .rootmap-info-card[data-verse="1"] .arabic { color: oklch(0.88 0.09 50); }
+      .rootmap-info-card[data-verse="1"] .vtag { background: oklch(0.72 0.1 50 / 0.2); color: oklch(0.9 0.07 50); }
+      .rootmap-info-card[data-verse="2"] .arabic { color: oklch(0.85 0.11 145); }
+      .rootmap-info-card[data-verse="2"] .vtag { background: oklch(0.72 0.13 145 / 0.2); color: oklch(0.9 0.1 145); }
+      .rootmap-info-card[data-verse="3"] .arabic { color: oklch(0.85 0.09 180); }
+      .rootmap-info-card[data-verse="3"] .vtag { background: oklch(0.72 0.11 180 / 0.2); color: oklch(0.9 0.08 180); }
+      .rootmap-info-card[data-verse="4"] .arabic { color: oklch(0.85 0.09 300); }
+      .rootmap-info-card[data-verse="4"] .vtag { background: oklch(0.72 0.11 300 / 0.2); color: oklch(0.9 0.08 300); }
+
+      .rootmap-legend {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: var(--space-sm) var(--space-md);
+        margin-block-end: var(--space-md);
+      }
+      .rootmap-legend-item {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.72rem;
+        color: var(--text-muted);
+      }
+      .rootmap-legend-item::before {
+        content: '';
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+      }
+      .rootmap-legend-item[data-verse="1"]::before { background: oklch(0.72 0.1 50); }
+      .rootmap-legend-item[data-verse="2"]::before { background: oklch(0.72 0.13 145); }
+      .rootmap-legend-item[data-verse="3"]::before { background: oklch(0.72 0.11 180); }
+      .rootmap-legend-item[data-verse="4"]::before { background: oklch(0.72 0.11 300); }
+      .rootmap-legend-item.bridge::before {
+        background: transparent;
+        border: 2px solid oklch(0.55 0.12 50);
+        box-shadow: 0 0 6px oklch(0.5 0.1 50 / 0.5);
+      }
+
+      @media (max-width: 768px) {
+        .rootmap-stage {
+          aspect-ratio: 3 / 4;
+          min-height: 520px;
+          max-height: 750px;
+        }
+        .rootmap-circle { width: 46px; height: 46px; font-size: 0.65rem; }
+        .rootmap-node.bridge .rootmap-circle { width: 56px; height: 56px; font-size: 0.75rem; }
+        .rootmap-word-bubble { font-size: 0.85rem; padding: 4px 9px; }
+      }
+
       /* ── Confetti container ── */
       .confetti-container {
         position: fixed;
@@ -1624,6 +1848,7 @@
       <li><a class="nav-link" href="#verse2">39:2</a></li>
       <li><a class="nav-link" href="#verse3">39:3</a></li>
       <li><a class="nav-link" href="#verse4">39:4</a></li>
+      <li><a class="nav-link" href="#rootmap">Roots</a></li>
       <li><a class="nav-link" href="#flow">Flow</a></li>
       <li><a class="nav-link" href="#themes">Themes</a></li>
       <li><a class="nav-link" href="#quiz">Quiz</a></li>
@@ -3130,10 +3355,39 @@
 
   <div class="divider scroll-reveal"></div>
 
+  <!-- ═══════════════════ ROOT CONNECTION MAP ═══════════════════ -->
+  <section class="section scroll-reveal" id="rootmap">
+    <div class="section__header">
+      <div class="section__number">5</div>
+      <h2 class="section__title">Root Connection Map</h2>
+      <p class="section__subtitle">Tap any glowing root to see how it connects words across all 4 verses — the hidden web of meaning</p>
+    </div>
+
+    <div class="rootmap-legend">
+      <span class="rootmap-legend-item" data-verse="1">Verse 1</span>
+      <span class="rootmap-legend-item" data-verse="2">Verse 2</span>
+      <span class="rootmap-legend-item" data-verse="3">Verse 3</span>
+      <span class="rootmap-legend-item" data-verse="4">Verse 4</span>
+      <span class="rootmap-legend-item bridge">Multi-Verse Bridge</span>
+    </div>
+
+    <div class="rootmap-stage" id="rootmapStage">
+      <canvas id="rootmapCanvas"></canvas>
+      <svg class="rootmap-svg" id="rootmapSvg"></svg>
+      <!-- Nodes and word bubbles are generated by JS -->
+    </div>
+
+    <div class="rootmap-info" id="rootmapInfo">
+      <p class="rootmap-info-prompt">✦ Tap a root above to explore its connections ✦</p>
+    </div>
+  </section>
+
+  <div class="divider scroll-reveal"></div>
+
   <!-- ═══════════════════ THEMATIC FLOW OF VERSES 1–4 ═══════════════════ -->
   <section class="section scroll-reveal" id="flow">
     <div class="section__header">
-      <div class="section__number">5</div>
+      <div class="section__number">6</div>
       <h2 class="section__title">The Cohesive Flow of Verses 1–4</h2>
       <p class="section__subtitle">How the opening 4 verses build an unbreakable logical journey from revelation to pure monotheism</p>
     </div>
@@ -3188,7 +3442,7 @@
   <!-- ═══════════════════ THEMES ═══════════════════ -->
   <section class="section scroll-reveal" id="themes">
     <div class="section__header">
-      <div class="section__number">6</div>
+      <div class="section__number">7</div>
       <h2 class="section__title">Core Themes Across Verses 1–4</h2>
       <p class="section__subtitle">The profound spiritual and logical journey from divine revelation to pure monotheism</p>
     </div>
@@ -3237,7 +3491,7 @@
   <!-- ═══════════════════ QUIZ ═══════════════════ -->
   <section class="section scroll-reveal" id="quiz">
     <div class="section__header">
-      <div class="section__number">7</div>
+      <div class="section__number">8</div>
       <h2 class="section__title">Test Your Understanding</h2>
       <p class="section__subtitle">10 interactive questions covering the meanings, grammar, and roots of Verses 1 to 4</p>
     </div>
@@ -3270,7 +3524,7 @@
   <footer class="site-footer">
     <div class="footer-ayah">تَنزِيلُ ٱلْكِتَـٰبِ مِنَ ٱللَّهِ ٱلْعَزِيزِ ٱلْحَكِيمِ • إِنَّآ أَنزَلْنَآ إِلَيْكَ ٱلْكِتَـٰبَ بِٱلْحَقِّ</div>
     <div class="footer-ref">Surah Az-Zumar (39:1–4)</div>
-    <div class="footer-version" id="footerVersion">v1.0.2 (updated 2026-09-09 19:35)</div>
+    <div class="footer-version" id="footerVersion">v1.0.3 (updated 2026-09-12 20:47)</div>
   </footer>
 
   <!-- ═══════════════════ JAVASCRIPT ═══════════════════ -->
@@ -3725,6 +3979,353 @@
       // Init
       renderQuestion();
     }
+
+    /* ══════════════════════════════════════════════════════════
+       ROOT CONNECTION MAP — Interactive Constellation
+       ══════════════════════════════════════════════════════════ */
+    (function initRootMap() {
+      const stage  = document.getElementById('rootmapStage');
+      const canvas = document.getElementById('rootmapCanvas');
+      const svg    = document.getElementById('rootmapSvg');
+      const info   = document.getElementById('rootmapInfo');
+      if (!stage || !canvas || !svg || !info) return;
+
+      const ctx = canvas.getContext('2d');
+
+      /* ── Root data ── */
+      const roots = [
+        { id:'nzl', root:'ن ز ل', meaning:'to descend / send down', bridge:true,
+          pos:[18,22], mpos:[25,12],
+          words:[
+            {ar:'تَنزِيلُ', en:'The Sending Down', v:1},
+            {ar:'أَنزَلْنَا', en:'We sent down', v:2}
+          ]},
+        { id:'ktb', root:'ك ت ب', meaning:'to write / inscribe', bridge:true,
+          pos:[40,15], mpos:[50,10],
+          words:[
+            {ar:'ٱلْكِتَـٰبِ', en:'The Book', v:1},
+            {ar:'ٱلْكِتَـٰبَ', en:'The Book', v:2}
+          ]},
+        { id:'hkm', root:'ح ك م', meaning:'wisdom / judgment', bridge:true,
+          pos:[75,20], mpos:[75,12],
+          words:[
+            {ar:'ٱلْحَكِيمِ', en:'The All-Wise', v:1},
+            {ar:'يَحْكُمُ', en:'He will judge', v:3}
+          ]},
+        { id:'abd', root:'ع ب د', meaning:'to worship / serve', bridge:true,
+          pos:[25,50], mpos:[20,35],
+          words:[
+            {ar:'فَٱعْبُدِ', en:'so worship!', v:2},
+            {ar:'نَعْبُدُهُمْ', en:'we worship them', v:3}
+          ]},
+        { id:'khls', root:'خ ل ص', meaning:'to be pure / sincere', bridge:true,
+          pos:[50,45], mpos:[50,35],
+          words:[
+            {ar:'مُخْلِصًا', en:'being sincere', v:2},
+            {ar:'ٱلْخَالِصُ', en:'the pure', v:3}
+          ]},
+        { id:'dyn', root:'د ي ن', meaning:'devotion / religion', bridge:true,
+          pos:[72,48], mpos:[78,35],
+          words:[
+            {ar:'ٱلدِّينَ', en:'the religion', v:2},
+            {ar:'ٱلدِّينُ', en:'the religion', v:3}
+          ]},
+        { id:'akhd', root:'أ خ ذ', meaning:'to take / adopt', bridge:true,
+          pos:[50,72], mpos:[50,58],
+          words:[
+            {ar:'ٱتَّخَذُوا', en:'they adopted', v:3},
+            {ar:'يَتَّخِذَ', en:'to take', v:4}
+          ]},
+        { id:'azz', root:'ع ز ز', meaning:'might / power', bridge:false,
+          pos:[8,10], mpos:[12,5],
+          words:[{ar:'ٱلْعَزِيزِ', en:'The Almighty', v:1}]
+        },
+        { id:'hqq', root:'ح ق ق', meaning:'truth / reality', bridge:false,
+          pos:[10,72], mpos:[15,68],
+          words:[{ar:'بِٱلْحَقِّ', en:'with the truth', v:2}]
+        },
+        { id:'qrb', root:'ق ر ب', meaning:'to draw near', bridge:false,
+          pos:[88,55], mpos:[85,50],
+          words:[{ar:'يُقَرِّبُونَا', en:'bring us closer', v:3}]
+        },
+        { id:'wly', root:'و ل ي', meaning:'to protect / ally', bridge:false,
+          pos:[92,35], mpos:[88,42],
+          words:[{ar:'أَوْلِيَاءَ', en:'protectors', v:3}]
+        },
+        { id:'sbh', root:'س ب ح', meaning:'to glorify', bridge:false,
+          pos:[30,88], mpos:[25,78],
+          words:[{ar:'سُبْحَانَهُ', en:'Glory be to Him!', v:4}]
+        },
+        { id:'whd', root:'و ح د', meaning:'to be one / unique', bridge:false,
+          pos:[62,88], mpos:[60,78],
+          words:[{ar:'ٱلْوَاحِدُ', en:'The One', v:4}]
+        },
+        { id:'qhr', root:'ق ه ر', meaning:'to overpower', bridge:false,
+          pos:[85,82], mpos:[82,72],
+          words:[{ar:'ٱلْقَهَّارُ', en:'The Supreme', v:4}]
+        }
+      ];
+
+      let activeRoot = null;
+      let nodeEls = [];
+      let wordEls = [];
+      const isMobile = () => window.innerWidth < 768;
+
+      /* ── Starfield canvas ── */
+      const stars = [];
+      function initStars() {
+        stars.length = 0;
+        const dpr = window.devicePixelRatio || 1;
+        canvas.width  = stage.offsetWidth  * dpr;
+        canvas.height = stage.offsetHeight * dpr;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        const count = Math.min(120, Math.floor(stage.offsetWidth * stage.offsetHeight / 3000));
+        for (let i = 0; i < count; i++) {
+          stars.push({
+            x: Math.random() * stage.offsetWidth,
+            y: Math.random() * stage.offsetHeight,
+            r: Math.random() * 1.2 + 0.3,
+            speed: Math.random() * 0.008 + 0.003,
+            phase: Math.random() * Math.PI * 2
+          });
+        }
+      }
+
+      let starRaf;
+      function drawStars(t) {
+        ctx.clearRect(0, 0, stage.offsetWidth, stage.offsetHeight);
+        for (const s of stars) {
+          const alpha = 0.3 + 0.5 * (0.5 + 0.5 * Math.sin(t * s.speed + s.phase));
+          ctx.beginPath();
+          ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(212,165,116,${alpha})`;
+          ctx.fill();
+        }
+        starRaf = requestAnimationFrame(drawStars);
+      }
+
+      /* ── Build nodes ── */
+      function buildNodes() {
+        /* Clear old */
+        nodeEls.forEach(el => el.remove());
+        wordEls.forEach(el => el.remove());
+        nodeEls = [];
+        wordEls = [];
+        svg.innerHTML = '';
+
+        const mobile = isMobile();
+
+        roots.forEach((r, ri) => {
+          const node = document.createElement('div');
+          node.className = 'rootmap-node' + (r.bridge ? ' bridge' : '');
+          node.dataset.rootId = r.id;
+          const [px, py] = mobile ? r.mpos : r.pos;
+          node.style.left = px + '%';
+          node.style.top  = py + '%';
+
+          node.innerHTML = `
+            <div class="rootmap-circle">${r.root}</div>
+            <div class="rootmap-label">${r.meaning}</div>
+          `;
+
+          node.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleRoot(r.id);
+          });
+
+          stage.appendChild(node);
+          nodeEls.push(node);
+
+          /* Word bubbles (hidden initially) */
+          r.words.forEach((w, wi) => {
+            const wordEl = document.createElement('div');
+            wordEl.className = 'rootmap-word';
+            wordEl.dataset.verse = w.v;
+            wordEl.dataset.rootId = r.id;
+            wordEl.dataset.wordIdx = wi;
+            wordEl.innerHTML = `
+              <span class="verse-tag">39:${w.v}</span>
+              <div class="rootmap-word-bubble">${w.ar}</div>
+              <span class="rootmap-word-eng">${w.en}</span>
+            `;
+            stage.appendChild(wordEl);
+            wordEls.push(wordEl);
+          });
+        });
+      }
+
+      /* ── Position word bubbles around root ── */
+      function positionWords(rootId) {
+        const r = roots.find(x => x.id === rootId);
+        if (!r) return;
+        const mobile = isMobile();
+        const [rx, ry] = mobile ? r.mpos : r.pos;
+        const count = r.words.length;
+        const spread = mobile ? 14 : 16;
+
+        r.words.forEach((w, i) => {
+          const wordEl = wordEls.find(
+            el => el.dataset.rootId === rootId && el.dataset.wordIdx == i
+          );
+          if (!wordEl) return;
+
+          /* Arrange words in a fan around the root */
+          let angle;
+          if (count === 1) {
+            angle = ry < 50 ? Math.PI / 2 : -Math.PI / 2; /* below if root is high, above if low */
+          } else {
+            const baseAngle = ry < 30 ? Math.PI * 0.35 : ry > 70 ? -Math.PI * 0.35 : 0;
+            angle = baseAngle + (i - (count - 1) / 2) * 0.8;
+          }
+
+          const wx = rx + Math.cos(angle) * spread;
+          const wy = ry + Math.sin(angle) * spread;
+
+          wordEl.style.left = Math.max(5, Math.min(95, wx)) + '%';
+          wordEl.style.top  = Math.max(5, Math.min(95, wy)) + '%';
+        });
+      }
+
+      /* ── Draw SVG connection lines ── */
+      function drawLines(rootId) {
+        svg.innerHTML = '';
+        const r = roots.find(x => x.id === rootId);
+        if (!r) return;
+
+        const stageW = stage.offsetWidth;
+        const stageH = stage.offsetHeight;
+        const mobile = isMobile();
+        const [rx, ry] = mobile ? r.mpos : r.pos;
+        const rootX = rx / 100 * stageW;
+        const rootY = ry / 100 * stageH;
+
+        r.words.forEach((w, i) => {
+          const wordEl = wordEls.find(
+            el => el.dataset.rootId === rootId && el.dataset.wordIdx == i
+          );
+          if (!wordEl) return;
+
+          const wLeft = parseFloat(wordEl.style.left);
+          const wTop  = parseFloat(wordEl.style.top);
+          const wordX = wLeft / 100 * stageW;
+          const wordY = wTop  / 100 * stageH;
+
+          /* Quadratic bezier with slight curve */
+          const midX = (rootX + wordX) / 2;
+          const midY = (rootY + wordY) / 2;
+          const cpx  = midX + (wordY - rootY) * 0.2;
+          const cpy  = midY - (wordX - rootX) * 0.2;
+
+          const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          const d = `M ${rootX} ${rootY} Q ${cpx} ${cpy} ${wordX} ${wordY}`;
+          path.setAttribute('d', d);
+          path.setAttribute('data-verse', w.v);
+          path.classList.add('rootmap-line');
+          svg.appendChild(path);
+
+          /* Measure length for dash animation */
+          const len = path.getTotalLength();
+          path.style.setProperty('--line-len', len);
+          path.setAttribute('stroke-dasharray', len);
+          path.setAttribute('stroke-dashoffset', len);
+
+          /* Stagger appearance */
+          setTimeout(() => path.classList.add('visible'), 80 * i);
+        });
+      }
+
+      /* ── Update info panel ── */
+      function updateInfo(rootId) {
+        const r = roots.find(x => x.id === rootId);
+        if (!r) {
+          info.innerHTML = '<p class="rootmap-info-prompt">✦ Tap a root above to explore its connections ✦</p>';
+          return;
+        }
+        const bridgeLabel = r.bridge
+          ? '<span style="color:var(--clr-gold);font-size:0.7rem;font-weight:600;margin-inline-start:8px;">✦ MULTI-VERSE BRIDGE</span>'
+          : '';
+
+        const wordCards = r.words.map(w => `
+          <div class="rootmap-info-card" data-verse="${w.v}">
+            <div class="arabic">${w.ar}</div>
+            <div class="eng">${w.en}</div>
+            <span class="vtag">Verse ${w.v} (39:${w.v})</span>
+          </div>
+        `).join('');
+
+        info.innerHTML = `
+          <div class="rootmap-info-root">${r.root}${bridgeLabel}</div>
+          <div class="rootmap-info-meaning">${r.meaning}</div>
+          <div class="rootmap-info-words">${wordCards}</div>
+        `;
+      }
+
+      /* ── Toggle root selection ── */
+      function toggleRoot(rootId) {
+        if (activeRoot === rootId) {
+          /* Deselect */
+          activeRoot = null;
+          nodeEls.forEach(n => n.classList.remove('active', 'dimmed'));
+          wordEls.forEach(w => w.classList.remove('visible'));
+          svg.innerHTML = '';
+          updateInfo(null);
+          return;
+        }
+
+        activeRoot = rootId;
+
+        /* Dim others, activate this */
+        nodeEls.forEach(n => {
+          if (n.dataset.rootId === rootId) {
+            n.classList.add('active');
+            n.classList.remove('dimmed');
+          } else {
+            n.classList.remove('active');
+            n.classList.add('dimmed');
+          }
+        });
+
+        /* Hide other words, position & show this root's words */
+        wordEls.forEach(w => w.classList.remove('visible'));
+        positionWords(rootId);
+
+        setTimeout(() => {
+          wordEls.forEach(w => {
+            if (w.dataset.rootId === rootId) w.classList.add('visible');
+          });
+          drawLines(rootId);
+        }, 50);
+
+        updateInfo(rootId);
+      }
+
+      /* Click stage background to deselect */
+      stage.addEventListener('click', () => {
+        if (activeRoot) toggleRoot(activeRoot);
+      });
+
+      /* ── Init ── */
+      function init() {
+        initStars();
+        buildNodes();
+        if (starRaf) cancelAnimationFrame(starRaf);
+        drawStars(0);
+        if (activeRoot) {
+          const prev = activeRoot;
+          activeRoot = null;
+          toggleRoot(prev);
+        }
+      }
+
+      init();
+
+      /* Debounced resize */
+      let resizeTimer;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(init, 200);
+      });
+    })();
 
     /* ══════════════════════════════════════════════════════════
        CONFETTI
