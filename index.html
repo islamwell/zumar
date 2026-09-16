@@ -1471,228 +1471,375 @@
         --tag-border: oklch(0.68 0.1 220 / 0.3);
       }
 
-      /* ── ROOT CONNECTION MAP ── */
-      .rootmap-stage {
-        position: relative;
-        width: 100%;
-        aspect-ratio: 16 / 10;
-        min-height: 480px;
-        max-height: 700px;
-        background: radial-gradient(ellipse at 50% 40%, oklch(0.13 0.03 260) 0%, oklch(0.06 0.015 260) 100%);
+      /* ── ROOT ARCHITECTURE & DEEP CONTEMPLATION STUDIO ── */
+      .root-studio {
+        background: radial-gradient(ellipse at 50% 20%, oklch(0.12 0.035 260) 0%, oklch(0.06 0.015 260) 100%);
+        border: 1px solid oklch(0.24 0.05 260 / 0.6);
         border-radius: var(--radius-lg);
-        overflow: hidden;
-        border: 1px solid oklch(0.2 0.04 260 / 0.4);
-        margin-block-end: var(--space-md);
-        cursor: default;
-      }
-      .rootmap-stage canvas {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-      }
-      .rootmap-svg {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 1;
-        pointer-events: none;
-      }
-      .rootmap-line {
-        fill: none;
-        stroke-width: 1.8;
-        stroke-linecap: round;
-        opacity: 0;
-        transition: opacity 0.3s;
-      }
-      .rootmap-line.visible {
-        opacity: 0.65;
-        stroke-dasharray: var(--line-len);
-        animation: rootmap-draw 0.7s ease-out forwards;
-      }
-      .rootmap-line[data-verse="1"] { stroke: oklch(0.72 0.1 50); }
-      .rootmap-line[data-verse="2"] { stroke: oklch(0.72 0.13 145); }
-      .rootmap-line[data-verse="3"] { stroke: oklch(0.72 0.11 180); }
-      .rootmap-line[data-verse="4"] { stroke: oklch(0.72 0.11 300); }
-      @keyframes rootmap-draw {
-        from { stroke-dashoffset: var(--line-len); }
-        to   { stroke-dashoffset: 0; }
+        padding: var(--space-md);
+        box-shadow: 0 16px 48px oklch(0 0 0 / 0.5), inset 0 1px 0 oklch(1 0 0 / 0.08);
+        margin-block-end: var(--space-lg);
       }
 
-      .rootmap-node {
-        position: absolute;
-        transform: translate(-50%, -50%);
+      /* Mode Switcher Tabs */
+      .root-studio-tabs {
         display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 4px;
-        cursor: pointer;
-        z-index: 2;
-        transition: opacity 0.4s, filter 0.4s;
-
-        &.dimmed { opacity: 0.15; filter: grayscale(0.6); }
-      }
-      .rootmap-circle {
-        width: 54px;
-        height: 54px;
-        border-radius: 50%;
-        display: grid;
-        place-items: center;
-        font-family: var(--font-arabic);
-        font-size: 0.75rem;
-        color: oklch(0.82 0.06 50);
-        background: oklch(0.1 0.025 260);
-        border: 1.5px solid oklch(0.35 0.07 50 / 0.45);
-        transition: all 0.35s var(--ease-smooth);
-        text-wrap: nowrap;
-      }
-      .rootmap-circle:hover {
-        scale: 1.12;
-        border-color: oklch(0.6 0.12 50);
-        box-shadow: 0 0 22px oklch(0.6 0.1 50 / 0.3);
-      }
-      .rootmap-node.bridge .rootmap-circle {
-        width: 66px;
-        height: 66px;
-        font-size: 0.85rem;
-        border: 2px solid oklch(0.55 0.12 50 / 0.7);
-        box-shadow: 0 0 14px oklch(0.5 0.1 50 / 0.12), inset 0 0 12px oklch(0.3 0.05 50 / 0.1);
-      }
-      .rootmap-node.active .rootmap-circle {
-        scale: 1.2;
-        box-shadow: 0 0 35px oklch(0.7 0.14 50 / 0.55), 0 0 60px oklch(0.6 0.12 50 / 0.2);
-        border-color: oklch(0.7 0.14 50);
-        background: oklch(0.14 0.04 50);
-      }
-      .rootmap-label {
-        font-size: 0.62rem;
-        color: var(--text-muted);
-        text-align: center;
-        max-width: 78px;
-        line-height: 1.25;
-        transition: color 0.3s;
-      }
-      .rootmap-node.active .rootmap-label { color: var(--clr-gold); }
-
-      .rootmap-word {
-        position: absolute;
-        transform: translate(-50%, -50%);
-        z-index: 3;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 3px;
-        opacity: 0;
-        scale: 0.3;
-        transition: all 0.4s var(--ease-spring);
-        pointer-events: none;
-
-        &.visible { opacity: 1; scale: 1; }
-      }
-      .rootmap-word-bubble {
-        padding: 5px 12px;
+        flex-wrap: wrap;
+        gap: var(--space-xs);
+        padding: 4px;
+        background: oklch(0.08 0.02 260 / 0.8);
         border-radius: var(--radius-pill);
+        border: 1px solid oklch(0.2 0.03 260 / 0.5);
+        margin-block-end: var(--space-md);
+      }
+      .root-tab-btn {
+        flex: 1 1 auto;
+        min-width: 140px;
+        padding: 8px 16px;
+        border-radius: var(--radius-pill);
+        border: none;
+        background: transparent;
+        color: var(--text-secondary);
+        font-family: inherit;
+        font-size: 0.82rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.25s var(--ease-smooth);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+      }
+      .root-tab-btn:hover {
+        color: var(--text-primary);
+        background: oklch(0.16 0.03 260 / 0.5);
+      }
+      .root-tab-btn.active {
+        color: oklch(0.1 0.02 50);
+        background: linear-gradient(135deg, var(--clr-gold-bright), var(--clr-gold));
+        font-weight: 700;
+        box-shadow: 0 2px 12px oklch(0.65 0.14 50 / 0.35);
+      }
+
+      /* Studio Dual Panel Layout */
+      .root-studio-layout {
+        display: grid;
+        grid-template-columns: 310px 1fr;
+        gap: var(--space-md);
+        align-items: stretch;
+      }
+
+      /* Left: Root Selector Shelf */
+      .root-shelf {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        max-height: 640px;
+        overflow-y: auto;
+        padding-inline-end: 4px;
+        scrollbar-width: thin;
+        scrollbar-color: oklch(0.3 0.05 50 / 0.4) transparent;
+      }
+      .root-shelf-card {
+        padding: 12px 14px;
+        background: oklch(0.09 0.02 260 / 0.7);
+        border: 1px solid oklch(0.2 0.03 260 / 0.4);
+        border-radius: var(--radius-md);
+        cursor: pointer;
+        transition: all 0.25s var(--ease-smooth);
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        text-align: start;
+      }
+      .root-shelf-card:hover {
+        background: oklch(0.13 0.03 260);
+        border-color: oklch(0.4 0.08 50 / 0.5);
+        transform: translateY(-1px);
+      }
+      .root-shelf-card.active {
+        background: oklch(0.14 0.04 50 / 0.2);
+        border-color: var(--clr-gold);
+        box-shadow: 0 0 16px oklch(0.6 0.12 50 / 0.2), inset 0 0 12px oklch(0.6 0.1 50 / 0.08);
+      }
+      .shelf-card-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .shelf-card-root {
         font-family: var(--font-arabic);
-        font-size: 1rem;
-        white-space: nowrap;
-        border: 1px solid;
-        backdrop-filter: blur(4px);
+        font-size: 1.25rem;
+        color: var(--clr-gold-bright);
+        line-height: 1;
       }
-      .rootmap-word-eng {
-        font-size: 0.58rem;
-        color: var(--text-muted);
+      .shelf-card-badges {
+        display: flex;
+        gap: 4px;
+        flex-wrap: wrap;
       }
-      .rootmap-word .verse-tag {
-        font-size: 0.52rem;
+      .shelf-vbadge {
+        font-size: 0.62rem;
         font-weight: 700;
         padding: 1px 6px;
         border-radius: 4px;
+        background: oklch(0.18 0.03 260);
+        color: var(--text-secondary);
       }
-      .rootmap-word[data-verse="1"] .rootmap-word-bubble { background: oklch(0.72 0.1 50 / 0.12); border-color: oklch(0.72 0.1 50 / 0.35); color: oklch(0.88 0.09 50); }
-      .rootmap-word[data-verse="2"] .rootmap-word-bubble { background: oklch(0.72 0.13 145 / 0.12); border-color: oklch(0.72 0.13 145 / 0.35); color: oklch(0.85 0.11 145); }
-      .rootmap-word[data-verse="3"] .rootmap-word-bubble { background: oklch(0.72 0.11 180 / 0.12); border-color: oklch(0.72 0.11 180 / 0.35); color: oklch(0.85 0.09 180); }
-      .rootmap-word[data-verse="4"] .rootmap-word-bubble { background: oklch(0.72 0.11 300 / 0.12); border-color: oklch(0.72 0.11 300 / 0.35); color: oklch(0.85 0.09 300); }
-      .rootmap-word[data-verse="1"] .verse-tag { background: oklch(0.72 0.1 50 / 0.25); color: oklch(0.92 0.07 50); }
-      .rootmap-word[data-verse="2"] .verse-tag { background: oklch(0.72 0.13 145 / 0.25); color: oklch(0.92 0.1 145); }
-      .rootmap-word[data-verse="3"] .verse-tag { background: oklch(0.72 0.11 180 / 0.25); color: oklch(0.92 0.08 180); }
-      .rootmap-word[data-verse="4"] .verse-tag { background: oklch(0.72 0.11 300 / 0.25); color: oklch(0.92 0.08 300); }
+      .shelf-vbadge.bridge {
+        background: oklch(0.65 0.12 50 / 0.2);
+        color: var(--clr-gold-bright);
+        border: 1px solid oklch(0.65 0.12 50 / 0.4);
+      }
+      .shelf-card-meaning {
+        font-size: 0.76rem;
+        color: var(--text-secondary);
+        line-height: 1.3;
+      }
 
-      .rootmap-info {
-        min-height: 72px;
-        padding: var(--space-sm) var(--space-md);
-        background: oklch(0.09 0.02 260 / 0.85);
-        border: 1px solid oklch(0.22 0.04 260 / 0.45);
+      /* Right: Organized Meaning Stage */
+      .root-stage {
+        background: oklch(0.08 0.02 260 / 0.85);
+        border: 1px solid oklch(0.2 0.035 260 / 0.5);
         border-radius: var(--radius-md);
-        text-align: center;
-        backdrop-filter: blur(6px);
-      }
-      .rootmap-info-prompt { color: var(--text-muted); font-size: 0.85rem; }
-      .rootmap-info-root { font-family: var(--font-arabic); font-size: 1.8rem; color: var(--clr-gold-bright); margin-block-end: 2px; }
-      .rootmap-info-meaning { font-size: 0.95rem; color: var(--text-secondary); margin-block-end: var(--space-xs); }
-      .rootmap-info-words { display: flex; justify-content: center; flex-wrap: wrap; gap: var(--space-sm); }
-      .rootmap-info-card {
+        padding: var(--space-md);
         display: flex;
         flex-direction: column;
-        align-items: center;
-        gap: 3px;
-        padding: 8px 14px;
-        border-radius: var(--radius-md);
-        background: oklch(0.12 0.025 260);
-        border: 1px solid oklch(0.22 0.03 260 / 0.5);
+        gap: var(--space-md);
+        min-height: 480px;
       }
-      .rootmap-info-card .arabic { font-family: var(--font-arabic); font-size: 1.3rem; }
-      .rootmap-info-card .eng { font-size: 0.72rem; color: var(--text-muted); }
-      .rootmap-info-card .vtag { font-size: 0.62rem; font-weight: 700; padding: 2px 8px; border-radius: 4px; }
-      .rootmap-info-card[data-verse="1"] .arabic { color: oklch(0.88 0.09 50); }
-      .rootmap-info-card[data-verse="1"] .vtag { background: oklch(0.72 0.1 50 / 0.2); color: oklch(0.9 0.07 50); }
-      .rootmap-info-card[data-verse="2"] .arabic { color: oklch(0.85 0.11 145); }
-      .rootmap-info-card[data-verse="2"] .vtag { background: oklch(0.72 0.13 145 / 0.2); color: oklch(0.9 0.1 145); }
-      .rootmap-info-card[data-verse="3"] .arabic { color: oklch(0.85 0.09 180); }
-      .rootmap-info-card[data-verse="3"] .vtag { background: oklch(0.72 0.11 180 / 0.2); color: oklch(0.9 0.08 180); }
-      .rootmap-info-card[data-verse="4"] .arabic { color: oklch(0.85 0.09 300); }
-      .rootmap-info-card[data-verse="4"] .vtag { background: oklch(0.72 0.11 300 / 0.2); color: oklch(0.9 0.08 300); }
 
-      .rootmap-legend {
+      /* Root DNA Banner */
+      .root-dna-banner {
+        padding: var(--space-sm) var(--space-md);
+        background: oklch(0.11 0.025 260);
+        border-radius: var(--radius-sm);
+        border-left: 4px solid var(--clr-gold);
         display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: var(--space-sm) var(--space-md);
-        margin-block-end: var(--space-md);
+        flex-direction: column;
+        gap: 4px;
       }
-      .rootmap-legend-item {
+      .dna-header {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .dna-root {
+        font-family: var(--font-arabic);
+        font-size: 2rem;
+        color: var(--clr-gold-bright);
+        line-height: 1;
+      }
+      .dna-core-title {
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: var(--text-primary);
+      }
+      .dna-origin-desc {
+        font-size: 0.84rem;
+        color: var(--text-secondary);
+        line-height: 1.45;
+      }
+
+      /* Chronological Word Pipeline (No Scattering!) */
+      .word-pipeline-title {
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--text-muted);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .word-pipeline-title::after {
+        content: '';
+        flex: 1;
+        height: 1px;
+        background: oklch(0.22 0.03 260);
+      }
+
+      .word-pipeline {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: var(--space-md);
+        position: relative;
+      }
+      .pipe-card {
+        background: oklch(0.12 0.025 260 / 0.9);
+        border: 1px solid oklch(0.22 0.04 260 / 0.6);
+        border-radius: var(--radius-md);
+        padding: var(--space-md);
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        position: relative;
+        transition: transform 0.25s var(--ease-smooth), border-color 0.25s;
+      }
+      .pipe-card:hover {
+        border-color: oklch(0.45 0.08 50);
+        transform: translateY(-2px);
+      }
+      .pipe-card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .pipe-verse-tag {
+        font-size: 0.68rem;
+        font-weight: 700;
+        padding: 2px 8px;
+        border-radius: var(--radius-pill);
+      }
+      .pipe-card[data-verse="1"] .pipe-verse-tag { background: oklch(0.72 0.1 50 / 0.2); color: oklch(0.9 0.08 50); }
+      .pipe-card[data-verse="2"] .pipe-verse-tag { background: oklch(0.72 0.13 145 / 0.2); color: oklch(0.9 0.1 145); }
+      .pipe-card[data-verse="3"] .pipe-verse-tag { background: oklch(0.72 0.11 180 / 0.2); color: oklch(0.9 0.09 180); }
+      .pipe-card[data-verse="4"] .pipe-verse-tag { background: oklch(0.72 0.11 300 / 0.2); color: oklch(0.9 0.09 300); }
+
+      .pipe-arabic {
+        font-family: var(--font-arabic);
+        font-size: 1.8rem;
+        line-height: 1.2;
+        margin-block: 4px;
+        color: var(--text-primary);
+      }
+      .pipe-meaning {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--clr-gold-bright);
+      }
+      .pipe-grammatical-form {
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        padding-block: 2px;
+        border-block: 1px dashed oklch(0.2 0.03 260);
+      }
+      .pipe-nuance {
+        font-size: 0.82rem;
+        color: var(--text-secondary);
+        line-height: 1.4;
+      }
+
+      /* Linguistic Bridge Synthesis */
+      .bridge-synthesis {
+        padding: var(--space-sm) var(--space-md);
+        background: oklch(0.14 0.035 50 / 0.15);
+        border: 1px solid oklch(0.6 0.12 50 / 0.35);
+        border-radius: var(--radius-sm);
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+      .bridge-synthesis-title {
+        font-size: 0.78rem;
+        font-weight: 700;
+        color: var(--clr-gold-bright);
         display: flex;
         align-items: center;
         gap: 6px;
-        font-size: 0.72rem;
-        color: var(--text-muted);
       }
-      .rootmap-legend-item::before {
-        content: '';
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-      }
-      .rootmap-legend-item[data-verse="1"]::before { background: oklch(0.72 0.1 50); }
-      .rootmap-legend-item[data-verse="2"]::before { background: oklch(0.72 0.13 145); }
-      .rootmap-legend-item[data-verse="3"]::before { background: oklch(0.72 0.11 180); }
-      .rootmap-legend-item[data-verse="4"]::before { background: oklch(0.72 0.11 300); }
-      .rootmap-legend-item.bridge::before {
-        background: transparent;
-        border: 2px solid oklch(0.55 0.12 50);
-        box-shadow: 0 0 6px oklch(0.5 0.1 50 / 0.5);
+      .bridge-synthesis-body {
+        font-size: 0.84rem;
+        color: var(--text-primary);
+        line-height: 1.45;
       }
 
-      @media (max-width: 768px) {
-        .rootmap-stage {
-          aspect-ratio: 3 / 4;
-          min-height: 520px;
-          max-height: 750px;
+      /* Interactive Contemplation Mode (Tab 3) */
+      .contemplation-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: var(--space-md);
+      }
+      .contemplate-card {
+        background: oklch(0.09 0.02 260 / 0.85);
+        border: 1px solid oklch(0.22 0.04 260 / 0.5);
+        border-radius: var(--radius-md);
+        padding: var(--space-md);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        transition: border-color 0.25s, transform 0.25s;
+      }
+      .contemplate-card:hover {
+        border-color: var(--clr-gold);
+        transform: translateY(-2px);
+      }
+      .contemplate-card-num {
+        font-size: 0.7rem;
+        font-weight: 700;
+        color: var(--clr-gold);
+        letter-spacing: 0.05em;
+      }
+      .contemplate-card-title {
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        line-height: 1.3;
+      }
+      .contemplate-card-prompt {
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+        line-height: 1.45;
+      }
+      .contemplate-toggle-btn {
+        margin-block-start: auto;
+        padding: 8px 14px;
+        border-radius: var(--radius-sm);
+        border: 1px solid oklch(0.4 0.08 50 / 0.5);
+        background: oklch(0.13 0.03 50 / 0.2);
+        color: var(--clr-gold-bright);
+        font-family: inherit;
+        font-size: 0.8rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+      }
+      .contemplate-toggle-btn:hover {
+        background: var(--clr-gold);
+        color: oklch(0.1 0.02 50);
+      }
+      .contemplate-gem-body {
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition: all 0.35s ease;
+        padding: 0 10px;
+        background: oklch(0.12 0.025 260);
+        border-radius: var(--radius-sm);
+        border-left: 3px solid var(--clr-gold);
+        font-size: 0.84rem;
+        color: var(--text-primary);
+        line-height: 1.5;
+      }
+      .contemplate-gem-body.open {
+        max-height: 280px;
+        opacity: 1;
+        padding: 12px;
+        margin-block-start: 6px;
+      }
+
+      /* Responsive Adjustments */
+      @media (max-width: 860px) {
+        .root-studio-layout {
+          grid-template-columns: 1fr;
         }
-        .rootmap-circle { width: 46px; height: 46px; font-size: 0.65rem; }
-        .rootmap-node.bridge .rootmap-circle { width: 56px; height: 56px; font-size: 0.75rem; }
-        .rootmap-word-bubble { font-size: 0.85rem; padding: 4px 9px; }
+        .root-shelf {
+          flex-direction: row;
+          max-height: none;
+          overflow-x: auto;
+          overflow-y: hidden;
+          padding-block-end: 8px;
+        }
+        .root-shelf-card {
+          min-width: 170px;
+          flex-shrink: 0;
+        }
       }
 
       /* ── Confetti container ── */
@@ -1977,22 +2124,22 @@
         <div class="word-card__details">
           <div class="detail-row">
             <span class="detail-label">Sentence Role</span>
-            <span class="detail-value">Linking Word (Preposition)</span>
+            <span class="detail-value">Preposition (The Sovereign Origin)</span>
           </div>
           <div class="detail-row">
             <span class="detail-label">Function</span>
-            <span class="detail-value">Points to the ultimate source</span>
+            <span class="detail-value">Establishes that this Book descends directly from the highest celestial authority</span>
           </div>
           <div class="detail-row">
-            <span class="detail-label">Effect</span>
-            <span class="detail-value">Gives the following word an i-sound ending</span>
+            <span class="detail-label">Grammar Effect</span>
+            <span class="detail-value">Gives the majestic name "Allah" its genitive ending (-i)</span>
           </div>
           <div class="detail-row">
-            <span class="detail-label">Pronunciation</span>
-            <span class="detail-value">The a-sound (ـَ) enables smooth flow into "Allah"</span>
+            <span class="detail-label">Linguistic Nuance</span>
+            <span class="detail-value">The vowel adjustment (ـَ) produces an effortless, venerating glide directly into the Divine Name</span>
           </div>
         </div>
-        <span class="word-card__tag">Linking Word</span>
+        <span class="word-card__tag">Preposition</span>
       </div>
 
       <!-- Word 4: ٱللَّهِ -->
@@ -2308,7 +2455,7 @@
       </div>
       <div class="legend-item">
         <span class="legend-dot" style="background: var(--clr-preposition);"></span>
-        <span>Linking Word</span>
+        <span>Preposition Phrase</span>
       </div>
       <div class="legend-item">
         <span class="legend-dot" style="background: oklch(0.72 0.13 30);"></span>
@@ -2387,22 +2534,22 @@
         <div class="word-card__details">
           <div class="detail-row">
             <span class="detail-label">Sentence Role</span>
-            <span class="detail-value">Direction Link + Personal Address</span>
+            <span class="detail-value">Preposition + Pronoun (Direct Personal Address)</span>
           </div>
           <div class="detail-row">
-            <span class="detail-label">Word Makeup</span>
-            <span class="detail-value">"To" + "You" (Prophet Muhammad)</span>
+            <span class="detail-label">Word Structure</span>
+            <span class="detail-value">"To" (إِلَىٰ) + "You" (كَ - Prophet Muhammad)</span>
           </div>
           <div class="detail-row">
-            <span class="detail-label">Function</span>
-            <span class="detail-value">Identifies the direct human recipient of revelation</span>
+            <span class="detail-label">Linguistic Nuance</span>
+            <span class="detail-value">An intimate, direct address honoring the Messenger as the chosen, trustworthy guardian of this revelation</span>
           </div>
           <div class="detail-row">
-            <span class="detail-label">Significance</span>
-            <span class="detail-value">Honors the Prophet as the trusted messenger</span>
+            <span class="detail-label">Human Connection</span>
+            <span class="detail-value">Reminds the listener that divine guidance enters humanity through a living, compassionate heart</span>
           </div>
         </div>
-        <span class="word-card__tag">Linking Word</span>
+        <span class="word-card__tag">Preposition Phrase</span>
       </div>
 
       <!-- Word 4: ٱلْكِتَـٰبَ -->
@@ -2412,7 +2559,7 @@
         <div class="word-card__details">
           <div class="detail-row">
             <span class="detail-label">Sentence Role</span>
-            <span class="detail-value">Target of Action (Direct Object)</span>
+            <span class="detail-value">Direct Object (Target of the Divine Action)</span>
           </div>
           <div class="detail-row">
             <span class="detail-label">Ending Sound</span>
@@ -2424,11 +2571,11 @@
           </div>
           <div class="detail-row">
             <span class="detail-label">Root Meaning</span>
-            <span class="detail-value">To write, bind together, preserve</span>
+            <span class="detail-value">To bind pieces together into an enduring, permanent record</span>
           </div>
           <div class="detail-row">
             <span class="detail-label">Grammar Shift</span>
-            <span class="detail-value">In verse 1 it ended with ـِ; here with ـَ because it receives the action</span>
+            <span class="detail-value">In verse 1 it ended with -i (possessive); here it takes -a because it receives the direct action of "We sent down"</span>
           </div>
         </div>
         <span class="word-card__tag">Target Object</span>
@@ -2441,11 +2588,11 @@
         <div class="word-card__details">
           <div class="detail-row">
             <span class="detail-label">Sentence Role</span>
-            <span class="detail-value">Manner Link: explains HOW it is sent</span>
+            <span class="detail-value">Preposition Phrase (Manner & Inherent Nature)</span>
           </div>
           <div class="detail-row">
-            <span class="detail-label">Word Makeup</span>
-            <span class="detail-value">"With / In" + "The Truth"</span>
+            <span class="detail-label">Word Structure</span>
+            <span class="detail-value">"With / Accompanied by" (بِـ) + "The Truth" (ٱلْحَقّ)</span>
           </div>
           <div class="detail-row">
             <span class="detail-label">Root Letters</span>
@@ -2453,14 +2600,14 @@
           </div>
           <div class="detail-row">
             <span class="detail-label">Root Meaning</span>
-            <span class="detail-value">To be real, established, just, and binding</span>
+            <span class="detail-value">Unyielding reality, absolute purpose, and binding justice</span>
           </div>
           <div class="detail-row">
-            <span class="detail-label">Key Message</span>
-            <span class="detail-value">The revelation is woven with truth, purpose, and justice</span>
+            <span class="detail-label">Linguistic Nuance</span>
+            <span class="detail-value">The particle "Ba" attaches truth directly to the Book: it arrived with serious purpose, not casual rhetoric</span>
           </div>
         </div>
-        <span class="word-card__tag">Manner</span>
+        <span class="word-card__tag">Preposition Phrase</span>
       </div>
 
       <!-- Word 6: فَٱعْبُدِ -->
@@ -2553,22 +2700,22 @@
         <div class="word-card__details">
           <div class="detail-row">
             <span class="detail-label">Sentence Role</span>
-            <span class="detail-value">Dedication Link + Pronoun</span>
+            <span class="detail-value">Fronted Preposition Phrase (Exclusivity)</span>
           </div>
           <div class="detail-row">
-            <span class="detail-label">Word Makeup</span>
-            <span class="detail-value">"For / To" + "Him" (referring to Allah)</span>
+            <span class="detail-label">Word Structure</span>
+            <span class="detail-value">"For / To" (لَـ) + "Him" (ـهُ - Allah)</span>
           </div>
           <div class="detail-row">
-            <span class="detail-label">Placement Note</span>
-            <span class="detail-value">Placed before "religion" to emphasize exclusivity</span>
+            <span class="detail-label">Linguistic Secret</span>
+            <span class="detail-value">Standard grammar puts the object first, but bringing "For Him" before "religion" locks absolute exclusivity: solely for Him, with zero tolerance for compromise</span>
           </div>
           <div class="detail-row">
-            <span class="detail-label">Core Meaning</span>
-            <span class="detail-value">No partner, idol, or creature receives a fraction of this devotion</span>
+            <span class="detail-label">Core Demand</span>
+            <span class="detail-value">No intermediary, idol, or ego may share even an atom of your devotion</span>
           </div>
         </div>
-        <span class="word-card__tag">Dedication</span>
+        <span class="word-card__tag">Exclusivity</span>
       </div>
 
       <!-- Word 10: ٱلدِّينَ -->
@@ -2649,22 +2796,18 @@
         <div class="word-card__details">
           <div class="detail-row">
             <span class="detail-label">Sentence Role</span>
-            <span class="detail-value">Ownership Link + Divine Name</span>
+            <span class="detail-value">Fronted Preposition Phrase (Exclusive Right & Ownership)</span>
           </div>
           <div class="detail-row">
-            <span class="detail-label">Word Makeup</span>
-            <span class="detail-value">"Belongs to" + "Allah"</span>
+            <span class="detail-label">Word Structure</span>
+            <span class="detail-value">"Belongs exclusively to" (لِـ) + "Allah" (ٱللَّه)</span>
           </div>
           <div class="detail-row">
-            <span class="detail-label">Sentence Order</span>
-            <span class="detail-value">Brought to the front of the sentence to declare exclusive right</span>
-          </div>
-          <div class="detail-row">
-            <span class="detail-label">Core Meaning</span>
-            <span class="detail-value">No partner or intermediary has any share in this devotion</span>
+            <span class="detail-label">Linguistic Secret</span>
+            <span class="detail-value">Fronted before the subject: pure, unadulterated religion is by right exclusively Allah's domain. No intermediary has any claim to it.</span>
           </div>
         </div>
-        <span class="word-card__tag">Divine Ownership</span>
+        <span class="word-card__tag">Exclusive Right</span>
       </div>
 
       <!-- ٱلدِّينُ -->
@@ -2770,22 +2913,22 @@
       <!-- مِن دُونِهِۦٓ -->
       <div class="word-card scroll-reveal" data-role="preposition">
         <div class="word-card__arabic">مِن دُونِهِۦٓ</div>
-        <div class="word-card__meaning">besides Him / other than Him</div>
+        <div class="word-card__meaning">besides Him / instead of Him</div>
         <div class="word-card__details">
           <div class="detail-row">
             <span class="detail-label">Sentence Role</span>
-            <span class="detail-value">Exclusion Link + Pronoun</span>
+            <span class="detail-value">Preposition Phrase (Exclusion & Substitution)</span>
           </div>
           <div class="detail-row">
-            <span class="detail-label">Word Makeup</span>
-            <span class="detail-value">"From" + "Other than" + "Him (Allah)"</span>
+            <span class="detail-label">Word Structure</span>
+            <span class="detail-value">"From" (مِنْ) + "Below / Other than" (دُونِ) + "Him" (ـهِ - Allah)</span>
           </div>
           <div class="detail-row">
-            <span class="detail-label">Key Message</span>
-            <span class="detail-value">They bypassed the Creator to cling to created things</span>
+            <span class="detail-label">Linguistic Nuance</span>
+            <span class="detail-value">"Doon" signifies trading down: stepping away from the Supreme Lord above to cling to frail entities far below Him</span>
           </div>
         </div>
-        <span class="word-card__tag">Linking Word</span>
+        <span class="word-card__tag">Preposition Phrase</span>
       </div>
 
       <!-- أَوْلِيَآءَ -->
@@ -2807,7 +2950,7 @@
           </div>
           <div class="detail-row">
             <span class="detail-label">Root Meaning</span>
-            <span class="detail-value">To be close, guardian, loyal ally, protector</span>
+            <span class="detail-value">To be near, guardian, loyal ally, protector</span>
           </div>
           <div class="detail-row">
             <span class="detail-label">Context</span>
@@ -2878,18 +3021,14 @@
         <div class="word-card__details">
           <div class="detail-row">
             <span class="detail-label">Sentence Role</span>
-            <span class="detail-value">Direction Link + Divine Name</span>
+            <span class="detail-value">Preposition Phrase (Target of Intended Nearness)</span>
           </div>
           <div class="detail-row">
-            <span class="detail-label">Ending Sound</span>
-            <span class="detail-value">Connected vowel — ـِ (i-sound)</span>
-          </div>
-          <div class="detail-row">
-            <span class="detail-label">Crucial Flaw</span>
-            <span class="detail-value">Allah is closer to His servant than their jugular vein — intermediaries are completely unnecessary</span>
+            <span class="detail-label">The Tragic Irony</span>
+            <span class="detail-value">They imagined intermediaries were needed to gain access, unaware that Allah is already nearer to every servant than their own heartbeat</span>
           </div>
         </div>
-        <span class="word-card__tag">Divine Name</span>
+        <span class="word-card__tag">Preposition Phrase</span>
       </div>
 
       <!-- زُلْفَىٰٓ -->
@@ -3199,11 +3338,11 @@
         <div class="word-card__details">
           <div class="detail-row">
             <span class="detail-label">Sentence Role</span>
-            <span class="detail-value">Source Link + Present Action Word</span>
+            <span class="detail-value">Preposition Phrase ("From that which He creates")</span>
           </div>
           <div class="detail-row">
-            <span class="detail-label">Word Makeup</span>
-            <span class="detail-value">"From" + "What" + "He creates"</span>
+            <span class="detail-label">Word Structure</span>
+            <span class="detail-value">"From" (مِنْ) + "What" (مَا) + "He creates" (يَخْلُقُ)</span>
           </div>
           <div class="detail-row">
             <span class="detail-label">Root Letters</span>
@@ -3211,14 +3350,14 @@
           </div>
           <div class="detail-row">
             <span class="detail-label">Root Meaning</span>
-            <span class="detail-value">To originate from nothing, measure, shape</span>
+            <span class="detail-value">To measure, design, and bring into being from nothing</span>
           </div>
           <div class="detail-row">
-            <span class="detail-label">Decisive Logic</span>
-            <span class="detail-value">Even in this hypothetical scenario, anything chosen would still be a CREATION — not a divine equal!</span>
+            <span class="detail-label">Linguistic Gem</span>
+            <span class="detail-value">A true child shares the divine essence of its parent. But whatever is selected from creation remains merely a created entity (*makhlooq*). Creation can never become divine offspring!</span>
           </div>
         </div>
-        <span class="word-card__tag">Source Link</span>
+        <span class="word-card__tag">Preposition + Verb</span>
       </div>
 
       <!-- مَا يَشَآءُ -->
@@ -3355,30 +3494,45 @@
 
   <div class="divider scroll-reveal"></div>
 
-  <!-- ═══════════════════ ROOT CONNECTION MAP ═══════════════════ -->
+  <!-- ═══════════════════ ROOT ARCHITECTURE & DEEP CONTEMPLATION STUDIO ═══════════════════ -->
   <section class="section scroll-reveal" id="rootmap">
     <div class="section__header">
       <div class="section__number">5</div>
-      <h2 class="section__title">Root Connection Map</h2>
-      <p class="section__subtitle">Tap any glowing root to see how it connects words across all 4 verses — the hidden web of meaning</p>
+      <h2 class="section__title">Root Architecture & Deep Contemplation</h2>
+      <p class="section__subtitle">Explore how master Arabic roots connect the 4 verses — organized chronologically with concise linguistic reflection</p>
     </div>
 
-    <div class="rootmap-legend">
-      <span class="rootmap-legend-item" data-verse="1">Verse 1</span>
-      <span class="rootmap-legend-item" data-verse="2">Verse 2</span>
-      <span class="rootmap-legend-item" data-verse="3">Verse 3</span>
-      <span class="rootmap-legend-item" data-verse="4">Verse 4</span>
-      <span class="rootmap-legend-item bridge">Multi-Verse Bridge</span>
-    </div>
+    <div class="root-studio" id="rootStudio">
+      <!-- Interactive Mode Switcher Tabs -->
+      <div class="root-studio-tabs" role="tablist" aria-label="Root exploration modes">
+        <button class="root-tab-btn active" data-mode="bridges" role="tab" aria-selected="true" id="tabBridges">
+          <span>🌟</span> 7 Cross-Verse Bridges
+        </button>
+        <button class="root-tab-btn" data-mode="all" role="tab" aria-selected="false" id="tabAll">
+          <span>📜</span> All 14 Roots (Verses 1–4)
+        </button>
+        <button class="root-tab-btn" data-mode="contemplate" role="tab" aria-selected="false" id="tabContemplate">
+          <span>💡</span> 5 Deep Contemplation Keys
+        </button>
+      </div>
 
-    <div class="rootmap-stage" id="rootmapStage">
-      <canvas id="rootmapCanvas"></canvas>
-      <svg class="rootmap-svg" id="rootmapSvg"></svg>
-      <!-- Nodes and word bubbles are generated by JS -->
-    </div>
+      <!-- Mode A & B: Dual-Panel Interactive Studio -->
+      <div class="root-studio-layout" id="rootStudioLayout">
+        <!-- Left: Root Selector Shelf -->
+        <aside class="root-shelf" id="rootShelf" aria-label="Root Letter Gallery">
+          <!-- Populated by JavaScript -->
+        </aside>
 
-    <div class="rootmap-info" id="rootmapInfo">
-      <p class="rootmap-info-prompt">✦ Tap a root above to explore its connections ✦</p>
+        <!-- Right: Meaning Architecture & Progression Pipeline -->
+        <main class="root-stage" id="rootStage">
+          <!-- Populated by JavaScript on root selection -->
+        </main>
+      </div>
+
+      <!-- Mode C: Deep Contemplation Laboratory (Revealed on tab switch) -->
+      <div class="contemplation-grid" id="contemplationGrid" style="display: none;">
+        <!-- Populated by JavaScript -->
+      </div>
     </div>
   </section>
 
@@ -3524,7 +3678,7 @@
   <footer class="site-footer">
     <div class="footer-ayah">تَنزِيلُ ٱلْكِتَـٰبِ مِنَ ٱللَّهِ ٱلْعَزِيزِ ٱلْحَكِيمِ • إِنَّآ أَنزَلْنَآ إِلَيْكَ ٱلْكِتَـٰبَ بِٱلْحَقِّ</div>
     <div class="footer-ref">Surah Az-Zumar (39:1–4)</div>
-    <div class="footer-version" id="footerVersion">v1.0.3 (updated 2026-09-12 20:47)</div>
+    <div class="footer-version" id="footerVersion">v1.0.4 (updated 2026-09-16 06:32)</div>
   </footer>
 
   <!-- ═══════════════════ JAVASCRIPT ═══════════════════ -->
@@ -3981,350 +4135,541 @@
     }
 
     /* ══════════════════════════════════════════════════════════
-       ROOT CONNECTION MAP — Interactive Constellation
+       ROOT ARCHITECTURE & DEEP CONTEMPLATION STUDIO ENGINE
        ══════════════════════════════════════════════════════════ */
-    (function initRootMap() {
-      const stage  = document.getElementById('rootmapStage');
-      const canvas = document.getElementById('rootmapCanvas');
-      const svg    = document.getElementById('rootmapSvg');
-      const info   = document.getElementById('rootmapInfo');
-      if (!stage || !canvas || !svg || !info) return;
+    (function initRootStudio() {
+      const studioLayout = document.getElementById('rootStudioLayout');
+      const shelfEl = document.getElementById('rootShelf');
+      const stageEl = document.getElementById('rootStage');
+      const contemplateGrid = document.getElementById('contemplationGrid');
+      const tabBtns = document.querySelectorAll('.root-tab-btn');
 
-      const ctx = canvas.getContext('2d');
+      if (!shelfEl || !stageEl || !contemplateGrid) return;
 
-      /* ── Root data ── */
+      /* ── Comprehensive Root Linguistic Data ── */
       const roots = [
-        { id:'nzl', root:'ن ز ل', meaning:'to descend / send down', bridge:true,
-          pos:[18,22], mpos:[25,12],
-          words:[
-            {ar:'تَنزِيلُ', en:'The Sending Down', v:1},
-            {ar:'أَنزَلْنَا', en:'We sent down', v:2}
-          ]},
-        { id:'ktb', root:'ك ت ب', meaning:'to write / inscribe', bridge:true,
-          pos:[40,15], mpos:[50,10],
-          words:[
-            {ar:'ٱلْكِتَـٰبِ', en:'The Book', v:1},
-            {ar:'ٱلْكِتَـٰبَ', en:'The Book', v:2}
-          ]},
-        { id:'hkm', root:'ح ك م', meaning:'wisdom / judgment', bridge:true,
-          pos:[75,20], mpos:[75,12],
-          words:[
-            {ar:'ٱلْحَكِيمِ', en:'The All-Wise', v:1},
-            {ar:'يَحْكُمُ', en:'He will judge', v:3}
-          ]},
-        { id:'abd', root:'ع ب د', meaning:'to worship / serve', bridge:true,
-          pos:[25,50], mpos:[20,35],
-          words:[
-            {ar:'فَٱعْبُدِ', en:'so worship!', v:2},
-            {ar:'نَعْبُدُهُمْ', en:'we worship them', v:3}
-          ]},
-        { id:'khls', root:'خ ل ص', meaning:'to be pure / sincere', bridge:true,
-          pos:[50,45], mpos:[50,35],
-          words:[
-            {ar:'مُخْلِصًا', en:'being sincere', v:2},
-            {ar:'ٱلْخَالِصُ', en:'the pure', v:3}
-          ]},
-        { id:'dyn', root:'د ي ن', meaning:'devotion / religion', bridge:true,
-          pos:[72,48], mpos:[78,35],
-          words:[
-            {ar:'ٱلدِّينَ', en:'the religion', v:2},
-            {ar:'ٱلدِّينُ', en:'the religion', v:3}
-          ]},
-        { id:'akhd', root:'أ خ ذ', meaning:'to take / adopt', bridge:true,
-          pos:[50,72], mpos:[50,58],
-          words:[
-            {ar:'ٱتَّخَذُوا', en:'they adopted', v:3},
-            {ar:'يَتَّخِذَ', en:'to take', v:4}
-          ]},
-        { id:'azz', root:'ع ز ز', meaning:'might / power', bridge:false,
-          pos:[8,10], mpos:[12,5],
-          words:[{ar:'ٱلْعَزِيزِ', en:'The Almighty', v:1}]
+        {
+          id: 'nzl',
+          root: 'ن - ز - ل',
+          title: 'Divine Descent & Revelation',
+          bridge: true,
+          verses: [1, 2],
+          origin: 'Originates from the Arabic concept of a revered guest descending from on high, bringing welcome rain, refreshment, and hospitality to a thirsty land.',
+          words: [
+            {
+              ar: 'تَنزِيلُ',
+              en: 'The Gradual Descent',
+              v: 1,
+              form: 'Form II Verbal Noun (Tafʿīl)',
+              nuance: 'Signifies an ongoing, measured, stage-by-stage descent over 23 years — gently nurturing the human heart through life\'s trials.'
+            },
+            {
+              ar: 'أَنزَلْنَا',
+              en: 'We Sent Down',
+              v: 2,
+              form: 'Form IV Past Tense (Ifʿāl)',
+              nuance: 'Signifies the definitive decree dispatched all at once from the highest heavens with undisputed sovereign authority.'
+            }
+          ],
+          synthesis: 'Verse 1 introduces the Quran as a gentle, lifelong companion arriving in stages (*tanzīl*). Verse 2 immediately balances this by reminding us that the decree descended with absolute celestial majesty (*anzalnā*). Gentle mercy and sovereign awe united.',
+          reflection: 'When you open the Book, do you read it casually as history, or receive it as a personal divine guest descending into your heart today?'
         },
-        { id:'hqq', root:'ح ق ق', meaning:'truth / reality', bridge:false,
-          pos:[10,72], mpos:[15,68],
-          words:[{ar:'بِٱلْحَقِّ', en:'with the truth', v:2}]
+        {
+          id: 'ktb',
+          root: 'ك - ت - ب',
+          title: 'The Inscribed Document & Binding Law',
+          bridge: true,
+          verses: [1, 2],
+          origin: 'Rooted in "kataba" — to stitch or bind pieces of leather tightly together so they cannot tear apart. It means uniting disperse realities into an unbreakable, enduring record.',
+          words: [
+            {
+              ar: 'ٱلْكِتَـٰبِ',
+              en: 'The Book (Possessive)',
+              v: 1,
+              form: 'Noun with Genitive Ending (-i)',
+              nuance: 'Identifies the content of the descent: an integrated, permanently protected scripture, not fleeting whispers.'
+            },
+            {
+              ar: 'ٱلْكِتَـٰبَ',
+              en: 'The Book (Direct Object)',
+              v: 2,
+              form: 'Noun with Accusative Ending (-a)',
+              nuance: 'Becomes the direct recipient of divine action — handed directly into human trust accompanied by absolute truth.'
+            }
+          ],
+          synthesis: 'The Book is first introduced in Verse 1 as the source of universal wisdom (*Al-Kitāb*). In Verse 2, it is placed directly into the hands of the Prophet (*ilayka*) as an active mission for humanity.',
+          reflection: 'A book bound on a shelf is ink; a book stitched into your daily decisions becomes living revelation.'
         },
-        { id:'qrb', root:'ق ر ب', meaning:'to draw near', bridge:false,
-          pos:[88,55], mpos:[85,50],
-          words:[{ar:'يُقَرِّبُونَا', en:'bring us closer', v:3}]
+        {
+          id: 'hkm',
+          root: 'ح - ك - م',
+          title: 'Restraining Wisdom & Final Arbitration',
+          bridge: true,
+          verses: [1, 3],
+          origin: 'Originates from "hakamah" — the metal bridle placed in a horse\'s mouth to restrain it from bolting into ruin. True wisdom (*hikmah*) is that which curbs reckless impulses.',
+          words: [
+            {
+              ar: 'ٱلْحَكِيمِ',
+              en: 'The All-Wise',
+              v: 1,
+              form: 'Intensive Attribute (Faʿīl)',
+              nuance: 'Paired with Al-ʿAzīz: Allah\'s invincible power is never tyrannical, but governed by boundless, flawless wisdom.'
+            },
+            {
+              ar: 'يَحْكُمُ',
+              en: 'He Will Judge / Settle',
+              v: 3,
+              form: 'Present / Future Active Verb (Yafʿulu)',
+              nuance: 'The ultimate court: on the Day of Standing, the All-Wise will personally issue the final, undisputed verdict on all human compromise.'
+            }
+          ],
+          synthesis: 'The One who authored the Book with restorative wisdom in Verse 1 (*Al-Ḥakīm*) is the very One who will judge our sincerity in Verse 3 (*yaḥkumu*). His law and His courtroom share identical perfection.',
+          reflection: 'Do you trust Allah\'s commands even when your limited intellect cannot see the immediate benefit?'
         },
-        { id:'wly', root:'و ل ي', meaning:'to protect / ally', bridge:false,
-          pos:[92,35], mpos:[88,42],
-          words:[{ar:'أَوْلِيَاءَ', en:'protectors', v:3}]
+        {
+          id: 'abd',
+          root: 'ع - ب - د',
+          title: 'Direct Devotion vs Counterfeit Enslavement',
+          bridge: true,
+          verses: [2, 3],
+          origin: 'Comes from "tareeq muʿabbad" — a pathway beaten smooth and leveled by constant treading. Enslavement to God means leveling your ego completely before the Master.',
+          words: [
+            {
+              ar: 'فَٱعْبُدِ',
+              en: 'So Worship / Enslave Yourself!',
+              v: 2,
+              form: 'Imperative Command (Iʿbud)',
+              nuance: 'The urgent conclusion of revelation: surrender your autonomy unconditionally to the One who sent the Book.'
+            },
+            {
+              ar: 'نَعْبُدُهُمْ',
+              en: 'We Worship Them',
+              v: 3,
+              form: 'Present Plural Verb (Nafʿulu)',
+              nuance: 'The tragic contradiction: polytheists admitting they enslave themselves to statues and saints under the pretext of seeking God.'
+            }
+          ],
+          synthesis: 'Verse 2 commands pure, unmediated servitude to the Creator. Verse 3 exposes how humans corrupt this instinct by offering devotion to middlemen, degrading the noble slave into a servant of servants.',
+          reflection: 'Everyone is enslaved to something — wealth, validation, or ego. Enslavement to Allah is the only slavery that sets the soul free.'
         },
-        { id:'sbh', root:'س ب ح', meaning:'to glorify', bridge:false,
-          pos:[30,88], mpos:[25,78],
-          words:[{ar:'سُبْحَانَهُ', en:'Glory be to Him!', v:4}]
+        {
+          id: 'khls',
+          root: 'خ - ل - ص',
+          title: 'Distilled Purity & Unadulterated Devotion',
+          bridge: true,
+          verses: [2, 3],
+          origin: 'Rooted in "khalasa" — the extraction of sweet, pure milk from an animal, untainted by a single drop of blood or waste. Purity through separation.',
+          words: [
+            {
+              ar: 'مُخْلِصًا',
+              en: 'Being Constantly Sincere',
+              v: 2,
+              form: 'Active Participle (Mufʿil - State of Being)',
+              nuance: 'Depicts ongoing human labor: continuously filtering out ego, showing off, and worldly motives from every deed.'
+            },
+            {
+              ar: 'ٱلْخَالِصُ',
+              en: 'The Inherent Pure',
+              v: 3,
+              form: 'Attribute of Intrinsic Purity (Fāʿil)',
+              nuance: 'The divine standard: the only religion acceptable to Allah is that which is 100% pure from inception, with zero compromise.'
+            }
+          ],
+          synthesis: 'In Verse 2, we are commanded to actively purify our hearts (*mukhliṣan*). In Verse 3, Allah declares that His standard is pristine purity (*Al-Khāliṣ*). He accepts no shared loyalties.',
+          reflection: 'If a glass of clean water has a single drop of poison, would you drink it? Allah accepts no deed mixed with pride or pretense.'
         },
-        { id:'whd', root:'و ح د', meaning:'to be one / unique', bridge:false,
-          pos:[62,88], mpos:[60,78],
-          words:[{ar:'ٱلْوَاحِدُ', en:'The One', v:4}]
+        {
+          id: 'dyn',
+          root: 'د - ي - ن',
+          title: 'Total Surrender, Debt & Life Orientation',
+          bridge: true,
+          verses: [2, 3],
+          origin: 'Originates from "dayn" (a debt you can never repay) and "madīnah" (civilization/governance). Religion is not a weekend ritual; it is a life lived in humble gratitude to the Creditor of existence.',
+          words: [
+            {
+              ar: 'ٱلدِّينَ',
+              en: 'The Religion / Devotion (Object)',
+              v: 2,
+              form: 'Accusative Noun (-a)',
+              nuance: 'The lifestyle of devotion directed exclusively to Him alone with zero split allegiance.'
+            },
+            {
+              ar: 'ٱلدِّينُ',
+              en: 'The Religion (Subject)',
+              v: 3,
+              form: 'Nominative Noun (-u)',
+              nuance: 'Elevated as the sovereign subject: true, uncorrupted devotion belongs by natural right only to Allah.'
+            }
+          ],
+          synthesis: 'In Verse 2, religion is your personal debt of devotion offered to Allah. In Verse 3, religion is Allah\'s exclusive right across the cosmos.',
+          reflection: 'Is Islam merely a checklist of actions for you, or the lens through which you govern every breath?'
         },
-        { id:'qhr', root:'ق ه ر', meaning:'to overpower', bridge:false,
-          pos:[85,82], mpos:[82,72],
-          words:[{ar:'ٱلْقَهَّارُ', en:'The Supreme', v:4}]
+        {
+          id: 'akhd',
+          root: 'أ - خ - ذ',
+          title: 'Adopting False Proxies vs The Impossible Son',
+          bridge: true,
+          verses: [3, 4],
+          origin: 'To seize, take hold of, or adopt. Expresses human attachment to worldly dependencies vs the divine transcendence from needing anything.',
+          words: [
+            {
+              ar: 'ٱتَّخَذُوا',
+              en: 'They Adopted / Clung To',
+              v: 3,
+              form: 'Form VIII Past Tense (Iftʿala)',
+              nuance: 'Desperate human fabrication: grasping onto created saints and idols as spiritual stepping stones.'
+            },
+            {
+              ar: 'يَتَّخِذَ',
+              en: 'To Take / Adopt',
+              v: 4,
+              form: 'Subjunctive Verb after "An"',
+              nuance: 'Dismantling the theological myth: if Allah had ever intended to adopt a child, He would not need creation.'
+            }
+          ],
+          synthesis: 'Humans "take" (*ittakhadhū*) proxies out of weakness and fear. They falsely projected this same human deficiency onto God, claiming He "took" (*yattakhidha*) a son. Both delusions are shattered.',
+          reflection: 'When life overwhelms you, what is the very first thing your heart grasps for support?'
+        },
+        {
+          id: 'azz',
+          root: 'ع - ز - ز',
+          title: 'Unconquerable Might & Regal Inaccessibility',
+          bridge: false,
+          verses: [1],
+          origin: 'A piece of land so hard and elevated that water cannot soften it, and enemies cannot climb it. Rare, invulnerable power.',
+          words: [
+            {
+              ar: 'ٱلْعَزِيزِ',
+              en: 'The Almighty / Invulnerable',
+              v: 1,
+              form: 'Intensive Attribute (Faʿīl)',
+              nuance: 'The One whose sovereignty cannot be challenged, bribed, resisted, or influenced by any creature.'
+            }
+          ],
+          synthesis: 'Paired before Al-Ḥakīm: He does not negotiate His revelation out of fear of critics; He reveals it from a position of absolute supremacy.',
+          reflection: 'Submitting to an invincible Lord frees you from fearing any mortal authority on earth.'
+        },
+        {
+          id: 'hqq',
+          root: 'ح - ق - ق',
+          title: 'Incontrovertible Truth & Unshakeable Reality',
+          bridge: false,
+          verses: [2],
+          origin: 'That which is firmly locked into place like a door pivot in its socket. Undeniable reality, purpose, and justice.',
+          words: [
+            {
+              ar: 'بِٱلْحَقِّ',
+              en: 'Accompanied by Truth',
+              v: 2,
+              form: 'Preposition + Noun',
+              nuance: 'The Book did not descend as casual poetry or mythology, but loaded with absolute reality and moral accountability.'
+            }
+          ],
+          synthesis: 'Truth is the vehicle of this Book. Whoever opposes it is not just arguing against words, but warring against the very fabric of reality.',
+          reflection: 'Truth does not change because it is unpopular, nor does falsehood become right because it is celebrated.'
+        },
+        {
+          id: 'qrb',
+          root: 'ق - ر - ب',
+          title: 'Intimate Proximity vs The Proxy Trap',
+          bridge: false,
+          verses: [3],
+          origin: 'Physical and spiritual closeness without barriers or distance.',
+          words: [
+            {
+              ar: 'لِيُقَرِّبُونَآ',
+              en: 'So That They Bring Us Closer',
+              v: 3,
+              form: 'Form II Verb (Taqreeb - Causing Closeness)',
+              nuance: 'The idolater\'s delusion: believing they can use created beings to pull themselves closer to God, when God is already directly near.'
+            }
+          ],
+          synthesis: 'The tragic irony of polytheism: pushing Allah away by inserting intermediaries, under the false guise of getting closer to Him.',
+          reflection: 'Allah asks for no toll-booths and no appointments. Whisper to Him directly; He hears you before your tongue even moves.'
+        },
+        {
+          id: 'wly',
+          root: 'و - ل - ي',
+          title: 'Alliances, Protectors & Loyal Guardians',
+          bridge: false,
+          verses: [3],
+          origin: 'Two things placed so close together that nothing can slide between them. A loyal ally who covers your back.',
+          words: [
+            {
+              ar: 'أَوْلِيَآءَ',
+              en: 'Protectors / Allies / Proxies',
+              v: 3,
+              form: 'Plural Noun (Afʿilāʾ)',
+              nuance: 'The false safety net: adopting deities, saints, and forces beside Allah to shield oneself from responsibility.'
+            }
+          ],
+          synthesis: 'When you take allies beside Allah, you tether your boat to dry twigs in a hurricane.',
+          reflection: 'Who holds ultimate authority over your sense of safety and peace of mind?'
+        },
+        {
+          id: 'sbh',
+          root: 'س - ب - ح',
+          title: 'Transcendent Glory & Absolute Disassociation',
+          bridge: false,
+          verses: [4],
+          origin: 'To swim swiftly across water, keeping your head elevated above the surface. Utterly detached from flaws, defects, or limits.',
+          words: [
+            {
+              ar: 'سُبْحَـٰنَهُۥ',
+              en: 'How Far Above Is He!',
+              v: 4,
+              form: 'Verbal Noun of Disassociation',
+              nuance: 'Instant, visceral refutation: Allah is infinitely elevated above the crude human concept of needing a child.'
+            }
+          ],
+          synthesis: 'The immediate response to blasphemy: not a long academic debate, but an exclamation of Allah\'s sublime transcendence.',
+          reflection: 'Whenever a dark thought questions Allah\'s justice or wisdom, declare Subḥānallāh — He is far above human shortcomings.'
+        },
+        {
+          id: 'whd',
+          root: 'و - ح - د',
+          title: 'Indivisible Oneness & Unique Supremacy',
+          bridge: false,
+          verses: [4],
+          origin: 'That which is single, without peer, division, or component parts.',
+          words: [
+            {
+              ar: 'ٱلْوَاحِدُ',
+              en: 'The One and Only',
+              v: 4,
+              form: 'Divine Attribute (Fāʿil)',
+              nuance: 'He has no second, no counterpart, no rival, and no successor.'
+            }
+          ],
+          synthesis: 'Pairs with Al-Qahhār: His Oneness is not fragile solitude; it is the Oneness of an all-encompassing King.',
+          reflection: 'When your heart belongs to The One, it is freed from the burden of pleasing thousands of competing masters.'
+        },
+        {
+          id: 'qhr',
+          root: 'ق - ه - ر',
+          title: 'The Irresistible Overpowering Dominator',
+          bridge: false,
+          verses: [4],
+          origin: 'To force something into submission from above so that it cannot resist or raise its head.',
+          words: [
+            {
+              ar: 'ٱلْقَهَّارُ',
+              en: 'The Supreme / Overpowering',
+              v: 4,
+              form: 'Intensive Attribute (Faʿʿāl)',
+              nuance: 'The ultimate seal of the 4-verse opening: He dominates every particle, dismantling all false philosophies with absolute reality.'
+            }
+          ],
+          synthesis: 'Closes the four verses: from the gentle descent in Verse 1 (*Tanzīl*) to the supreme dominator in Verse 4 (*Al-Qahhār*).',
+          reflection: 'Every tyrant who thought he was untouchable eventually crumbled before Al-Qahhār. Bow willingly before you are brought low.'
         }
       ];
 
-      let activeRoot = null;
-      let nodeEls = [];
-      let wordEls = [];
-      const isMobile = () => window.innerWidth < 768;
-
-      /* ── Starfield canvas ── */
-      const stars = [];
-      function initStars() {
-        stars.length = 0;
-        const dpr = window.devicePixelRatio || 1;
-        canvas.width  = stage.offsetWidth  * dpr;
-        canvas.height = stage.offsetHeight * dpr;
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        const count = Math.min(120, Math.floor(stage.offsetWidth * stage.offsetHeight / 3000));
-        for (let i = 0; i < count; i++) {
-          stars.push({
-            x: Math.random() * stage.offsetWidth,
-            y: Math.random() * stage.offsetHeight,
-            r: Math.random() * 1.2 + 0.3,
-            speed: Math.random() * 0.008 + 0.003,
-            phase: Math.random() * Math.PI * 2
-          });
+      /* ── 5 Deep Contemplation Keys (Tab 3) ── */
+      const contemplationKeys = [
+        {
+          num: 'Key 01',
+          title: 'The Twin Descents: Tanzīl vs. Anzalnā',
+          prompt: 'Why does Verse 1 call the Quran "Tanzīl" (gradual descent), while Verse 2 declares "Anzalnā" (We sent down all at once)?',
+          gem: 'In Arabic grammar, Form II (*Tanzīl*) signifies repetition and gradual progression over 23 years — arriving step-by-step to heal the human heart in times of grief, battle, and joy. Form IV (*Anzalnā*) signifies the all-at-once decree dispatched from the Preserved Tablet with undisputed sovereign authority. The Quran introduces itself as your lifelong, compassionate mentor (*tanzīl*), while reminding you that it carries the celestial weight of the King of Kings (*anzalnā*).'
+        },
+        {
+          num: 'Key 02',
+          title: 'The Perfect Balance: Al-ʿAzīz & Al-Ḥakīm',
+          prompt: 'Why does the opening verse conclude by pairing "The Almighty" with "The All-Wise"?',
+          gem: 'Power without wisdom is ruthless tyranny. Wisdom without power is helpless philosophy. In human leaders, power corrupts and wisdom lacks enforcement. Allah pairs Al-ʿAzīz (The Unconquerable Authority) with Al-Ḥakīm (The All-Wise Lawmaker) to reassure you: His commands are never arbitrary or cruel, and His mercy is backed by power that no force in the cosmos can resist.'
+        },
+        {
+          num: 'Key 03',
+          title: 'The Sincerity Crucible: Mukhliṣ vs. Al-Khāliṣ',
+          prompt: 'What is the subtle grammatical difference between human sincerity in Verse 2 and divine purity in Verse 3?',
+          gem: 'In Verse 2, we are commanded to be *mukhliṣan* — an active participle describing an ongoing, daily human struggle to purge ego, vanity, and people-pleasing from our deeds. In Verse 3, Allah declares that the religion with Him is *Al-Khāliṣ* — a state of inherent, permanent purity. Just as milk tainted by a single droplet of blood is ruined, devotion diluted by showing off is completely rejected by Allah.'
+        },
+        {
+          num: 'Key 04',
+          title: 'Deconstructing the Middleman: "Li-Yuqarribūnā"',
+          prompt: 'Why did the polytheists claim their idols were only meant "to bring us closer to Allah"?',
+          gem: 'The polytheists never believed their stone idols created the universe. Their justification was psychological: "We are too dirty and sinful to address the Great God directly, so we need elite intercessors to broker our prayers." The Quran exposes this as the root of all idolatry. Allah requires zero brokers, zero VIP access, and zero saintly intermediaries. He is closer to you than your jugular vein; inventing middlemen actually separates you from Him.'
+        },
+        {
+          num: 'Key 05',
+          title: 'The Irrefutable Logic: "Mimmā Yakhluqu"',
+          prompt: 'How do two simple words in Verse 4 mathematically destroy the myth of God having a child?',
+          gem: 'A child inherently shares the genetic and divine nature of its parent. But Allah states that even in a purely hypothetical scenario (*law arāda* = an impossible hypothesis), anything He would choose would be "from what He creates" (*mimmā yakhluqu*). Anything created is by definition *makhlooq* — finite, dependent, and contingent. A created thing can never possess divine essence. Therefore, claiming God took a created entity as a child is a logical absurdity.'
         }
-      }
+      ];
 
-      let starRaf;
-      function drawStars(t) {
-        ctx.clearRect(0, 0, stage.offsetWidth, stage.offsetHeight);
-        for (const s of stars) {
-          const alpha = 0.3 + 0.5 * (0.5 + 0.5 * Math.sin(t * s.speed + s.phase));
-          ctx.beginPath();
-          ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(212,165,116,${alpha})`;
-          ctx.fill();
-        }
-        starRaf = requestAnimationFrame(drawStars);
-      }
+      let currentMode = 'bridges';
+      let selectedRootId = 'nzl';
 
-      /* ── Build nodes ── */
-      function buildNodes() {
-        /* Clear old */
-        nodeEls.forEach(el => el.remove());
-        wordEls.forEach(el => el.remove());
-        nodeEls = [];
-        wordEls = [];
-        svg.innerHTML = '';
+      /* ── Render Shelf ── */
+      function renderShelf() {
+        shelfEl.innerHTML = '';
 
-        const mobile = isMobile();
+        const filtered = currentMode === 'bridges'
+          ? roots.filter(r => r.bridge)
+          : roots;
 
-        roots.forEach((r, ri) => {
-          const node = document.createElement('div');
-          node.className = 'rootmap-node' + (r.bridge ? ' bridge' : '');
-          node.dataset.rootId = r.id;
-          const [px, py] = mobile ? r.mpos : r.pos;
-          node.style.left = px + '%';
-          node.style.top  = py + '%';
+        filtered.forEach(r => {
+          const card = document.createElement('div');
+          card.className = 'root-shelf-card' + (r.id === selectedRootId ? ' active' : '');
+          card.dataset.rootId = r.id;
 
-          node.innerHTML = `
-            <div class="rootmap-circle">${r.root}</div>
-            <div class="rootmap-label">${r.meaning}</div>
+          const badgesHtml = r.verses.map(v => `<span class="shelf-vbadge">39:${v}</span>`).join('');
+          const bridgeHtml = r.bridge ? '<span class="shelf-vbadge bridge">Bridge</span>' : '';
+
+          card.innerHTML = `
+            <div class="shelf-card-header">
+              <span class="shelf-card-root">${r.root}</span>
+              <div class="shelf-card-badges">${bridgeHtml}${badgesHtml}</div>
+            </div>
+            <div class="shelf-card-meaning">${r.title}</div>
           `;
 
-          node.addEventListener('click', (e) => {
-            e.stopPropagation();
-            toggleRoot(r.id);
+          card.addEventListener('click', () => {
+            selectedRootId = r.id;
+            renderShelf();
+            renderStage(r.id);
           });
 
-          stage.appendChild(node);
-          nodeEls.push(node);
-
-          /* Word bubbles (hidden initially) */
-          r.words.forEach((w, wi) => {
-            const wordEl = document.createElement('div');
-            wordEl.className = 'rootmap-word';
-            wordEl.dataset.verse = w.v;
-            wordEl.dataset.rootId = r.id;
-            wordEl.dataset.wordIdx = wi;
-            wordEl.innerHTML = `
-              <span class="verse-tag">39:${w.v}</span>
-              <div class="rootmap-word-bubble">${w.ar}</div>
-              <span class="rootmap-word-eng">${w.en}</span>
-            `;
-            stage.appendChild(wordEl);
-            wordEls.push(wordEl);
-          });
+          shelfEl.appendChild(card);
         });
       }
 
-      /* ── Position word bubbles around root ── */
-      function positionWords(rootId) {
-        const r = roots.find(x => x.id === rootId);
-        if (!r) return;
-        const mobile = isMobile();
-        const [rx, ry] = mobile ? r.mpos : r.pos;
-        const count = r.words.length;
-        const spread = mobile ? 14 : 16;
+      /* ── Render Stage ── */
+      function renderStage(rootId) {
+        const r = roots.find(x => x.id === rootId) || roots[0];
 
-        r.words.forEach((w, i) => {
-          const wordEl = wordEls.find(
-            el => el.dataset.rootId === rootId && el.dataset.wordIdx == i
-          );
-          if (!wordEl) return;
-
-          /* Arrange words in a fan around the root */
-          let angle;
-          if (count === 1) {
-            angle = ry < 50 ? Math.PI / 2 : -Math.PI / 2; /* below if root is high, above if low */
-          } else {
-            const baseAngle = ry < 30 ? Math.PI * 0.35 : ry > 70 ? -Math.PI * 0.35 : 0;
-            angle = baseAngle + (i - (count - 1) / 2) * 0.8;
-          }
-
-          const wx = rx + Math.cos(angle) * spread;
-          const wy = ry + Math.sin(angle) * spread;
-
-          wordEl.style.left = Math.max(5, Math.min(95, wx)) + '%';
-          wordEl.style.top  = Math.max(5, Math.min(95, wy)) + '%';
-        });
-      }
-
-      /* ── Draw SVG connection lines ── */
-      function drawLines(rootId) {
-        svg.innerHTML = '';
-        const r = roots.find(x => x.id === rootId);
-        if (!r) return;
-
-        const stageW = stage.offsetWidth;
-        const stageH = stage.offsetHeight;
-        const mobile = isMobile();
-        const [rx, ry] = mobile ? r.mpos : r.pos;
-        const rootX = rx / 100 * stageW;
-        const rootY = ry / 100 * stageH;
-
-        r.words.forEach((w, i) => {
-          const wordEl = wordEls.find(
-            el => el.dataset.rootId === rootId && el.dataset.wordIdx == i
-          );
-          if (!wordEl) return;
-
-          const wLeft = parseFloat(wordEl.style.left);
-          const wTop  = parseFloat(wordEl.style.top);
-          const wordX = wLeft / 100 * stageW;
-          const wordY = wTop  / 100 * stageH;
-
-          /* Quadratic bezier with slight curve */
-          const midX = (rootX + wordX) / 2;
-          const midY = (rootY + wordY) / 2;
-          const cpx  = midX + (wordY - rootY) * 0.2;
-          const cpy  = midY - (wordX - rootX) * 0.2;
-
-          const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-          const d = `M ${rootX} ${rootY} Q ${cpx} ${cpy} ${wordX} ${wordY}`;
-          path.setAttribute('d', d);
-          path.setAttribute('data-verse', w.v);
-          path.classList.add('rootmap-line');
-          svg.appendChild(path);
-
-          /* Measure length for dash animation */
-          const len = path.getTotalLength();
-          path.style.setProperty('--line-len', len);
-          path.setAttribute('stroke-dasharray', len);
-          path.setAttribute('stroke-dashoffset', len);
-
-          /* Stagger appearance */
-          setTimeout(() => path.classList.add('visible'), 80 * i);
-        });
-      }
-
-      /* ── Update info panel ── */
-      function updateInfo(rootId) {
-        const r = roots.find(x => x.id === rootId);
-        if (!r) {
-          info.innerHTML = '<p class="rootmap-info-prompt">✦ Tap a root above to explore its connections ✦</p>';
-          return;
-        }
-        const bridgeLabel = r.bridge
-          ? '<span style="color:var(--clr-gold);font-size:0.7rem;font-weight:600;margin-inline-start:8px;">✦ MULTI-VERSE BRIDGE</span>'
-          : '';
-
-        const wordCards = r.words.map(w => `
-          <div class="rootmap-info-card" data-verse="${w.v}">
-            <div class="arabic">${w.ar}</div>
-            <div class="eng">${w.en}</div>
-            <span class="vtag">Verse ${w.v} (39:${w.v})</span>
+        // Word pipeline cards
+        const wordsHtml = r.words.map((w, idx) => `
+          <div class="pipe-card" data-verse="${w.v}">
+            <div class="pipe-card-header">
+              <span class="pipe-verse-tag">Verse 39:${w.v}</span>
+              <span style="font-size: 0.72rem; color: var(--text-muted);">Step 0${idx + 1}</span>
+            </div>
+            <div class="pipe-arabic">${w.ar}</div>
+            <div class="pipe-meaning">${w.en}</div>
+            <div class="pipe-grammatical-form">${w.form}</div>
+            <div class="pipe-nuance">${w.nuance}</div>
           </div>
         `).join('');
 
-        info.innerHTML = `
-          <div class="rootmap-info-root">${r.root}${bridgeLabel}</div>
-          <div class="rootmap-info-meaning">${r.meaning}</div>
-          <div class="rootmap-info-words">${wordCards}</div>
+        // Synthesis callout for bridge roots
+        const synthesisHtml = r.synthesis ? `
+          <div class="bridge-synthesis">
+            <div class="bridge-synthesis-title">
+              <span>✦</span> The Linguistic Progression Across Verses
+            </div>
+            <div class="bridge-synthesis-body">${r.synthesis}</div>
+          </div>
+        ` : '';
+
+        stageEl.innerHTML = `
+          <!-- Root DNA Banner -->
+          <div class="root-dna-banner">
+            <div class="dna-header">
+              <div class="dna-root">${r.root}</div>
+              <div class="dna-core-title">${r.title}</div>
+            </div>
+            <div class="dna-origin-desc">${r.origin}</div>
+          </div>
+
+          <!-- Chronological Word Pipeline -->
+          <div class="word-pipeline-title">
+            <span>Chronological Evolution Across Verses (No Scattering)</span>
+          </div>
+          <div class="word-pipeline">
+            ${wordsHtml}
+          </div>
+
+          <!-- Linguistic Synthesis -->
+          ${synthesisHtml}
+
+          <!-- Deep Contemplation Callout -->
+          <div style="padding: var(--space-sm) var(--space-md); background: oklch(0.1 0.02 260); border-radius: var(--radius-sm); border: 1px dashed oklch(0.3 0.06 50 / 0.5); display: flex; flex-direction: column; gap: 4px;">
+            <strong style="color: var(--clr-gold); font-size: 0.82rem; display: flex; align-items: center; gap: 6px;">
+              <span>💡</span> Contemplative Inquiry
+            </strong>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); margin: 0; line-height: 1.45;">
+              ${r.reflection}
+            </p>
+          </div>
         `;
       }
 
-      /* ── Toggle root selection ── */
-      function toggleRoot(rootId) {
-        if (activeRoot === rootId) {
-          /* Deselect */
-          activeRoot = null;
-          nodeEls.forEach(n => n.classList.remove('active', 'dimmed'));
-          wordEls.forEach(w => w.classList.remove('visible'));
-          svg.innerHTML = '';
-          updateInfo(null);
-          return;
-        }
+      /* ── Render Contemplation Lab (Tab 3) ── */
+      function renderContemplationLab() {
+        contemplateGrid.innerHTML = contemplationKeys.map((c, i) => `
+          <div class="contemplate-card">
+            <div class="contemplate-card-num">${c.num}</div>
+            <div class="contemplate-card-title">${c.title}</div>
+            <div class="contemplate-card-prompt">${c.prompt}</div>
+            <button class="contemplate-toggle-btn" data-index="${i}">
+              <span>✦</span> Reveal Linguistic Secret
+            </button>
+            <div class="contemplate-gem-body" id="gemBody${i}">
+              ${c.gem}
+            </div>
+          </div>
+        `).join('');
 
-        activeRoot = rootId;
+        contemplateGrid.querySelectorAll('.contemplate-toggle-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const idx = btn.dataset.index;
+            const gem = document.getElementById(`gemBody${idx}`);
+            const isOpen = gem.classList.contains('open');
 
-        /* Dim others, activate this */
-        nodeEls.forEach(n => {
-          if (n.dataset.rootId === rootId) {
-            n.classList.add('active');
-            n.classList.remove('dimmed');
-          } else {
-            n.classList.remove('active');
-            n.classList.add('dimmed');
-          }
+            if (isOpen) {
+              gem.classList.remove('open');
+              btn.innerHTML = '<span>✦</span> Reveal Linguistic Secret';
+            } else {
+              gem.classList.add('open');
+              btn.innerHTML = '<span>✕</span> Close Linguistic Secret';
+            }
+          });
+        });
+      }
+
+      /* ── Switch Mode Tabs ── */
+      function switchMode(mode) {
+        currentMode = mode;
+
+        tabBtns.forEach(btn => {
+          const isActive = btn.dataset.mode === mode;
+          btn.classList.toggle('active', isActive);
+          btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
         });
 
-        /* Hide other words, position & show this root's words */
-        wordEls.forEach(w => w.classList.remove('visible'));
-        positionWords(rootId);
+        if (mode === 'contemplate') {
+          studioLayout.style.display = 'none';
+          contemplateGrid.style.display = 'grid';
+          renderContemplationLab();
+        } else {
+          studioLayout.style.display = 'grid';
+          contemplateGrid.style.display = 'none';
 
-        setTimeout(() => {
-          wordEls.forEach(w => {
-            if (w.dataset.rootId === rootId) w.classList.add('visible');
-          });
-          drawLines(rootId);
-        }, 50);
+          // Reset selection if current selection isn't in filter
+          if (mode === 'bridges') {
+            const current = roots.find(r => r.id === selectedRootId);
+            if (!current || !current.bridge) {
+              selectedRootId = 'nzl';
+            }
+          }
 
-        updateInfo(rootId);
-      }
-
-      /* Click stage background to deselect */
-      stage.addEventListener('click', () => {
-        if (activeRoot) toggleRoot(activeRoot);
-      });
-
-      /* ── Init ── */
-      function init() {
-        initStars();
-        buildNodes();
-        if (starRaf) cancelAnimationFrame(starRaf);
-        drawStars(0);
-        if (activeRoot) {
-          const prev = activeRoot;
-          activeRoot = null;
-          toggleRoot(prev);
+          renderShelf();
+          renderStage(selectedRootId);
         }
       }
 
-      init();
-
-      /* Debounced resize */
-      let resizeTimer;
-      window.addEventListener('resize', () => {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(init, 200);
+      // Event Listeners for Tabs
+      tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          switchMode(btn.dataset.mode);
+        });
       });
+
+      // Initial Render
+      switchMode('bridges');
     })();
 
     /* ══════════════════════════════════════════════════════════
