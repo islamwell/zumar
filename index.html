@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Surah Az-Zumar 1–4 · Grammar and Word Forms</title>
-  <meta name="description" content="Study Surah Az-Zumar ayat 1–4 word by word. Tap a word to see its job, ending, and root. Then answer 'why' questions about the grammar and word forms.">
+  <title>Surah Az-Zumar 1–14 · Grammar, Word Forms & Deep Reflection</title>
+  <meta name="description" content="Study Surah Az-Zumar ayat 1–14 word by word. Tap a word to see its grammar role, ending, root, and form. Then explore deep linguistic reflection questions and connections.">
   <meta name="theme-color" content="#f7f4ee" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#14171b" media="(prefers-color-scheme: dark)">
 
@@ -96,24 +96,24 @@
       overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
     }
 
-    /* ───────── Header + tabs ───────── */
+    /* ───────── Header + Optimized Ayat Chooser ───────── */
     .top {
       position: sticky;
       top: 0;
-      z-index: 10;
+      z-index: 50;
       background: color-mix(in srgb, var(--bg) 88%, transparent);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--line);
     }
     .top-inner {
-      max-width: 860px;
+      max-width: 900px;
       margin: 0 auto;
       padding: 10px 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
+      gap: 12px;
       flex-wrap: wrap;
     }
     .brand {
@@ -126,25 +126,267 @@
     .brand-ar { font-family: var(--font-ar); font-size: 1.6rem; line-height: 1.3; color: var(--accent); }
     .brand-en { font-weight: 600; font-size: 0.95rem; }
 
-    .tabs { display: flex; gap: 4px; flex-wrap: wrap; }
+    .nav-controls {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
     .tab {
       text-decoration: none;
       color: var(--ink-2);
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       font-weight: 500;
       padding: 6px 12px;
       border-radius: 999px;
       border: 1px solid transparent;
       transition: background 0.15s, color 0.15s;
+      white-space: nowrap;
     }
     .tab:hover { background: var(--surface-2); color: var(--ink); }
     .tab[aria-current="page"] {
       background: var(--accent);
       color: var(--surface);
     }
-    @media (max-width: 560px) {
-      .tab-long { display: none; }
-      .tab { padding: 6px 10px; }
+
+    /* Stepper & Chooser Button */
+    .ayah-picker-wrap {
+      display: inline-flex;
+      align-items: center;
+      background: var(--surface-2);
+      border-radius: 999px;
+      padding: 2px;
+      border: 1px solid var(--line);
+    }
+    .ayah-step-btn {
+      background: transparent;
+      border: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: inline-grid;
+      place-items: center;
+      cursor: pointer;
+      font-size: 1.15rem;
+      line-height: 1;
+      font-weight: 700;
+      color: var(--ink-2);
+      transition: background 0.15s, color 0.15s;
+    }
+    .ayah-step-btn:hover:not(:disabled) {
+      background: var(--surface);
+      color: var(--ink);
+    }
+    .ayah-step-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+    .ayah-select-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--surface);
+      border: 1px solid transparent;
+      border-radius: 999px;
+      padding: 4px 12px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--ink);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .ayah-select-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .ayah-select-chevron {
+      font-size: 0.75rem;
+      color: var(--ink-3);
+      transition: transform 0.2s;
+    }
+    .ayah-picker-wrap.open .ayah-select-chevron {
+      transform: rotate(180deg);
+    }
+
+    /* ───────── Ayah Chooser Modal Dialog ───────── */
+    .ayah-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: rgb(15 20 25 / 0.6);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      display: grid;
+      place-items: center;
+      padding: 16px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.2s, visibility 0.2s;
+    }
+    .ayah-modal-backdrop.open {
+      opacity: 1;
+      visibility: visible;
+    }
+    .ayah-modal-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      box-shadow: 0 20px 48px rgb(0 0 0 / 0.25);
+      width: 100%;
+      max-width: 660px;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transform: scale(0.96);
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .ayah-modal-backdrop.open .ayah-modal-card {
+      transform: scale(1);
+    }
+    .ayah-modal-head {
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+    }
+    .ayah-modal-search {
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--line);
+      background: var(--surface-2);
+    }
+    .ayah-modal-search input {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      font-family: inherit;
+      font-size: 0.95rem;
+      color: var(--ink);
+      outline: none;
+    }
+    .ayah-modal-search input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 20%, transparent);
+    }
+    .ayah-modal-body {
+      padding: 16px 20px 24px;
+      overflow-y: auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 10px;
+    }
+    .ayah-pick-btn {
+      text-align: left;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      transition: all 0.15s;
+      text-decoration: none;
+      color: var(--ink);
+    }
+    .ayah-pick-btn:hover {
+      border-color: var(--accent);
+      background: color-mix(in srgb, var(--accent) 6%, transparent);
+      transform: translateY(-1px);
+    }
+    .ayah-pick-btn.active {
+      border-color: var(--accent);
+      background: color-mix(in srgb, var(--accent) 14%, transparent);
+      box-shadow: inset 0 0 0 1px var(--accent);
+    }
+    .ayah-pick-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .ayah-pick-num {
+      font-weight: 700;
+      font-size: 0.88rem;
+      color: var(--accent);
+    }
+    .ayah-pick-ar {
+      font-family: var(--font-ar);
+      font-size: 1.15rem;
+      color: var(--ink-2);
+      line-height: 1;
+    }
+    .ayah-pick-title {
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--ink-2);
+      line-height: 1.35;
+    }
+
+    /* Start view Ayat Directory Grid */
+    .surah-directory {
+      margin-top: 36px;
+    }
+    .surah-dir-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .dir-card {
+      display: block;
+      padding: 16px 18px;
+      text-decoration: none;
+      color: var(--ink);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--surface);
+      transition: border-color 0.15s, transform 0.15s;
+    }
+    .dir-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+    .dir-card-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 6px;
+    }
+    .dir-card-num {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+    }
+    .dir-card-ar {
+      font-family: var(--font-ar);
+      font-size: 1.25rem;
+      color: var(--ink-3);
+    }
+    .dir-card-title {
+      font-weight: 650;
+      font-size: 0.98rem;
+      margin-bottom: 4px;
+    }
+    .dir-card-tr {
+      font-size: 0.86rem;
+      color: var(--ink-2);
+      line-height: 1.45;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    @media (max-width: 600px) {
+      .top-inner { padding: 8px 14px; }
+      .brand-en { display: none; }
+      .tab { padding: 5px 9px; font-size: 0.84rem; }
+      .ayah-select-btn { padding: 4px 8px; font-size: 0.84rem; }
     }
 
     /* ───────── Layout ───────── */
@@ -473,30 +715,51 @@
 
   <header class="top">
     <div class="top-inner">
-      <a class="brand" href="#start" aria-label="Surah Az-Zumar, ayat 1 to 4. Go to start.">
+      <a class="brand" href="#start" aria-label="Surah Az-Zumar, ayat 1 to 14. Go to start.">
         <span class="brand-ar" lang="ar">الزُّمَر</span>
-        <span class="brand-en">Ayat 1–4</span>
+        <span class="brand-en">Ayat 1–14</span>
       </a>
-      <nav class="tabs" aria-label="Sections">
+      <div class="nav-controls">
         <a class="tab" href="#start">Start</a>
-        <a class="tab" href="#ayah-1"><span class="tab-long">Ayah </span>1</a>
-        <a class="tab" href="#ayah-2"><span class="tab-long">Ayah </span>2</a>
-        <a class="tab" href="#ayah-3"><span class="tab-long">Ayah </span>3</a>
-        <a class="tab" href="#ayah-4"><span class="tab-long">Ayah </span>4</a>
-        <a class="tab" href="#links">Links</a>
+        <div class="ayah-picker-wrap" id="ayah-picker-wrap">
+          <button type="button" class="ayah-step-btn" id="btn-prev-ayah" title="Previous Ayah" aria-label="Previous Ayah">‹</button>
+          <button type="button" class="ayah-select-btn" id="btn-ayah-chooser" aria-haspopup="dialog" aria-expanded="false" title="Choose Ayah">
+            <span id="current-ayah-label">Ayah 1 of 14</span>
+            <span class="ayah-select-chevron">▾</span>
+          </button>
+          <button type="button" class="ayah-step-btn" id="btn-next-ayah" title="Next Ayah" aria-label="Next Ayah">›</button>
+        </div>
+        <a class="tab" href="#links">Connections</a>
         <a class="tab" href="#quiz">Quiz</a>
-      </nav>
+      </div>
     </div>
   </header>
+
+  <!-- ───────── Ayah Chooser Modal Dialog ───────── -->
+  <div class="ayah-modal-backdrop" id="ayah-modal" role="dialog" aria-modal="true" aria-labelledby="modal-picker-title">
+    <div class="ayah-modal-card">
+      <div class="ayah-modal-head">
+        <div>
+          <h2 id="modal-picker-title" style="font-size:1.1rem;font-weight:700;margin:0">Choose an Ayah</h2>
+          <small style="color:var(--ink-3)">Surah Az-Zumar (39:1–14)</small>
+        </div>
+        <button type="button" class="ayah-step-btn" id="modal-close-btn" aria-label="Close chooser" style="font-size:1.4rem">×</button>
+      </div>
+      <div class="ayah-modal-search">
+        <input type="text" id="ayah-search-input" placeholder="Search by number, Arabic, or meaning..." aria-label="Search ayahs" autocomplete="off" />
+      </div>
+      <div class="ayah-modal-body" id="ayah-modal-grid"></div>
+    </div>
+  </div>
 
   <main id="main">
 
     <!-- ───────── START ───────── -->
     <section class="view" id="view-start" aria-labelledby="start-title">
       <div class="card intro">
-        <p class="eyebrow">Surah Az-Zumar · 39:1–4</p>
+        <p class="eyebrow">Surah Az-Zumar · 39:1–14</p>
         <h1 id="start-title">Ask why each word is there</h1>
-        <p class="lead">Go through the first four ayat one at a time. Look at each word, then think about why Allah chose that word, that form, and that order.</p>
+        <p class="lead">Go through the first fourteen ayat one at a time. Look at each word, then think about why Allah chose that word, that form, and that order.</p>
 
         <ol class="how">
           <li><span class="step-num">1</span><span><strong>Read the ayah.</strong> Read the Arabic and the meaning.</span></li>
@@ -504,7 +767,7 @@
           <li><span class="step-num">3</span><span><strong>Answer the questions.</strong> Try to answer yourself first. Then open the answer.</span></li>
         </ol>
 
-        <p class="credit">The questions follow the way Nouman Ali Khan teaches the Quran: ask why this word, why this form, why this order. The answers are short study notes, not quotes from him.</p>
+        <p class="credit">The questions follow the classical way of linguistic Quranic reflection: ask why this word, why this form, why this order. The answers are concise, clear study notes.</p>
 
         <a class="btn-primary" href="#ayah-1">Start with ayah 1 →</a>
       </div>
@@ -557,6 +820,12 @@
           </table>
         </div>
       </div>
+
+      <div class="surah-directory">
+        <h2 class="step-title">Directory of Ayat (1–14)</h2>
+        <p class="step-sub">Select any ayah to study its word breakdown, grammar endings, and questions.</p>
+        <div class="surah-dir-grid" id="surah-dir-grid"></div>
+      </div>
     </section>
 
     <!-- ───────── AYAH (filled by script) ───────── -->
@@ -569,7 +838,7 @@
     <section class="view" id="view-quiz" hidden aria-labelledby="quiz-title">
       <p class="eyebrow">Review</p>
       <h1 id="quiz-title" class="ayah-title" style="font-size:1.6rem;margin-bottom:6px">Quiz</h1>
-      <p class="step-sub">Short questions on the grammar and word forms from ayat 1–4.</p>
+      <p class="step-sub">Questions on the grammar, word forms, and meanings from ayat 1–14.</p>
       <div class="card quiz" id="quiz"></div>
     </section>
 
@@ -1029,110 +1298,2259 @@
             'Ayah 1 opened with a noun sentence too. The passage starts and ends on settled facts.'
           ] }
       ]
-    }
+    },
+{
+    "n": 5,
+    "title": "The cosmic balance",
+    "tr": "He created the heavens and the earth with the truth. He wraps the night over the day and wraps the day over the night, and He subjected the sun and the moon, each running for an appointed term. Listen: He is the Almighty, the Perpetual Forgiver.",
+    "words": [
+      {
+        "ar": "خَلَقَ",
+        "en": "He created",
+        "k": "v",
+        "role": "Past-tense verb. The doer is implied: \"He\" (Allah).",
+        "root": "خ ل ق",
+        "form": "{{فَعَلَ}} — Form I",
+        "note": "To measure, design, and bring into being from nothing."
+      },
+      {
+        "ar": "ٱلسَّمَـٰوَٰتِ",
+        "en": "the heavens",
+        "k": "n",
+        "c": "nasb",
+        "role": "Object of \"created\". Ends in -i because sound feminine plurals take kasra (-i) in the object job!",
+        "root": "س م و",
+        "form": "{{فَعَلَات}}",
+        "note": "Sound feminine plural (ending in {{ـَات}}) never takes a fatha (-a)."
+      },
+      {
+        "ar": "وَٱلْأَرْضَ",
+        "en": "and the earth",
+        "k": "n",
+        "c": "nasb",
+        "role": "{{وَ}} (\"and\") + {{ٱلْأَرْضَ}}. Joined to the heavens, so it takes the normal object ending -a.",
+        "root": "أ ر ض"
+      },
+      {
+        "ar": "بِٱلْحَقِّ",
+        "en": "with the truth",
+        "k": "n",
+        "c": "jarr",
+        "role": "Preposition {{بِ}} + {{ٱلْحَقّ}}. Ends in -i after the preposition.",
+        "root": "ح ق ق",
+        "note": "Created with unshakeable purpose and reality, not as frivolous play."
+      },
+      {
+        "mark": "ۖ"
+      },
+      {
+        "ar": "يُكَوِّرُ",
+        "en": "He wraps / rolls",
+        "k": "v",
+        "role": "Present-tense verb. Continuous action happening right now.",
+        "root": "ك و ر",
+        "form": "{{يُفَعِّلُ}} — Form II",
+        "note": "The root means to wind a turban around a rounded head. It shows smooth, continuous wrapping over a curved surface."
+      },
+      {
+        "ar": "ٱلَّيْلَ",
+        "en": "the night",
+        "k": "n",
+        "c": "nasb",
+        "role": "Object of \"He wraps\", so it ends in -a.",
+        "root": "ل ي ل"
+      },
+      {
+        "ar": "عَلَى",
+        "en": "over",
+        "k": "p",
+        "role": "Preposition (\"upon, over\")."
+      },
+      {
+        "ar": "ٱلنَّهَارِ",
+        "en": "the day",
+        "k": "n",
+        "c": "jarr",
+        "role": "Comes after {{عَلَى}}, so it ends in -i.",
+        "root": "ن ه ر"
+      },
+      {
+        "ar": "وَيُكَوِّرُ",
+        "en": "and He wraps",
+        "k": "v",
+        "role": "{{وَ}} (\"and\") + present verb {{يُكَوِّرُ}}.",
+        "root": "ك و ر",
+        "form": "{{يُفَعِّلُ}} — Form II"
+      },
+      {
+        "ar": "ٱلنَّهَارَ",
+        "en": "the day",
+        "k": "n",
+        "c": "nasb",
+        "role": "Object, ends in -a.",
+        "root": "ن ه ر"
+      },
+      {
+        "ar": "عَلَى",
+        "en": "over",
+        "k": "p",
+        "role": "Preposition."
+      },
+      {
+        "ar": "ٱلَّيْلِ",
+        "en": "the night",
+        "k": "n",
+        "c": "jarr",
+        "role": "After {{عَلَى}}, ends in -i.",
+        "root": "ل ي ل"
+      },
+      {
+        "mark": "ۖ"
+      },
+      {
+        "ar": "وَسَخَّرَ",
+        "en": "and He subjected",
+        "k": "v",
+        "role": "{{وَ}} + Form II past verb. To place under subservience for a purpose.",
+        "root": "س خ ر",
+        "form": "{{فَعَّلَ}} — Form II"
+      },
+      {
+        "ar": "ٱلشَّمْسَ",
+        "en": "the sun",
+        "k": "n",
+        "c": "nasb",
+        "role": "Object of \"subjected\", ends in -a.",
+        "root": "ش م س"
+      },
+      {
+        "ar": "وَٱلْقَمَرَ",
+        "en": "and the moon",
+        "k": "n",
+        "c": "nasb",
+        "role": "Joined to \"the sun\", ends in -a.",
+        "root": "ق م ر"
+      },
+      {
+        "mark": "ۖ"
+      },
+      {
+        "ar": "كُلٌّۭ",
+        "en": "each one",
+        "k": "n",
+        "c": "raf",
+        "role": "Subject (mubtada) of a new sentence. Ends in -un.",
+        "root": "ك ل ل"
+      },
+      {
+        "ar": "يَجْرِى",
+        "en": "runs / orbits",
+        "k": "v",
+        "role": "Present-tense verb describing smooth, continuous journey.",
+        "root": "ج ر ي",
+        "form": "{{يَفْعِلُ}} — Form I"
+      },
+      {
+        "ar": "لِأَجَلٍۢ",
+        "en": "for a term",
+        "k": "n",
+        "c": "jarr",
+        "role": "{{لِ}} (\"for\") + {{أَجَل}} (\"appointed time\"). Ends in -in.",
+        "root": "أ ج ل"
+      },
+      {
+        "ar": "مُّسَمًّى",
+        "en": "specified / fixed",
+        "k": "n",
+        "c": "jarr",
+        "role": "Adjective describing the term. Its ending vowel is hidden on the alif maqsura.",
+        "root": "س م و",
+        "form": "{{مُفَعَّل}} — passive participle of Form II"
+      },
+      {
+        "mark": "ۗ"
+      },
+      {
+        "ar": "أَلَا",
+        "en": "listen!",
+        "k": "p",
+        "role": "Attention particle (harf tanbih)."
+      },
+      {
+        "ar": "هُوَ",
+        "en": "He",
+        "k": "f",
+        "role": "Pronoun, subject."
+      },
+      {
+        "ar": "ٱلْعَزِيزُ",
+        "en": "the Almighty",
+        "k": "n",
+        "c": "raf",
+        "role": "Predicate (khabar). Ends in -u.",
+        "root": "ع ز ز",
+        "form": "{{فَعِيل}}"
+      },
+      {
+        "ar": "ٱلْغَفَّـٰرُ",
+        "en": "the Perpetual Forgiver",
+        "k": "n",
+        "c": "raf",
+        "role": "Second predicate. Ends in -u.",
+        "root": "غ ف ر",
+        "form": "{{فَعَّال}} — forgives again and again"
+      }
+    ],
+    "qs": [
+      {
+        "t": "sarf",
+        "focus": "يُكَوِّرُ",
+        "q": "Why use the word {{يُكَوِّرُ}} for night and day?",
+        "hint": "What does the root {{ك و ر}} physically mean in ancient Arabic?",
+        "a": [
+          "The root {{ك و ر}} refers to wrapping or coiling a cloth smoothly around a sphere, exactly like winding a turban around a head.",
+          "It portrays the night and day wrapping around a curved, rotating earth in a continuous, seamless flow with no sharp edges."
+        ]
+      },
+      {
+        "t": "nahw",
+        "focus": "ٱلسَّمَـٰوَٰتِ",
+        "q": "Why does \"the heavens\" end in -i when it is the object of the verb?",
+        "hint": "What kind of plural is {{ٱلسَّمَاوَات}}?",
+        "a": [
+          "It is a sound feminine plural (ending in {{ـَات}}).",
+          "In Arabic grammar, sound feminine plurals never take a fatha (-a). When they are in the object position (mansub), their sign is a kasra (-i) instead."
+        ]
+      },
+      {
+        "t": "nahw",
+        "focus": "خَلَقَ … يُكَوِّرُ",
+        "q": "Why does the ayah start with past-tense {{خَلَقَ}}, but use present-tense {{يُكَوِّرُ}} and {{يَجْرِي}}?",
+        "hint": "Which action happened once, and which action is happening right now?",
+        "a": [
+          "The initial creation of the cosmos ({{خَلَقَ}}) took place in the past as an established reality.",
+          "The rolling of day into night and the orbital movement of the sun and moon ({{يُكَوِّرُ}}, {{يَجْرِي}}) is an ongoing, dynamic process happening before our eyes every single moment."
+        ]
+      },
+      {
+        "t": "sarf",
+        "focus": "ٱلْعَزِيزُ ٱلْغَفَّـٰرُ",
+        "q": "Why pair \"the Almighty\" with \"the Perpetual Forgiver\" at the end of this cosmic ayah?",
+        "hint": "How does seeing the immense universe make a small human feel?",
+        "a": [
+          "Looking at the staggering scale of the universe shows Allah's irresistible might ({{ٱلْعَزِيز}}). If an Almighty King were only powerful, sinners would despair.",
+          "So He immediately follows with {{ٱلْغَفَّار}} on the pattern {{فَعَّال}} (forgiving over and over): the One who controls the galaxies is ready to forgive your sins every time you turn back to Him."
+        ]
+      }
+    ]
+  },
+  {
+    "n": 6,
+    "title": "From one soul, through three darknesses",
+    "tr": "He created you from a single soul, then made from it its mate, and He sent down for you of the cattle eight pairs. He creates you in the bellies of your mothers, creation after creation, in three darknesses. That is Allah, your Lord; to Him belongs the dominion. There is no deity except Him. So how are you turned away?",
+    "words": [
+      {
+        "ar": "خَلَقَكُم",
+        "en": "He created you",
+        "k": "v",
+        "role": "Past verb + object pronoun {{كُم}} (\"you all\").",
+        "root": "خ ل ق"
+      },
+      {
+        "ar": "مِّن",
+        "en": "from",
+        "k": "p",
+        "role": "Preposition of origin."
+      },
+      {
+        "ar": "نَّفْسٍۢ",
+        "en": "a soul",
+        "k": "n",
+        "c": "jarr",
+        "role": "After {{مِنْ}}, ends in -in.",
+        "root": "ن ف س"
+      },
+      {
+        "ar": "وَٰحِدَةٍۢ",
+        "en": "single / one",
+        "k": "n",
+        "c": "jarr",
+        "role": "Adjective describing the soul, ends in -in.",
+        "root": "و ح د",
+        "form": "{{فَاعِلَة}}"
+      },
+      {
+        "ar": "ثُمَّ",
+        "en": "then",
+        "k": "p",
+        "role": "Conjunction showing a meaningful, distinguished progression."
+      },
+      {
+        "ar": "جَعَلَ",
+        "en": "He made",
+        "k": "v",
+        "role": "Past-tense verb.",
+        "root": "ج ع ل"
+      },
+      {
+        "ar": "مِنْهَا",
+        "en": "from it",
+        "k": "p",
+        "role": "{{مِنْ}} + {{هَا}} (\"it\" / the soul)."
+      },
+      {
+        "ar": "زَوْجَهَا",
+        "en": "its mate",
+        "k": "n",
+        "c": "nasb",
+        "role": "Object of \"made\" (Eve / Hawwa). Ends in -a.",
+        "root": "ز و ج"
+      },
+      {
+        "ar": "وَأَنزَلَ",
+        "en": "and He sent down",
+        "k": "v",
+        "role": "Form IV past verb.",
+        "root": "ن ز ل",
+        "form": "{{أَفْعَلَ}}"
+      },
+      {
+        "ar": "لَكُم",
+        "en": "for you",
+        "k": "p",
+        "role": "{{لِ}} + {{كُم}}."
+      },
+      {
+        "ar": "مِّنَ",
+        "en": "from / of",
+        "k": "p",
+        "role": "Preposition."
+      },
+      {
+        "ar": "ٱلْأَنْعَـٰمِ",
+        "en": "the cattle",
+        "k": "n",
+        "c": "jarr",
+        "role": "Plural noun after {{مِنَ}}, ends in -i.",
+        "root": "ن ع م"
+      },
+      {
+        "ar": "ثَمَـٰنِيَةَ",
+        "en": "eight",
+        "k": "n",
+        "c": "nasb",
+        "role": "Object of \"sent down\", ends in -a.",
+        "root": "ث م ن"
+      },
+      {
+        "ar": "أَزْوَٰجٍۢ",
+        "en": "pairs / kinds",
+        "k": "n",
+        "c": "jarr",
+        "role": "Counted noun (mudaf ilayh), plural of {{زَوْج}}.",
+        "root": "ز و ج"
+      },
+      {
+        "mark": "ۚ"
+      },
+      {
+        "ar": "يَخْلُقُكُمْ",
+        "en": "He creates you",
+        "k": "v",
+        "role": "Present-tense verb + {{كُم}} (\"you\"). Continuous, gradual shaping.",
+        "root": "خ ل ق"
+      },
+      {
+        "ar": "فِى",
+        "en": "in",
+        "k": "p",
+        "role": "Preposition."
+      },
+      {
+        "ar": "بُطُونِ",
+        "en": "the bellies of",
+        "k": "n",
+        "c": "jarr",
+        "role": "Plural of {{بَطْن}}, ends in -i. First half of \"of\" pair.",
+        "root": "ب ط ن"
+      },
+      {
+        "ar": "أُمَّهَـٰتِكُمْ",
+        "en": "your mothers",
+        "k": "n",
+        "c": "jarr",
+        "role": "Second half of \"of\" pair, ends in -i, + {{كُم}}.",
+        "root": "أ م م"
+      },
+      {
+        "ar": "خَلْقًۭا",
+        "en": "a creation",
+        "k": "n",
+        "c": "nasb",
+        "role": "Cognate noun (maf'ul mutlaq) stressing the successive stages. Ends in -an.",
+        "root": "خ ل ق",
+        "form": "{{فَعْل}}"
+      },
+      {
+        "ar": "مِّنۢ بَعْدِ",
+        "en": "after",
+        "k": "n",
+        "c": "jarr",
+        "role": "{{مِنْ}} + {{بَعْدِ}} (\"after\")."
+      },
+      {
+        "ar": "خَلْقٍۢ",
+        "en": "a creation",
+        "k": "n",
+        "c": "jarr",
+        "role": "After {{بَعْدِ}}, ends in -in.",
+        "root": "خ ل ق"
+      },
+      {
+        "ar": "فِى",
+        "en": "in",
+        "k": "p",
+        "role": "Preposition."
+      },
+      {
+        "ar": "ظُلُمَـٰتٍۢ",
+        "en": "darknesses",
+        "k": "n",
+        "c": "jarr",
+        "role": "Sound feminine plural, ends in -in.",
+        "root": "ظ ل م"
+      },
+      {
+        "ar": "ثَلَـٰثٍۢ",
+        "en": "three",
+        "k": "n",
+        "c": "jarr",
+        "role": "Adjective describing the darknesses, ends in -in.",
+        "root": "ث ل ث"
+      },
+      {
+        "mark": "ۚ"
+      },
+      {
+        "ar": "ذَٰلِكُمُ",
+        "en": "That is",
+        "k": "f",
+        "role": "Pointing word (ism ishara) denoting majestic elevation."
+      },
+      {
+        "ar": "ٱللَّهُ",
+        "en": "Allah",
+        "k": "n",
+        "c": "raf",
+        "role": "Subject / predicate, ends in -u."
+      },
+      {
+        "ar": "رَبُّكُمْ",
+        "en": "your Lord",
+        "k": "n",
+        "c": "raf",
+        "role": "Second predicate + {{كُم}}, ends in -u.",
+        "root": "ر ب ب"
+      },
+      {
+        "ar": "لَهُ",
+        "en": "to Him belongs",
+        "k": "p",
+        "role": "Fronted predicate declaring exclusive ownership."
+      },
+      {
+        "ar": "ٱلْمُلْكُ",
+        "en": "the dominion",
+        "k": "n",
+        "c": "raf",
+        "role": "Subject, ends in -u.",
+        "root": "م ل ك"
+      },
+      {
+        "mark": "ۖ"
+      },
+      {
+        "ar": "لَآ",
+        "en": "no",
+        "k": "p",
+        "role": "Absolute negation (la nafiya lil-jins)."
+      },
+      {
+        "ar": "إِلَـٰهَ",
+        "en": "deity / god",
+        "k": "n",
+        "c": "nasb",
+        "role": "Noun of {{لَا}}, fixed on fatha (-a).",
+        "root": "أ ل ه"
+      },
+      {
+        "ar": "إِلَّا",
+        "en": "except",
+        "k": "p",
+        "role": "Exclusion word."
+      },
+      {
+        "ar": "هُوَ",
+        "en": "He",
+        "k": "f",
+        "role": "Pronoun."
+      },
+      {
+        "mark": "ۖ"
+      },
+      {
+        "ar": "فَأَنَّىٰ",
+        "en": "so how / to where",
+        "k": "p",
+        "role": "Question expressing astonishment at blindness."
+      },
+      {
+        "ar": "تُصْرَفُونَ",
+        "en": "are you turned away",
+        "k": "v",
+        "role": "Passive present-tense verb (Form I majhool).",
+        "root": "ص ر ف",
+        "form": "{{تُفْعَلُونَ}}"
+      }
+    ],
+    "qs": [
+      {
+        "t": "nahw",
+        "focus": "خَلَقَكُم … يَخْلُقُكُمْ",
+        "q": "Why use past-tense {{خَلَقَكُم}} first, then present-tense {{يَخْلُقُكُمْ}} later in the same ayah?",
+        "hint": "Which creation happened at the beginning of human history, and which happens to each individual?",
+        "a": [
+          "{{خَلَقَكُم}} (past) points to our shared historical origin: Allah created humanity as a collective from one soul (Adam).",
+          "{{يَخْلُقُكُمْ}} (present) points to your personal biological journey right now: the continuous, delicate sculpting inside your mother's womb."
+        ]
+      },
+      {
+        "t": "sarf",
+        "focus": "خَلْقًۭا مِّنۢ بَعْدِ خَلْقٍۢ",
+        "q": "What is the grammatical role of {{خَلْقًا}} here?",
+        "hint": "It comes from the same root as the verb before it.",
+        "a": [
+          "It is a cognate accusative (maf'ul mutlaq).",
+          "It emphasizes the progressive, miraculous stages of embryology: a drop, then a clinging clot, then a lump of tissue, then bones clothed in flesh — creation unfolding step by step."
+        ]
+      },
+      {
+        "t": "nahw",
+        "focus": "فَأَنَّىٰ تُصْرَفُونَ",
+        "q": "Why is {{تُصْرَفُونَ}} in the passive voice (\"are you turned away\")?",
+        "hint": "Who is turning them away? Is there an excuse?",
+        "a": [
+          "In the passive voice, the doer is omitted.",
+          "There is no logical agent or sensible reason that could explain turning away from such an intimate Creator. It paints turning away as completely irrational and absurd."
+        ]
+      }
+    ]
+  },
+  {
+    "n": 7,
+    "title": "Free from need, yet full of care",
+    "tr": "If you disbelieve, then indeed, Allah is free from need of you. And He does not approve for His servants disbelief. And if you are grateful, He approves it for you. And no bearer of burdens bears the burden of another. Then to your Lord is your return, and He will inform you of what you used to do. Indeed, He is Knowing of that within the chests.",
+    "words": [
+      {
+        "ar": "إِن",
+        "en": "if",
+        "k": "p",
+        "role": "Condition particle."
+      },
+      {
+        "ar": "تَكْفُرُوا۟",
+        "en": "you disbelieve",
+        "k": "v",
+        "role": "Condition verb. Plural {{وا}} drops its nun.",
+        "root": "ك ف ر"
+      },
+      {
+        "ar": "فَإِنَّ",
+        "en": "then indeed",
+        "k": "p",
+        "role": "Answer link {{فَ}} + emphasis {{إِنَّ}}."
+      },
+      {
+        "ar": "ٱللَّهَ",
+        "en": "Allah",
+        "k": "n",
+        "c": "nasb",
+        "role": "Noun of {{إِنَّ}}, ends in -a."
+      },
+      {
+        "ar": "غَنِىٌّ",
+        "en": "free from need",
+        "k": "n",
+        "c": "raf",
+        "role": "Predicate, ends in -un.",
+        "root": "غ ن ي",
+        "form": "{{فَعِيل}}"
+      },
+      {
+        "ar": "عَنكُمْ",
+        "en": "of you",
+        "k": "p",
+        "role": "{{عَنْ}} + {{كُم}}."
+      },
+      {
+        "mark": "ۖ"
+      },
+      {
+        "ar": "وَلَا",
+        "en": "and not",
+        "k": "p",
+        "role": "{{وَ}} + negation {{لَا}}."
+      },
+      {
+        "ar": "يَرْضَىٰ",
+        "en": "He approves / is pleased with",
+        "k": "v",
+        "role": "Present verb.",
+        "root": "ر ض ي"
+      },
+      {
+        "ar": "لِعِبَادِهِ",
+        "en": "for His servants",
+        "k": "n",
+        "c": "jarr",
+        "role": "{{لِ}} + plural noun {{عِبَاد}} + {{هِ}}.",
+        "root": "ع ب د"
+      },
+      {
+        "ar": "ٱلْكُفْرَ",
+        "en": "disbelief",
+        "k": "n",
+        "c": "nasb",
+        "role": "Object of \"approves\", ends in -a.",
+        "root": "ك ف ر"
+      },
+      {
+        "mark": "ۖ"
+      },
+      {
+        "ar": "وَإِن",
+        "en": "and if",
+        "k": "p",
+        "role": "Condition particle."
+      },
+      {
+        "ar": "تَشْكُرُوا۟",
+        "en": "you are grateful",
+        "k": "v",
+        "role": "Condition verb.",
+        "root": "ش ك ر"
+      },
+      {
+        "ar": "يَرْضَهُ",
+        "en": "He approves it",
+        "k": "v",
+        "role": "Result verb (truncated due to jazm) + pronoun {{هُ}} (\"it\").",
+        "root": "ر ض ي"
+      },
+      {
+        "ar": "لَكُمْ",
+        "en": "for you",
+        "k": "p",
+        "role": "{{لِ}} + {{كُم}}."
+      },
+      {
+        "mark": "ۗ"
+      },
+      {
+        "ar": "وَلَا",
+        "en": "and not",
+        "k": "p",
+        "role": "Negation."
+      },
+      {
+        "ar": "تَزِرُ",
+        "en": "bears",
+        "k": "v",
+        "role": "Present verb.",
+        "root": "و ز ر"
+      },
+      {
+        "ar": "وَازِرَةٌۭ",
+        "en": "a bearer of burdens",
+        "k": "n",
+        "c": "raf",
+        "role": "Doer (fa'il), ends in -un.",
+        "root": "و ز ر",
+        "form": "{{فَاعِلَة}}"
+      },
+      {
+        "ar": "وِزْرَ",
+        "en": "the burden of",
+        "k": "n",
+        "c": "nasb",
+        "role": "Object, ends in -a. First half of \"of\" pair.",
+        "root": "و ز ر",
+        "form": "{{فِعْل}}"
+      },
+      {
+        "ar": "أُخْرَىٰ",
+        "en": "another",
+        "k": "n",
+        "c": "jarr",
+        "role": "Second half of \"of\" pair.",
+        "root": "أ خ ر"
+      },
+      {
+        "mark": "ۗ"
+      },
+      {
+        "ar": "ثُمَّ",
+        "en": "then",
+        "k": "p",
+        "role": "Conjunction showing final destination."
+      },
+      {
+        "ar": "إِلَىٰ",
+        "en": "to",
+        "k": "p",
+        "role": "Preposition."
+      },
+      {
+        "ar": "رَبِّكُم",
+        "en": "your Lord",
+        "k": "n",
+        "c": "jarr",
+        "role": "After {{إِلَىٰ}}, ends in -i, + {{كُم}}.",
+        "root": "ر ب ب"
+      },
+      {
+        "ar": "مَّرْجِعُكُمْ",
+        "en": "is your return",
+        "k": "n",
+        "c": "raf",
+        "role": "Subject (noun of place/time), ends in -u, + {{كُم}}.",
+        "root": "ر ج ع",
+        "form": "{{مَفْعِل}}"
+      },
+      {
+        "ar": "فَيُنَبِّئُكُم",
+        "en": "and He will inform you",
+        "k": "v",
+        "role": "{{فَ}} + Form II present verb + {{كُم}}.",
+        "root": "ن ب أ",
+        "form": "{{يُفَعِّلُ}}"
+      },
+      {
+        "ar": "بِمَا",
+        "en": "of what",
+        "k": "p",
+        "role": "{{بِ}} + {{مَا}} (\"what\")."
+      },
+      {
+        "ar": "كُنتُمْ",
+        "en": "you used to",
+        "k": "v",
+        "role": "Past verb {{كَانَ}} + {{تُمْ}} (\"you all\").",
+        "root": "ك و ن"
+      },
+      {
+        "ar": "تَعْمَلُونَ",
+        "en": "do",
+        "k": "v",
+        "role": "Present verb.",
+        "root": "ع م ل"
+      },
+      {
+        "mark": "ۚ"
+      },
+      {
+        "ar": "إِنَّهُۥ",
+        "en": "indeed He",
+        "k": "p",
+        "role": "{{إِنَّ}} + {{هُ}} (\"He\")."
+      },
+      {
+        "ar": "عَلِيمٌۢ",
+        "en": "is Fully Knowing",
+        "k": "n",
+        "c": "raf",
+        "role": "Predicate, ends in -un.",
+        "root": "ع ل م",
+        "form": "{{فَعِيل}}"
+      },
+      {
+        "ar": "بِذَاتِ",
+        "en": "of the secrets / possessor of",
+        "k": "n",
+        "c": "jarr",
+        "role": "{{بِ}} + {{ذَاتِ}} (\"that which belongs to\").",
+        "root": "ذ و"
+      },
+      {
+        "ar": "ٱلصُّدُورِ",
+        "en": "the chests",
+        "k": "n",
+        "c": "jarr",
+        "role": "Plural of {{صَدْر}}, ends in -i.",
+        "root": "ص د ر"
+      }
+    ],
+    "qs": [
+      {
+        "t": "sarf",
+        "focus": "تَشْكُرُوا۟",
+        "q": "Why does the ayah contrast disbelief ({{تَكْفُرُوا}}) with gratitude ({{تَشْكُرُوا}}) rather than belief ({{تُؤْمِنُوا}})?",
+        "hint": "What is the root meaning of {{كُفْر}}?",
+        "a": [
+          "In Arabic, {{كُفْر}} fundamentally means to cover up. A farmer who covers a seed in dirt is called a kāfir. The spiritual disbeliever covers up Allah's obvious favors and shows ingratitude.",
+          "Therefore, the true opposite of disbelief is not merely passive agreement, but active, living gratitude ({{شُكْر}})."
+        ]
+      },
+      {
+        "t": "nahw",
+        "focus": "يَرْضَهُ لَكُمْ",
+        "q": "Why is {{يَرْضَهُ}} missing its final alif/yaa?",
+        "hint": "It is the answer to the condition {{وَإِن تَشْكُرُوا}}.",
+        "a": [
+          "Normally the verb is {{يَرْضَاهُ}}.",
+          "Because it is the result of a condition (jawāb al-sharṭ), it is in the jussive mood (majzūm). Its weak ending letter drops, leaving the concise, sharp form {{يَرْضَهُ}}."
+        ]
+      },
+      {
+        "t": "nahw",
+        "focus": "عَلِيمٌۢ بِذَاتِ ٱلصُّدُورِ",
+        "q": "What does {{ذَاتِ ٱلصُّدُورِ}} mean literally?",
+        "hint": "{{ذَات}} means \"the owner or possessor\". What resides in the chests?",
+        "a": [
+          "It means \"that which possesses the chests\" — the innermost intentions, secrets, and private thoughts that live inside human hearts.",
+          "He does not judge by outward ritual alone, but knows the exact pulse of sincerity inside your chest."
+        ]
+      }
+    ]
+  },
+  {
+    "n": 8,
+    "title": "The desperate call and the quick forgetfulness",
+    "tr": "And when adversity touches man, he calls upon his Lord, turning to Him in repentance. Then when He grants him a favor from Himself, he forgets what he used to call upon Him for before, and he sets up rivals to Allah to mislead from His path. Say, \"Enjoy your disbelief a little; indeed, you are of the companions of the Fire.\"",
+    "words": [
+      {
+        "ar": "وَإِذَا",
+        "en": "and when",
+        "k": "p",
+        "role": "Time word for something that happens repeatedly."
+      },
+      {
+        "ar": "مَسَّ",
+        "en": "touches",
+        "k": "v",
+        "role": "Past verb used for certainty.",
+        "root": "م س س"
+      },
+      {
+        "ar": "ٱلْإِنسَـٰنَ",
+        "en": "man",
+        "k": "n",
+        "c": "nasb",
+        "role": "Object of \"touches\", ends in -a.",
+        "root": "أ ن س"
+      },
+      {
+        "ar": "ضُرٌّۭ",
+        "en": "adversity / harm",
+        "k": "n",
+        "c": "raf",
+        "role": "Doer (the thing that touches), ends in -un.",
+        "root": "ض ر ر"
+      },
+      {
+        "ar": "دَعَا",
+        "en": "he calls upon",
+        "k": "v",
+        "role": "Past-tense verb.",
+        "root": "د ع و"
+      },
+      {
+        "ar": "رَبَّهُۥ",
+        "en": "his Lord",
+        "k": "n",
+        "c": "nasb",
+        "role": "Object of \"calls upon\", ends in -a, + {{هُ}}.",
+        "root": "ر ب ب"
+      },
+      {
+        "ar": "مُنِيبًا",
+        "en": "turning in repentance",
+        "k": "n",
+        "c": "nasb",
+        "role": "State (haal) describing his attitude, ends in -an.",
+        "root": "ن و ب",
+        "form": "{{مُفِيل}} — Form IV doer"
+      },
+      {
+        "ar": "إِلَيْهِ",
+        "en": "to Him",
+        "k": "p",
+        "role": "{{إِلَىٰ}} + {{هِ}}."
+      },
+      {
+        "ar": "ثُمَّ",
+        "en": "then",
+        "k": "p",
+        "role": "Conjunction showing a dramatic shift in attitude."
+      },
+      {
+        "ar": "إِذَا",
+        "en": "when",
+        "k": "p",
+        "role": "Time word."
+      },
+      {
+        "ar": "خَوَّلَهُۥ",
+        "en": "He bestows upon him",
+        "k": "v",
+        "role": "Form II past verb + {{هُ}}.",
+        "root": "خ و ل",
+        "form": "{{فَعَّلَ}}"
+      },
+      {
+        "ar": "نِعْمَةًۭ",
+        "en": "a favor / blessing",
+        "k": "n",
+        "c": "nasb",
+        "role": "Object, ends in -an.",
+        "root": "ن ع م"
+      },
+      {
+        "ar": "مِّنْهُ",
+        "en": "from Himself",
+        "k": "p",
+        "role": "{{مِنْ}} + {{هُ}}."
+      },
+      {
+        "ar": "نَسِىَ",
+        "en": "he forgets",
+        "k": "v",
+        "role": "Past-tense verb.",
+        "root": "ن س ي"
+      },
+      {
+        "ar": "مَا",
+        "en": "what",
+        "k": "f",
+        "role": "Relative pronoun (the prayer or the distress)."
+      },
+      {
+        "ar": "كَانَ",
+        "en": "he used to",
+        "k": "v",
+        "role": "Auxiliary past verb.",
+        "root": "ك و ن"
+      },
+      {
+        "ar": "يَدْعُوٓا۟",
+        "en": "call",
+        "k": "v",
+        "role": "Present-tense verb.",
+        "root": "د ع و"
+      },
+      {
+        "ar": "إِلَيْهِ",
+        "en": "upon Him / to it",
+        "k": "p",
+        "role": "{{إِلَىٰ}} + {{هِ}}."
+      },
+      {
+        "ar": "مِن قَبْلُ",
+        "en": "before",
+        "k": "p",
+        "role": "{{مِنْ}} + {{قَبْلُ}} (fixed on damma when cut off from its complement)."
+      },
+      {
+        "ar": "وَجَعَلَ",
+        "en": "and sets up",
+        "k": "v",
+        "role": "{{وَ}} + past verb.",
+        "root": "ج ع ل"
+      },
+      {
+        "ar": "لِلَّهِ",
+        "en": "for Allah",
+        "k": "p",
+        "role": "{{لِ}} + {{ٱللَّه}}."
+      },
+      {
+        "ar": "أَندَادًۭا",
+        "en": "equals / rivals",
+        "k": "n",
+        "c": "nasb",
+        "role": "Object, plural of {{نِدّ}}, ends in -an.",
+        "root": "ن د د",
+        "form": "{{أَفْعَال}}"
+      },
+      {
+        "ar": "لِّيُضِلَّ",
+        "en": "to mislead",
+        "k": "v",
+        "role": "Purpose {{لِ}} + Form IV subjunctive verb.",
+        "root": "ض ل ل",
+        "form": "{{يُفْعِلَ}}"
+      },
+      {
+        "ar": "عَن",
+        "en": "from",
+        "k": "p",
+        "role": "Preposition."
+      },
+      {
+        "ar": "سَبِيلِهِۦ",
+        "en": "His way / path",
+        "k": "n",
+        "c": "jarr",
+        "role": "After {{عَنْ}}, ends in -i, + {{هِ}}.",
+        "root": "س ب ل"
+      },
+      {
+        "mark": "ۗ"
+      },
+      {
+        "ar": "قُلْ",
+        "en": "Say",
+        "k": "v",
+        "role": "Command verb (amr).",
+        "root": "ق و ل"
+      },
+      {
+        "ar": "تَمَتَّعْ",
+        "en": "enjoy yourself!",
+        "k": "v",
+        "role": "Form V command verb (imperative of threat).",
+        "root": "م ت ع",
+        "form": "{{تَفَعَّلْ}}"
+      },
+      {
+        "ar": "بِكُفْرِكَ",
+        "en": "with your disbelief",
+        "k": "n",
+        "c": "jarr",
+        "role": "{{بِ}} + {{كُفْرِ}} + {{كَ}}.",
+        "root": "ك ف ر"
+      },
+      {
+        "ar": "قَلِيلًا",
+        "en": "a little",
+        "k": "n",
+        "c": "nasb",
+        "role": "Adverb of duration (dharf), ends in -an.",
+        "root": "ق ل ل"
+      },
+      {
+        "mark": "ۖ"
+      },
+      {
+        "ar": "إِنَّكَ",
+        "en": "indeed you",
+        "k": "p",
+        "role": "{{إِنَّ}} + {{كَ}} (\"you\")."
+      },
+      {
+        "ar": "مِنْ",
+        "en": "are among",
+        "k": "p",
+        "role": "Preposition."
+      },
+      {
+        "ar": "أَصْحَـٰبِ",
+        "en": "the companions of",
+        "k": "n",
+        "c": "jarr",
+        "role": "Plural of {{صَاحِب}}, ends in -i.",
+        "root": "ص ح ب"
+      },
+      {
+        "ar": "ٱلنَّارِ",
+        "en": "the Fire",
+        "k": "n",
+        "c": "jarr",
+        "role": "Mudaf ilayh, ends in -i.",
+        "root": "ن و ر"
+      }
+    ],
+    "qs": [
+      {
+        "t": "sarf",
+        "focus": "مَسَّ … ضُرٌّۭ",
+        "q": "Why use the verb {{مَسَّ}} (\"touched\") for adversity?",
+        "hint": "Does {{مَسَّ}} mean a heavy blow or the lightest contact?",
+        "a": [
+          "{{مَسَّ}} means the lightest brush or touch.",
+          "It exposes the fragile hypocrisy of human arrogance: a tiny pinch of difficulty makes a proud person break down and plead with God, but once relief comes, they quickly return to rebellion."
+        ]
+      },
+      {
+        "t": "sarf",
+        "focus": "خَوَّلَهُۥ",
+        "q": "What does the word {{خَوَّلَ}} add beyond just giving?",
+        "hint": "Look at Form II of {{خ و ل}}.",
+        "a": [
+          "{{خَوَّلَ}} means to entrust someone with temporary guardianship of wealth or authority that does not genuinely belong to them.",
+          "It reminds man that blessings are loans for which we will be audited, not permanent personal property."
+        ]
+      },
+      {
+        "t": "nahw",
+        "focus": "قُلْ تَمَتَّعْ بِكُفْرِكَ قَلِيلًا",
+        "q": "Why is there a command to \"enjoy your disbelief\"?",
+        "hint": "Is this an encouragement or a severe warning?",
+        "a": [
+          "This is an imperative of threat (amr al-tahdīd).",
+          "It is biting divine sarcasm: \"Enjoy your rebellion for this brief blink of an eye — eternity is waiting for you.\""
+        ]
+      }
+    ]
+  },
+  {
+    "n": 9,
+    "title": "Standing in the night: the true scholar",
+    "tr": "Is one who is devoutly obedient during periods of the night, prostrating and standing, fearing the Hereafter and hoping for the mercy of his Lord [like the ungrateful]? Say, \"Are those who know equal to those who do not know?\" Only the people of understanding will take heed.",
+    "words": [
+      {
+        "ar": "أَمَّنْ",
+        "en": "Is one who",
+        "k": "p",
+        "role": "Question particle {{أَ}} + {{مَنْ}} (\"who\")."
+      },
+      {
+        "ar": "هُوَ",
+        "en": "he",
+        "k": "f",
+        "role": "Pronoun, subject."
+      },
+      {
+        "ar": "قَـٰنِتٌ",
+        "en": "is devoutly obedient",
+        "k": "n",
+        "c": "raf",
+        "role": "Predicate (khabar), ends in -un.",
+        "root": "ق ن ت",
+        "form": "{{فَاعِل}}"
+      },
+      {
+        "ar": "ءَانَآءَ",
+        "en": "during the hours of",
+        "k": "n",
+        "c": "nasb",
+        "role": "Time adverb (dharf zamān), plural of {{إِنًى}} or {{أَنْي}}, ends in -a.",
+        "root": "أ ن ي"
+      },
+      {
+        "ar": "ٱلَّيْلِ",
+        "en": "the night",
+        "k": "n",
+        "c": "jarr",
+        "role": "Mudaf ilayh, ends in -i.",
+        "root": "ل ي ل"
+      },
+      {
+        "ar": "سَاجِدًۭا",
+        "en": "prostrating",
+        "k": "n",
+        "c": "nasb",
+        "role": "State (haal), ends in -an.",
+        "root": "س ج د",
+        "form": "{{فَاعِل}}"
+      },
+      {
+        "ar": "وَقَآئِمًۭا",
+        "en": "and standing",
+        "k": "n",
+        "c": "nasb",
+        "role": "Joined to \"prostrating\", ends in -an.",
+        "root": "ق و م",
+        "form": "{{فَاعِل}}"
+      },
+      {
+        "ar": "يَحْذَرُ",
+        "en": "fearing / guarding against",
+        "k": "v",
+        "role": "Present-tense verb describing active alertness.",
+        "root": "ح ذ ر",
+        "form": "{{يَفْعَلُ}}"
+      },
+      {
+        "ar": "ٱلْـَٔاخِرَةَ",
+        "en": "the Hereafter",
+        "k": "n",
+        "c": "nasb",
+        "role": "Object of \"fearing\", ends in -a.",
+        "root": "أ خ ر"
+      },
+      {
+        "ar": "وَيَرْجُوا۟",
+        "en": "and hoping for",
+        "k": "v",
+        "role": "{{وَ}} + present-tense verb.",
+        "root": "ر ج و"
+      },
+      {
+        "ar": "رَحْمَةَ",
+        "en": "the mercy of",
+        "k": "n",
+        "c": "nasb",
+        "role": "Object of \"hoping for\", ends in -a.",
+        "root": "ر ح م"
+      },
+      {
+        "ar": "رَبِّهِۦ",
+        "en": "his Lord",
+        "k": "n",
+        "c": "jarr",
+        "role": "Mudaf ilayh, ends in -i, + {{هِ}}.",
+        "root": "ر ب ب"
+      },
+      {
+        "mark": "ۗ"
+      },
+      {
+        "ar": "قُلْ",
+        "en": "Say",
+        "k": "v",
+        "role": "Command verb."
+      },
+      {
+        "ar": "هَلْ",
+        "en": "are / can",
+        "k": "p",
+        "role": "Question particle."
+      },
+      {
+        "ar": "يَسْتَوِى",
+        "en": "equal",
+        "k": "v",
+        "role": "Form VIII present verb.",
+        "root": "س و ي",
+        "form": "{{يَفْتَعِلُ}}"
+      },
+      {
+        "ar": "ٱلَّذِينَ",
+        "en": "those who",
+        "k": "f",
+        "role": "Doer (fa'il)."
+      },
+      {
+        "ar": "يَعْلَمُونَ",
+        "en": "know",
+        "k": "v",
+        "role": "Present verb.",
+        "root": "ع ل م"
+      },
+      {
+        "ar": "وَٱلَّذِينَ",
+        "en": "and those who",
+        "k": "f",
+        "role": "Joined subject."
+      },
+      {
+        "ar": "لَا",
+        "en": "do not",
+        "k": "p",
+        "role": "Negation."
+      },
+      {
+        "ar": "يَعْلَمُونَ",
+        "en": "know",
+        "k": "v",
+        "role": "Present verb.",
+        "root": "ع ل م"
+      },
+      {
+        "mark": "ۗ"
+      },
+      {
+        "ar": "إِنَّمَا",
+        "en": "only",
+        "k": "p",
+        "role": "Restriction particle (innā + mā al-kāffah)."
+      },
+      {
+        "ar": "يَتَذَكَّرُ",
+        "en": "take heed / reflect",
+        "k": "v",
+        "role": "Form V present verb.",
+        "root": "ذ ك ر",
+        "form": "{{يَتَفَعَّلُ}}"
+      },
+      {
+        "ar": "أُو۟لُوا۟",
+        "en": "people of / possessors of",
+        "k": "n",
+        "c": "raf",
+        "role": "Doer, masculine plural (marfu' by wāw).",
+        "root": "أ و ل"
+      },
+      {
+        "ar": "ٱلْأَلْبَـٰبِ",
+        "en": "understanding / pure intellects",
+        "k": "n",
+        "c": "jarr",
+        "role": "Plural of {{لُبّ}} (\"kernel\"), ends in -i.",
+        "root": "ل ب ب"
+      }
+    ],
+    "qs": [
+      {
+        "t": "sarf",
+        "focus": "سَاجِدًۭا وَقَآئِمًۭا",
+        "q": "Why mention prostrating ({{سَاجِدًا}}) before standing ({{قَائِمًا}})?",
+        "hint": "In prayer, we stand first and prostrate second. Why reverse the order here?",
+        "a": [
+          "Prostration (sujūd) is the absolute pinnacle of humility, where the servant is nearest to Allah (as stated in Hadith).",
+          "Mentioning prostration first prioritizes the spiritual depth and intimacy of the worshipper over mere chronological sequence."
+        ]
+      },
+      {
+        "t": "nahw",
+        "focus": "يَحْذَرُ … وَيَرْجُوا۟",
+        "q": "How does the ayah balance fear and hope in the worshipper?",
+        "hint": "What does he fear, and what does he hope for?",
+        "a": [
+          "He fears the punishment of the Hereafter ({{يَحْذَرُ ٱلْآخِرَةَ}}) and yearns for the mercy of his Lord ({{يَرْجُو رَحْمَةَ رَبِّهِ}}).",
+          "A bird needs two balanced wings to fly: fear keeps the heart vigilant against sin, while hope keeps the soul from despairing."
+        ]
+      },
+      {
+        "t": "sarf",
+        "focus": "أُو۟لُوا۟ ٱلْأَلْبَـٰبِ",
+        "q": "What is the root meaning of {{ٱلْأَلْبَاب}}?",
+        "hint": "Look at the singular noun {{لُبّ}}.",
+        "a": [
+          "{{لُبّ}} is the core, edible nut inside a shell (like an almond kernel inside its wooden hull).",
+          "The \"people of albāb\" are those whose minds look past the superficial shells of worldly distractions and focus on the deep core realities of existence."
+        ]
+      }
+    ]
+  },
+  {
+    "n": 10,
+    "title": "A spacious earth and unmeasured reward",
+    "tr": "Say, \"O My servants who have believed, be conscious of your Lord. For those who do good in this world is good, and the earth of Allah is spacious. Indeed, the patient will be given their reward without account.\"",
+    "words": [
+      {
+        "ar": "قُلْ",
+        "en": "Say",
+        "k": "v",
+        "role": "Command verb."
+      },
+      {
+        "ar": "يَـٰعِبَادِ",
+        "en": "O My servants",
+        "k": "n",
+        "c": "nasb",
+        "role": "Calling particle {{يَا}} + {{عِبَادِ}} (with shortened possessive yā).",
+        "root": "ع ب د"
+      },
+      {
+        "ar": "ٱلَّذِينَ",
+        "en": "who",
+        "k": "f",
+        "role": "Relative pronoun."
+      },
+      {
+        "ar": "ءَامَنُوا۟",
+        "en": "have believed",
+        "k": "v",
+        "role": "Past-tense verb.",
+        "root": "أ م ن"
+      },
+      {
+        "ar": "ٱتَّقُوا۟",
+        "en": "be conscious of / revere",
+        "k": "v",
+        "role": "Form VIII command verb.",
+        "root": "و ق ي",
+        "form": "{{ٱفْتَعِلُوا}}"
+      },
+      {
+        "ar": "رَبَّكُمْ",
+        "en": "your Lord",
+        "k": "n",
+        "c": "nasb",
+        "role": "Object of \"revere\", ends in -a, + {{كُم}}.",
+        "root": "ر ب ب"
+      },
+      {
+        "mark": "ۚ"
+      },
+      {
+        "ar": "لِلَّذِينَ",
+        "en": "for those who",
+        "k": "p",
+        "role": "{{لِ}} + {{ٱلَّذِينَ}}."
+      },
+      {
+        "ar": "أَحْسَنُوا۟",
+        "en": "do good / excel",
+        "k": "v",
+        "role": "Form IV past verb.",
+        "root": "ح س ن",
+        "form": "{{أَفْعَلُوا}}"
+      },
+      {
+        "ar": "فِى",
+        "en": "in",
+        "k": "p",
+        "role": "Preposition."
+      },
+      {
+        "ar": "هَـٰذِهِ",
+        "en": "this",
+        "k": "f",
+        "role": "Pointing noun."
+      },
+      {
+        "ar": "ٱلدُّنْيَا",
+        "en": "world",
+        "k": "n",
+        "c": "jarr",
+        "role": "Noun with hidden ending, feminine of {{أَدْنَى}} (\"the lowest / nearest\").",
+        "root": "د ن و"
+      },
+      {
+        "ar": "حَسَنَةٌۭ",
+        "en": "is good",
+        "k": "n",
+        "c": "raf",
+        "role": "Delayed subject (mubtada mu'akhkhar), ends in -un.",
+        "root": "ح س ن"
+      },
+      {
+        "mark": "ۗ"
+      },
+      {
+        "ar": "وَأَرْضُ",
+        "en": "and the earth of",
+        "k": "n",
+        "c": "raf",
+        "role": "Subject, ends in -u.",
+        "root": "أ ر ض"
+      },
+      {
+        "ar": "ٱللَّهِ",
+        "en": "Allah",
+        "k": "n",
+        "c": "jarr",
+        "role": "Mudaf ilayh, ends in -i."
+      },
+      {
+        "ar": "وَٰسِعَةٌ",
+        "en": "is spacious",
+        "k": "n",
+        "c": "raf",
+        "role": "Predicate, ends in -un.",
+        "root": "و س ع",
+        "form": "{{فَاعِلَة}}"
+      },
+      {
+        "mark": "ۗ"
+      },
+      {
+        "ar": "إِنَّمَا",
+        "en": "only / indeed",
+        "k": "p",
+        "role": "Restriction particle."
+      },
+      {
+        "ar": "يُوَفَّى",
+        "en": "will be paid in full",
+        "k": "v",
+        "role": "Passive Form II present verb.",
+        "root": "و ف ي",
+        "form": "{{يُفَعَّلُ}}"
+      },
+      {
+        "ar": "ٱلصَّـٰبِرُونَ",
+        "en": "the patient / persevering",
+        "k": "n",
+        "c": "raf",
+        "role": "Deputy doer (nā'ib fā'il), plural ending in -ūn.",
+        "root": "ص ب ر",
+        "form": "{{فَاعِلُونَ}}"
+      },
+      {
+        "ar": "أَجْرَهُم",
+        "en": "their reward",
+        "k": "n",
+        "c": "nasb",
+        "role": "Second object, ends in -a, + {{هُم}}.",
+        "root": "أ ج ر"
+      },
+      {
+        "ar": "بِغَيْرِ",
+        "en": "without",
+        "k": "p",
+        "role": "{{بِ}} + {{غَيْرِ}}."
+      },
+      {
+        "ar": "حِسَابٍۢ",
+        "en": "measure / calculation",
+        "k": "n",
+        "c": "jarr",
+        "role": "After {{غَيْرِ}}, ends in -in.",
+        "root": "ح س ب"
+      }
+    ],
+    "qs": [
+      {
+        "t": "sarf",
+        "focus": "يَـٰعِبَادِ",
+        "q": "Why is {{يَاعِبَادِ}} written with a kasra on the dal, without the letter yaa?",
+        "hint": "It stands for {{يَا عِبَادِي}} (\"O My servants\"). What does shortening it indicate?",
+        "a": [
+          "In Arabic poetry and intimate address, dropping the final pronoun {{ي}} shows tenderness, proximity, and urgency.",
+          "Allah addresses the believers with the highest badge of honor: calling them \"My servants\", reassuring them that He is intimately close."
+        ]
+      },
+      {
+        "t": "nahw",
+        "focus": "وَأَرْضُ ٱللَّهِ وَٰسِعَةٌ",
+        "q": "Why insert \"and the earth of Allah is spacious\" right here?",
+        "hint": "What were the early Muslims in Makkah suffering from?",
+        "a": [
+          "The early believers were facing severe persecution and boycotts in Makkah. Some feared leaving their homeland, ancestral homes, and trade.",
+          "Allah reminds them: Do not sacrifice your faith for geography. If you are oppressed in one land, migrate (hijrah)—Allah's earth is wide."
+        ]
+      },
+      {
+        "t": "nahw",
+        "focus": "بِغَيْرِ حِسَابٍۢ",
+        "q": "What does \"without account\" mean for the reward of patience?",
+        "hint": "Most good deeds are rewarded 10 to 700 times. How is patience different?",
+        "a": [
+          "Normally, deeds are calculated on scales with exact multiples.",
+          "Patience and steadfast perseverance ({{ٱلصَّابِرُونَ}}) requires restraining one's whole soul through ongoing struggle. Its reward is poured out without counting, without measurement, and without limit."
+        ]
+      }
+    ]
+  },
+  {
+    "n": 11,
+    "title": "The public mission",
+    "tr": "Say, \"Indeed, I have been commanded to worship Allah, keeping religion sincerely for Him.\"",
+    "words": [
+      {
+        "ar": "قُلْ",
+        "en": "Say",
+        "k": "v",
+        "role": "Command verb (amr)."
+      },
+      {
+        "ar": "إِنِّىٓ",
+        "en": "indeed I",
+        "k": "p",
+        "role": "{{إِنَّ}} + {{ي}} (\"I\")."
+      },
+      {
+        "ar": "أُمِرْتُ",
+        "en": "I have been commanded",
+        "k": "v",
+        "role": "Passive past verb (Form I majhool) + doer {{تُ}} (\"I\").",
+        "root": "أ م ر"
+      },
+      {
+        "ar": "أَنْ",
+        "en": "that / to",
+        "k": "p",
+        "role": "Subjunctive particle."
+      },
+      {
+        "ar": "أَعْبُدَ",
+        "en": "I worship",
+        "k": "v",
+        "role": "Present verb in the -a mood after {{أَنْ}}.",
+        "root": "ع ب د"
+      },
+      {
+        "ar": "ٱللَّهَ",
+        "en": "Allah",
+        "k": "n",
+        "c": "nasb",
+        "role": "Object of \"worship\", ends in -a."
+      },
+      {
+        "ar": "مُخْلِصًۭا",
+        "en": "being sincere",
+        "k": "n",
+        "c": "nasb",
+        "role": "State (haal), ends in -an.",
+        "root": "خ ل ص",
+        "form": "{{مُفْعِل}}"
+      },
+      {
+        "ar": "لَّهُ",
+        "en": "for Him alone",
+        "k": "p",
+        "role": "Fronted preposition phrase for exclusivity."
+      },
+      {
+        "ar": "ٱلدِّينَ",
+        "en": "the religion",
+        "k": "n",
+        "c": "nasb",
+        "role": "Object of {{مُخْلِصًا}}, ends in -a.",
+        "root": "د ي ن"
+      }
+    ],
+    "qs": [
+      {
+        "t": "nahw",
+        "focus": "قُلْ إِنِّىٓ أُمِرْتُ",
+        "q": "How does this ayah connect back to ayah 2?",
+        "hint": "Look at the command in ayah 2: {{فَٱعْبُدِ ٱللَّهَ مُخْلِصًا لَّهُ ٱلدِّينَ}}.",
+        "a": [
+          "In ayah 2, Allah gave this command to the Prophet ﷺ directly in private.",
+          "Here in ayah 11, He tells him: {{قُلْ}}, \"Say!\" Proclaim this mission publicly to the entire world. Private conviction becomes public declaration."
+        ]
+      },
+      {
+        "t": "sarf",
+        "focus": "أُمِرْتُ",
+        "q": "Why is {{أُمِرْتُ}} in the passive voice (\"I have been commanded\")?",
+        "hint": "Who is the Commander? Does He need to be named?",
+        "a": [
+          "The Commander is Allah, so supreme and obvious that He needs no mention.",
+          "It also emphasizes total obedience: the Prophet ﷺ does not invent religion from personal desire; he is a dutiful servant carrying out divine instructions."
+        ]
+      }
+    ]
+  },
+  {
+    "n": 12,
+    "title": "First to submit",
+    "tr": "And I have been commanded to be the first of those who submit.",
+    "words": [
+      {
+        "ar": "وَأُمِرْتُ",
+        "en": "and I have been commanded",
+        "k": "v",
+        "role": "{{وَ}} + passive past verb.",
+        "root": "أ م ر"
+      },
+      {
+        "ar": "لِأَنْ",
+        "en": "that / in order that",
+        "k": "p",
+        "role": "{{لِ}} + {{أَنْ}}."
+      },
+      {
+        "ar": "أَكُونَ",
+        "en": "I be",
+        "k": "v",
+        "role": "Present verb in -a mood after {{أَنْ}}.",
+        "root": "ك و ن"
+      },
+      {
+        "ar": "أَوَّلَ",
+        "en": "the first of",
+        "k": "n",
+        "c": "nasb",
+        "role": "Predicate of {{أَكُونَ}}, ends in -a. First half of \"of\" pair.",
+        "root": "أ و ل"
+      },
+      {
+        "ar": "ٱلْمُسْلِمِينَ",
+        "en": "those who submit",
+        "k": "n",
+        "c": "jarr",
+        "role": "Mudaf ilayh, sound masculine plural ending in -īn.",
+        "root": "س ل م",
+        "form": "{{مُفْعِلِينَ}}"
+      }
+    ],
+    "qs": [
+      {
+        "t": "sarf",
+        "focus": "أَوَّلَ ٱلْمُسْلِمِينَ",
+        "q": "Why must the Messenger be {{أَوَّلَ ٱلْمُسْلِمِينَ}} (the first of the Muslims)?",
+        "hint": "Can a leader ask followers to do what he is not doing himself?",
+        "a": [
+          "A true prophetic leader does not direct from the comfort of the rear. He is the first to surrender his will, the first to sacrifice, and the first to bow before God.",
+          "His own life is the living prototype of what complete Islam looks like."
+        ]
+      }
+    ]
+  },
+  {
+    "n": 13,
+    "title": "Accountability without exception",
+    "tr": "Say, \"Indeed I fear, if I should disobey my Lord, the punishment of a tremendous Day.\"",
+    "words": [
+      {
+        "ar": "قُلْ",
+        "en": "Say",
+        "k": "v",
+        "role": "Command verb."
+      },
+      {
+        "ar": "إِنِّىٓ",
+        "en": "indeed I",
+        "k": "p",
+        "role": "{{إِنَّ}} + {{ي}}."
+      },
+      {
+        "ar": "أَخَافُ",
+        "en": "I fear",
+        "k": "v",
+        "role": "Present-tense verb.",
+        "root": "خ و ف",
+        "form": "{{أَفْعَلُ}}"
+      },
+      {
+        "ar": "إِنْ",
+        "en": "if",
+        "k": "p",
+        "role": "Condition particle."
+      },
+      {
+        "ar": "عَصَيْتُ",
+        "en": "I should disobey",
+        "k": "v",
+        "role": "Past-tense verb with doer {{تُ}} (\"I\").",
+        "root": "ع ص ي"
+      },
+      {
+        "ar": "رَبِّى",
+        "en": "my Lord",
+        "k": "n",
+        "c": "nasb",
+        "role": "Object, ends in -a (hidden under possessive yā).",
+        "root": "ر ب ب"
+      },
+      {
+        "ar": "عَذَابَ",
+        "en": "the punishment of",
+        "k": "n",
+        "c": "nasb",
+        "role": "Object of \"I fear\", ends in -a.",
+        "root": "ع ذ ب"
+      },
+      {
+        "ar": "يَوْمٍ",
+        "en": "a Day",
+        "k": "n",
+        "c": "jarr",
+        "role": "Mudaf ilayh, ends in -in.",
+        "root": "ي و م"
+      },
+      {
+        "ar": "عَظِيمٍۢ",
+        "en": "tremendous / colossal",
+        "k": "n",
+        "c": "jarr",
+        "role": "Adjective describing the Day, ends in -in.",
+        "root": "ع ظ م",
+        "form": "{{فَعِيل}}"
+      }
+    ],
+    "qs": [
+      {
+        "t": "nahw",
+        "focus": "إِنْ عَصَيْتُ رَبِّى",
+        "q": "Why does the Prophet ﷺ publicly express fear of disobeying his Lord?",
+        "hint": "Does anyone have a VIP exemption from God's justice?",
+        "a": [
+          "It dismantles every cult of personality: no human being, not even the Messenger himself, is above divine accountability.",
+          "If the most beloved creation fears disobeying his Lord on that tremendous Day, how can any ordinary human feel casual about sin?"
+        ]
+      }
+    ]
+  },
+  {
+    "n": 14,
+    "title": "My worship, my religion",
+    "tr": "Say, \"Allah alone I worship, keeping my religion sincere for Him.\"",
+    "words": [
+      {
+        "ar": "قُلِ",
+        "en": "Say",
+        "k": "v",
+        "role": "Command verb with kasra to link into the next word."
+      },
+      {
+        "ar": "ٱللَّهَ",
+        "en": "Allah",
+        "k": "n",
+        "c": "nasb",
+        "role": "Fronted object (maf'ul muqaddam). Moved forward for absolute exclusivity!",
+        "root": "أ ل ه"
+      },
+      {
+        "ar": "أَعْبُدُ",
+        "en": "I worship",
+        "k": "v",
+        "role": "Present-tense verb with doer \"I\".",
+        "root": "ع ب د"
+      },
+      {
+        "ar": "مُخْلِصًۭا",
+        "en": "being sincere",
+        "k": "n",
+        "c": "nasb",
+        "role": "State (haal), ends in -an.",
+        "root": "خ ل ص",
+        "form": "{{مُفْعِل}}"
+      },
+      {
+        "ar": "لَّهُۥ",
+        "en": "for Him alone",
+        "k": "p",
+        "role": "Fronted preposition phrase."
+      },
+      {
+        "ar": "دِينِى",
+        "en": "my religion",
+        "k": "n",
+        "c": "nasb",
+        "role": "Object of {{مُخْلِصًا}} with personal pronoun {{ي}} (\"my\").",
+        "root": "د ي ن"
+      }
+    ],
+    "qs": [
+      {
+        "t": "nahw",
+        "focus": "ٱللَّهَ أَعْبُدُ",
+        "q": "In ayah 11 it said {{أَعْبُدَ ٱللَّهَ}}. Why does ayah 14 say {{ٱللَّهَ أَعْبُدُ}}?",
+        "hint": "What happens in Arabic when the object is moved before the verb?",
+        "a": [
+          "This is taqdīm (fronting the object). Moving \"Allah\" before \"I worship\" adds the meaning of exclusivity (ḥaṣr).",
+          "It does not merely mean \"I worship Allah\" (which could leave room for others); it means: \"Allah ALONE I worship, and no one else.\""
+        ]
+      },
+      {
+        "t": "sarf",
+        "focus": "دِينِى",
+        "q": "Why does it say {{دِينِي}} (\"my religion\") instead of {{ٱلدِّينَ}} (\"the religion\") as in ayat 2 and 11?",
+        "hint": "What changes when you add the personal pronoun \"my\"?",
+        "a": [
+          "In ayat 2 and 11, it was {{ٱلدِّينَ}} — religion in the general sense.",
+          "Here in ayah 14, it becomes {{دِينِي}}, \"my religion\". It is now completely personal: my individual allegiance, my whole way of life, and my heart are irrevocably dedicated to Him alone."
+        ]
+      }
+    ]
+  }
   ];
 
-  /* How the four ayat connect */
+  /* How the 14 ayat connect */
   const FLOW = [
-    { n: 1, t: 'The source', d: 'The Book is from Allah.' },
-    { n: 2, t: 'The response', d: 'So worship Him sincerely.' },
-    { n: 3, t: 'The excuse', d: '"Idols bring us near." Allah will judge.' },
-    { n: 4, t: 'The answer', d: 'He has no child. He is One and All-Dominant.' }
-  ];
+  {
+    "n": 1,
+    "t": "The Source",
+    "d": "The Book is sent down from the Almighty, All-Wise."
+  },
+  {
+    "n": 2,
+    "t": "The Response",
+    "d": "Worship Allah, keeping the religion sincerely for Him."
+  },
+  {
+    "n": 3,
+    "t": "The Excuse",
+    "d": "\"Idols bring us near.\" Allah will judge between them."
+  },
+  {
+    "n": 4,
+    "t": "The Refutation",
+    "d": "He has no child. He is the One, the All-Dominant."
+  },
+  {
+    "n": 5,
+    "t": "Cosmic Order",
+    "d": "Night and day wrapped in truth; sun and moon orbiting."
+  },
+  {
+    "n": 6,
+    "t": "Human Creation",
+    "d": "From one soul, through three darknesses in the womb."
+  },
+  {
+    "n": 7,
+    "t": "Self-Sufficiency",
+    "d": "Allah needs nothing; gratitude is solely for your own benefit."
+  },
+  {
+    "n": 8,
+    "t": "Human Hypocrisy",
+    "d": "Desperate in sickness, ungrateful in health."
+  },
+  {
+    "n": 9,
+    "t": "The Night Worshipper",
+    "d": "Prostrating in the dark, balancing reverent fear and hope."
+  },
+  {
+    "n": 10,
+    "t": "Unmeasured Reward",
+    "d": "Allah's earth is wide; the patient receive reward without limit."
+  },
+  {
+    "n": 11,
+    "t": "The Public Mission",
+    "d": "\"I have been commanded to worship Allah with pure sincerity.\""
+  },
+  {
+    "n": 12,
+    "t": "First to Submit",
+    "d": "The Prophet leads from the front in total surrender."
+  },
+  {
+    "n": 13,
+    "t": "Equal Accountability",
+    "d": "Even the Messenger fears disobeying his Lord on the Great Day."
+  },
+  {
+    "n": 14,
+    "t": "My Personal Religion",
+    "d": "Allah ALONE I worship, keeping my entire life sincere for Him."
+  }
+];
 
   const LINKS = [
-    { t: 'Root {{ن ز ل}}: two forms', tag: 'sarf',
-      items: [
-        { ar: 'تَنزِيلُ', n: 1, c: 'raf', d: 'Form II verbal noun: step by step' },
-        { ar: 'أَنزَلْنَآ', n: 2, c: 'verb', d: 'Form IV verb: the whole Book' }
-      ],
-      lesson: 'The same root in two forms shows two views of the same revelation.' },
-    { t: 'The name Allah in three endings', tag: 'nahw',
-      items: [
-        { ar: 'مِنَ ٱللَّهِ', n: 1, c: 'jarr', d: '-i: after "from"' },
-        { ar: 'فَٱعْبُدِ ٱللَّهَ', n: 2, c: 'nasb', d: '-a: the one worshipped' },
-        { ar: 'أَرَادَ ٱللَّهُ', n: 4, c: 'raf', d: '-u: the one who wills' }
-      ],
-      lesson: 'The word stays the same. Only the ending changes, and it tells you the job.' },
-    { t: '{{ٱلْكِتَـٰب}}: same word, new job', tag: 'nahw',
-      items: [
-        { ar: 'تَنزِيلُ ٱلْكِتَـٰبِ', n: 1, c: 'jarr', d: '-i: "of the Book"' },
-        { ar: 'أَنزَلْنَآ … ٱلْكِتَـٰبَ', n: 2, c: 'nasb', d: '-a: the thing sent down' }
-      ],
-      lesson: 'In ayah 1 the Book is described. In ayah 2 it is the object of Allah\'s action.' },
-    { t: '{{ٱلدِّين}}: object, then subject', tag: 'nahw',
-      items: [
-        { ar: 'مُخْلِصًۭا لَّهُ ٱلدِّينَ', n: 2, c: 'nasb', d: '-a: what you keep pure' },
-        { ar: 'لِلَّهِ ٱلدِّينُ ٱلْخَالِصُ', n: 3, c: 'raf', d: '-u: what belongs to Allah' }
-      ],
-      lesson: 'Both times "for Him / for Allah" is moved to the front. Ayah 2 is the command. Ayah 3 is the fact behind it.' },
-    { t: 'Root {{خ ل ص}}: the effort and the result', tag: 'sarf',
-      items: [
-        { ar: 'مُخْلِصًۭا', n: 2, c: 'nasb', d: 'Form IV doer: you make it pure' },
-        { ar: 'ٱلْخَالِصُ', n: 3, c: 'raf', d: 'Form I doer: it is pure' }
-      ],
-      lesson: 'You work at sincerity. Allah accepts only what is pure.' },
-    { t: 'Root {{ع ب د}}: the right target, the wrong target', tag: 'sarf',
-      items: [
-        { ar: 'فَٱعْبُدِ ٱللَّهَ', n: 2, c: 'verb', d: 'Command: worship Allah' },
-        { ar: 'مَا نَعْبُدُهُمْ', n: 3, c: 'verb', d: 'Their words: we worship them' }
-      ],
-      lesson: 'Same act, turned to the wrong object.' },
-    { t: 'Root {{ح ك م}}: wise, and the judge', tag: 'sarf',
-      items: [
-        { ar: 'ٱلْحَكِيمِ', n: 1, c: 'jarr', d: 'The All-Wise' },
-        { ar: 'يَحْكُمُ', n: 3, c: 'verb', d: 'He will judge' }
-      ],
-      lesson: 'The One who sent a wise Book will judge those who argue about it.' },
-    { t: 'Root {{أ خ ذ}}: taking for yourself', tag: 'sarf',
-      items: [
-        { ar: 'ٱتَّخَذُوا۟', n: 3, c: 'verb', d: 'They took protectors' },
-        { ar: 'أَن يَتَّخِذَ', n: 4, c: 'verb', d: 'If He wanted to take a child' }
-      ],
-      lesson: 'Form VIII "taking for yourself" comes from need. People need. Allah does not.' },
-    { t: 'Pattern {{فَعَّال}}: the two endings', tag: 'sarf',
-      items: [
-        { ar: 'كَفَّارٌۭ', n: 3, c: 'raf', d: 'The one who denies again and again' },
-        { ar: 'ٱلْقَهَّـٰرُ', n: 4, c: 'raf', d: 'The One who overpowers completely' }
-      ],
-      lesson: 'Ayah 3 and ayah 4 both end on the same strong pattern.' }
-  ];
+  {
+    "t": "Root {{ن ز ل}}: step by step, then the whole Book",
+    "tag": "sarf",
+    "items": [
+      {
+        "ar": "تَنزِيلُ",
+        "n": 1,
+        "c": "raf",
+        "d": "Form II verbal noun: arriving in stages over 23 years"
+      },
+      {
+        "ar": "أَنزَلْنَآ",
+        "n": 2,
+        "c": "verb",
+        "d": "Form IV verb: the decree dispatched from the heavens"
+      },
+      {
+        "ar": "وَأَنزَلَ لَكُم",
+        "n": 6,
+        "c": "verb",
+        "d": "Form IV verb: sending down grazing livestock for sustenance"
+      }
+    ],
+    "lesson": "The same root shows how Allah provides both spiritual revelation for the heart and physical sustenance for the body."
+  },
+  {
+    "t": "Root {{خ ل ق}}: creation cannot be a child",
+    "tag": "sarf",
+    "items": [
+      {
+        "ar": "مِمَّا يَخْلُقُ",
+        "n": 4,
+        "c": "verb",
+        "d": "Whatever He chooses is still created, never divine offspring"
+      },
+      {
+        "ar": "خَلَقَ ٱلسَّمَـٰوَٰتِ",
+        "n": 5,
+        "c": "verb",
+        "d": "Forming the macrocosm: heavens and earth with absolute truth"
+      },
+      {
+        "ar": "خَلَقَكُم … يَخْلُقُكُمْ",
+        "n": 6,
+        "c": "verb",
+        "d": "Forming the microcosm: shaping humans in three darknesses"
+      }
+    ],
+    "lesson": "From cosmic galaxies to microscopic embryos, everything outside Allah is created (makhlooq). Creation can never share divine status."
+  },
+  {
+    "t": "Root {{ع ب د}}: the progression of worship",
+    "tag": "nahw",
+    "items": [
+      {
+        "ar": "فَٱعْبُدِ ٱللَّهَ",
+        "n": 2,
+        "c": "verb",
+        "d": "Personal command: worship Allah with sincere intent"
+      },
+      {
+        "ar": "مَا نَعْبُدُهُمْ",
+        "n": 3,
+        "c": "verb",
+        "d": "The idolater's false justification: worshiping proxies"
+      },
+      {
+        "ar": "قَـٰنِتٌ … سَاجِدًۭا",
+        "n": 9,
+        "c": "raf",
+        "d": "The true believer: devout worship in the quiet of night"
+      },
+      {
+        "ar": "قُلْ إِنِّىٓ أُمِرْتُ أَنْ أَعْبُدَ",
+        "n": 11,
+        "c": "verb",
+        "d": "Public mission: commanded to worship with sincerity"
+      },
+      {
+        "ar": "قُلِ ٱللَّهَ أَعْبُدُ",
+        "n": 14,
+        "c": "nasb",
+        "d": "Exclusive surrender: Allah ALONE I worship"
+      }
+    ],
+    "lesson": "The word \"worship\" journeys from private command (2) to exposed falsehood (3) to night intimacy (9) to public mandate (11) and finally to exclusive dedication (14)."
+  },
+  {
+    "t": "{{ٱلدِّين}}: from general concept to personal life",
+    "tag": "sarf",
+    "items": [
+      {
+        "ar": "مُخْلِصًۭا لَّهُ ٱلدِّينَ",
+        "n": 2,
+        "c": "nasb",
+        "d": "Keeping the religion pure for Him"
+      },
+      {
+        "ar": "لِلَّهِ ٱلدِّينُ ٱلْخَالِصُ",
+        "n": 3,
+        "c": "raf",
+        "d": "Pure religion belongs by right to Allah alone"
+      },
+      {
+        "ar": "أَنْ أَعْبُدَ ٱللَّهَ مُخْلِصًۭا لَّهُ ٱلدِّينَ",
+        "n": 11,
+        "c": "nasb",
+        "d": "Proclaiming religion for Him"
+      },
+      {
+        "ar": "مُخْلِصًۭا لَّهُۥ دِينِى",
+        "n": 14,
+        "c": "nasb",
+        "d": "MY religion: deeply personal, unshakeable allegiance"
+      }
+    ],
+    "lesson": "In ayat 2, 3, and 11, it is \"the religion\" (al-dīn). In ayah 14, it becomes \"my religion\" (dīnī). Faith is not merely an external theory; it must become your personal heartbeat."
+  },
+  {
+    "t": "Fronted words for exclusivity (Taqdīm)",
+    "tag": "nahw",
+    "items": [
+      {
+        "ar": "لَّهُ ٱلدِّينَ",
+        "n": 2,
+        "c": "part",
+        "d": "For Him ALONE is the religion"
+      },
+      {
+        "ar": "لِلَّهِ ٱلدِّينُ",
+        "n": 3,
+        "c": "jarr",
+        "d": "To Allah ALONE belongs pure religion"
+      },
+      {
+        "ar": "ثُمَّ إِلَىٰ رَبِّكُم مَّرْجِعُكُمْ",
+        "n": 7,
+        "c": "jarr",
+        "d": "To your Lord ALONE is your final return"
+      },
+      {
+        "ar": "قُلِ ٱللَّهَ أَعْبُدُ",
+        "n": 14,
+        "c": "nasb",
+        "d": "Allah ALONE I worship"
+      }
+    ],
+    "lesson": "Whenever Arabic moves an object or preposition before its verb, it locks exclusivity: not just \"X\", but \"ONLY X\"."
+  },
+  {
+    "t": "Pattern {{فَعَّال}}: intensive frequency",
+    "tag": "sarf",
+    "items": [
+      {
+        "ar": "كَفَّارٌۭ",
+        "n": 3,
+        "c": "raf",
+        "d": "The one who denies and covers up again and again"
+      },
+      {
+        "ar": "ٱلْقَهَّـٰرُ",
+        "n": 4,
+        "c": "raf",
+        "d": "The One who overpowers everything completely"
+      },
+      {
+        "ar": "ٱلْغَفَّـٰرُ",
+        "n": 5,
+        "c": "raf",
+        "d": "The One who forgives repeatedly and boundlessly"
+      }
+    ],
+    "lesson": "The intensive pattern {{فَعَّال}} shows doing something constantly. Man denies repeatedly (3), but Allah overpowers (4) and forgives (5) with boundless abundance."
+  }
+];
 
   const QUIZ = [
-    { q: '{{تَنزِيل}} is the verbal noun of which form?',
-      o: ['Form I {{نَزَلَ}}', 'Form II {{نَزَّلَ}}', 'Form IV {{أَنزَلَ}}', 'Form V {{تَنَزَّلَ}}'], a: 1,
-      e: 'The pattern {{تَفْعِيل}} is the verbal noun of Form II. It often shows something done step by step.' },
-    { q: 'Why does {{ٱلْكِتَـٰبِ}} end in -i in ayah 1?',
-      o: ['It is the object', 'It is the "of" word after {{تَنزِيلُ}}', 'It is the subject', 'It is plural'], a: 1,
-      e: '"The sending down of the Book": {{ٱلْكِتَـٰبِ}} is the mudaf ilayh, so it ends in -i.' },
-    { q: 'Ayah 1 has no verb. What does a noun sentence show?',
-      o: ['A command', 'A question', 'A fixed fact, not tied to time', 'Something only in the past'], a: 2,
-      e: 'A noun sentence states a settled fact. A verb would tie it to a time.' },
-    { q: 'What is the job of {{مُخْلِصًا}} in ayah 2?',
-      o: ['Subject', 'A state (haal) describing the worshipper', 'A verb', 'A preposition'], a: 1,
-      e: 'It is a haal. It describes your state while you worship, so it ends in -a.' },
-    { q: 'Why is {{لَهُ}} placed before {{ٱلدِّينَ}}?',
-      o: ['For rhyme only', 'To add the meaning "for Him alone"', 'Because {{ٱلدِّينَ}} is plural', 'It is the normal order'], a: 1,
-      e: 'Moving a phrase forward (taqdim) often adds the meaning of "only".' },
-    { q: 'Which word describes the person doing the purifying?',
-      o: ['{{خَالِص}}', '{{مُخْلِص}}', '{{دِين}}', '{{حَقّ}}'], a: 1,
-      e: '{{مُخْلِص}} is the Form IV doer: the one who makes it pure. {{خَالِص}} is the thing that is pure.' },
-    { q: 'What do {{مَا … إِلَّا}} mean together?',
-      o: ['"never"', '"only"', '"and"', '"if"'], a: 1,
-      e: '"We do not worship them except to…" = "We only worship them to…".' },
-    { q: 'Which word in ayah 3 shares a root with {{ٱلْحَكِيم}}?',
-      o: ['{{يَهْدِي}}', '{{يَخْتَلِفُونَ}}', '{{يَحْكُمُ}}', '{{نَعْبُدُ}}'], a: 2,
-      e: 'Both come from {{ح ك م}}: to judge, to be wise.' },
-    { q: 'Why does ayah 4 use {{لَوْ}} and not {{إِنْ}}?',
-      o: ['{{لَوْ}} is for things that will not happen', '{{لَوْ}} is more polite', 'They mean exactly the same', '{{إِنْ}} is only for the past'], a: 0,
-      e: '{{لَوْ}} marks the idea of Allah taking a child as impossible from the first word.' },
-    { q: 'Why does {{ٱللَّهُ}} end in -u in {{أَرَادَ ٱللَّهُ}}?',
-      o: ['It comes after a preposition', 'It is the object', 'It is the doer of the verb', 'It is a haal'], a: 2,
-      e: 'The doer (fa\'il) of a verb ends in -u.' },
-    { q: '{{كَفَّار}} and {{قَهَّار}} share which pattern?',
-      o: ['{{فَعِيل}}', '{{فَاعِل}}', '{{فَعَّال}}', '{{مُفْعِل}}'], a: 2,
-      e: '{{فَعَّال}} means doing something a lot, again and again.' }
-  ];
+  {
+    "q": "{{تَنزِيل}} is the verbal noun of which form?",
+    "o": [
+      "Form I {{نَزَلَ}}",
+      "Form II {{نَزَّلَ}}",
+      "Form IV {{أَنزَلَ}}",
+      "Form V {{تَنَزَّلَ}}"
+    ],
+    "a": 1,
+    "e": "The pattern {{تَفْعِيل}} is the verbal noun of Form II. It often shows something done step by step."
+  },
+  {
+    "q": "Why does {{ٱلْكِتَـٰبِ}} end in -i in ayah 1?",
+    "o": [
+      "It is the object",
+      "It is the \"of\" word after {{تَنزِيلُ}}",
+      "It is the subject",
+      "It is plural"
+    ],
+    "a": 1,
+    "e": "\"The sending down of the Book\": {{ٱلْكِتَـٰبِ}} is the mudaf ilayh, so it ends in -i."
+  },
+  {
+    "q": "What is the job of {{مُخْلِصًا}} in ayah 2?",
+    "o": [
+      "Subject",
+      "A state (haal) describing the worshipper",
+      "A verb",
+      "A preposition"
+    ],
+    "a": 1,
+    "e": "It is a haal. It describes your state while you worship, so it ends in -a."
+  },
+  {
+    "q": "Why is {{لَهُ}} placed before {{ٱلدِّينَ}} in ayah 2?",
+    "o": [
+      "For rhyme only",
+      "To add the meaning \"for Him alone\"",
+      "Because {{ٱلدِّينَ}} is plural",
+      "It is the normal order"
+    ],
+    "a": 1,
+    "e": "Moving a phrase forward (taqdim) adds the meaning of exclusivity: \"for Him alone\"."
+  },
+  {
+    "q": "Which word in ayah 3 shares a root with {{ٱلْحَكِيم}}?",
+    "o": [
+      "{{يَهْدِي}}",
+      "{{يَخْتَلِفُونَ}}",
+      "{{يَحْكُمُ}}",
+      "{{نَعْبُدُ}}"
+    ],
+    "a": 2,
+    "e": "Both come from {{ح ك م}}: to judge, to be wise."
+  },
+  {
+    "q": "Why does ayah 4 use {{لَوْ}} and not {{إِنْ}}?",
+    "o": [
+      "{{لَوْ}} is for things that will not happen",
+      "{{لَوْ}} is more polite",
+      "They mean exactly the same",
+      "{{إِنْ}} is only for the past"
+    ],
+    "a": 0,
+    "e": "{{لَوْ}} marks the idea of Allah taking a child as impossible from the first word."
+  },
+  {
+    "q": "What does the verb {{يُكَوِّرُ}} in ayah 5 physically describe?",
+    "o": [
+      "Splitting something in two",
+      "Winding a cloth smoothly around a curved sphere",
+      "Making light bright",
+      "Stopping time"
+    ],
+    "a": 1,
+    "e": "Root {{ك و ر}} means winding a turban around a head. It portrays continuous wrapping of night and day around a curved earth."
+  },
+  {
+    "q": "Why does {{ٱلسَّمَـٰوَٰتِ}} end in -i in ayah 5 even though it is an object?",
+    "o": [
+      "It comes after a preposition",
+      "Sound feminine plurals take -i instead of -a for the object",
+      "It is singular",
+      "It is an adjective"
+    ],
+    "a": 1,
+    "e": "Sound feminine plurals (ending in {{ـَات}}) never take a fatha (-a). In the object role (nasb), they take a kasra (-i)."
+  },
+  {
+    "q": "In ayah 6, what are the \"three darknesses\" in which human creation takes place?",
+    "o": [
+      "Night, clouds, and sea",
+      "The abdominal wall, uterine wall, and amniotic sac",
+      "Past, present, and future",
+      "Clay, water, and dust"
+    ],
+    "a": 1,
+    "e": "Commentators explain them as the three physical barriers sheltering the developing embryo: belly wall, womb, and amniotic membrane."
+  },
+  {
+    "q": "Why does ayah 7 contrast disbelief ({{تَكْفُرُوا}}) with gratitude ({{تَشْكُرُوا}})?",
+    "o": [
+      "By accident",
+      "Because {{كُفْر}} is fundamentally covering up favors and ingratitude",
+      "Because belief is not mentioned in the Quran",
+      "They mean the same thing"
+    ],
+    "a": 1,
+    "e": "{{كُفْر}} literally means to cover up. Denying God is denying His favors; therefore, true faith is living gratitude ({{شُكْر}})."
+  },
+  {
+    "q": "In ayah 8, what does the verb {{مَسَّ}} (\"touched\") reveal about human nature?",
+    "o": [
+      "Adversity is always huge",
+      "Even the lightest brush of difficulty breaks proud arrogance",
+      "Man never prays",
+      "God never tests humans"
+    ],
+    "a": 1,
+    "e": "{{مَسَّ}} means the lightest touch. Even a slight distress makes the proud sinner panic and plead with God."
+  },
+  {
+    "q": "Why does ayah 9 mention prostrating ({{سَاجِدًا}}) before standing ({{قَائِمًا}})?",
+    "o": [
+      "Sujūd is the closest station to Allah, prioritizing spiritual intimacy",
+      "Standing is not part of prayer",
+      "To fit the rhyme",
+      "It was a typo"
+    ],
+    "a": 0,
+    "e": "Prostration (sujūd) is where the servant is closest to their Lord, highlighting supreme humility."
+  },
+  {
+    "q": "In ayah 10, how is the reward of the patient ({{ٱلصَّـٰبِرُونَ}}) measured?",
+    "o": [
+      "Double the normal reward",
+      "Ten times",
+      "Without account ({{بِغَيْرِ حِسَابٍ}}), with no limit",
+      "Equal to one year"
+    ],
+    "a": 2,
+    "e": "Every other deed has a measured multiplier, but patience in trial receives an uncounted, boundless outpouring of reward."
+  },
+  {
+    "q": "Why is {{ٱللَّهَ}} fronted before {{أَعْبُدُ}} in ayah 14 ({{ٱللَّهَ أَعْبُدُ}})?",
+    "o": [
+      "To make it plural",
+      "Fronting the object declares absolute exclusivity: \"Allah ALONE I worship\"",
+      "It is the subject",
+      "No reason"
+    ],
+    "a": 1,
+    "e": "Moving the object before the verb (taqdīm) specifies exclusivity (ḥaṣr): \"Allah ALONE I worship.\""
+  },
+  {
+    "q": "What shifts between {{ٱلدِّينَ}} in ayah 11 and {{دِينِى}} in ayah 14?",
+    "o": [
+      "It changes from \"the religion\" to personal \"my religion\"",
+      "It becomes past tense",
+      "It becomes plural",
+      "It refers to someone else"
+    ],
+    "a": 0,
+    "e": "Ayah 14 makes it deeply personal: {{دِينِي}}, \"my religion\" — not just an abstract concept, but my personal life and soul dedicated to Him."
+  }
+];
   </script>
 
   <script>
@@ -1140,7 +3558,7 @@
      APP
      ═══════════════════════════════════════════════════════════ */
   (() => {
-    const AR_DIGITS = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+    const toArDigits = (num) => String(num).replace(/[0-9]/g, (d) => '٠١٢٣٤٥٦٧٨٩'[d]);
     const $ = (sel, root = document) => root.querySelector(sel);
 
     /* {{…}} → inline Arabic */
@@ -1152,8 +3570,8 @@
       if (w.k === 'n') return 'c-' + w.c;
       return 'c-part';
     };
-    const KIND = { n: 'Noun (ism)', v: 'Verb (fi\'l)', p: 'Particle (harf)', f: 'Fixed word (mabni)' };
-    const CASE = { raf: '-u ending · marfu\'', nasb: '-a ending · mansub', jarr: '-i ending · majrur' };
+    const KIND = { n: 'Noun (ism)', v: "Verb (fi'l)", p: 'Particle (harf)', f: 'Fixed word (mabni)' };
+    const CASE = { raf: "-u ending · marfu'", nasb: "-a ending · mansub", jarr: "-i ending · majrur" };
 
     const rootBoxes = (r) =>
       `<span class="root" lang="ar">${r.split(' ').map((l) => `<b>${l}</b>`).join('')}</span>`;
@@ -1167,12 +3585,28 @@
         <span class="c-part"><i class="dot"></i>Particle / fixed</span>
       </div>`;
 
+    let currentAyah = 1;
+
     /* ───────── Ayah view ───────── */
     const viewAyah = $('#view-ayah');
 
     function renderAyah(n) {
+      currentAyah = n;
       const A = AYAT[n - 1];
       const words = A.words.filter((w) => !w.mark);
+
+      // Update header steppers & label
+      const currentLabel = $('#current-ayah-label');
+      if (currentLabel) currentLabel.textContent = `Ayah ${n} of ${AYAT.length}`;
+      const prevStep = $('#btn-prev-ayah');
+      const nextStep = $('#btn-next-ayah');
+      if (prevStep) prevStep.disabled = (n <= 1);
+      if (nextStep) nextStep.disabled = (n >= AYAT.length);
+
+      // Highlight active button in modal
+      document.querySelectorAll('.ayah-pick-btn').forEach((btn) => {
+        btn.classList.toggle('active', Number(btn.dataset.n) === n);
+      });
 
       let wi = 0;
       const tokens = A.words.map((w) => {
@@ -1198,19 +3632,19 @@
       const prev = n === 1
         ? `<a class="prev" href="#start"><small>← Back</small><span>Start</span></a>`
         : `<a class="prev" href="#ayah-${n - 1}"><small>← Previous</small><span>Ayah ${n - 1}</span></a>`;
-      const next = n === 4
-        ? `<a class="next" href="#links"><small>Next →</small><span>How they connect</span></a>`
+      const next = n === AYAT.length
+        ? `<a class="next" href="#links"><small>Next →</small><span>Connections</span></a>`
         : `<a class="next" href="#ayah-${n + 1}"><small>Next →</small><span>Ayah ${n + 1}</span></a>`;
 
       viewAyah.innerHTML = `
         <div class="card ayah-card">
           <div class="ayah-top">
             <div>
-              <p class="eyebrow">Ayah ${n} of 4 · 39:${n}</p>
+              <p class="eyebrow">Ayah ${n} of ${AYAT.length} · 39:${n}</p>
               <h1 class="ayah-title">${A.title}</h1>
             </div>
           </div>
-          <p class="ayah" lang="ar" dir="rtl">${tokens}<span class="ayah-no" aria-hidden="true">${AR_DIGITS[n]}</span></p>
+          <p class="ayah" lang="ar" dir="rtl">${tokens}<span class="ayah-no" aria-hidden="true">${toArDigits(n)}</span></p>
           <p class="translation">${A.tr}</p>
           ${legend()}
         </div>
@@ -1294,18 +3728,18 @@
 
       $('#view-links').innerHTML = `
         <p class="eyebrow">Review</p>
-        <h1 id="links-title" class="ayah-title" style="font-size:1.6rem;margin-bottom:6px">How the four ayat connect</h1>
-        <p class="step-sub">The same roots, endings, and patterns come back across the ayat. Each one adds to the argument.</p>
+        <h1 id="links-title" class="ayah-title" style="font-size:1.6rem;margin-bottom:6px">How the ${AYAT.length} ayat connect</h1>
+        <p class="step-sub">The same roots, endings, and patterns come back across the ayat. Each one deepens the message.</p>
 
         <h2 class="step-title" style="margin-top:20px">The flow</h2>
         <div class="flow">${flow}</div>
 
         <h2 class="step-title">Words that come back</h2>
-        <p class="step-sub">Read each pair. What changed, and why?</p>
+        <p class="step-sub">Read each pattern. What changed, and why?</p>
         <div class="links">${links}</div>
 
         <nav class="pager" aria-label="Section navigation">
-          <a class="prev" href="#ayah-4"><small>← Previous</small><span>Ayah 4</span></a>
+          <a class="prev" href="#ayah-${AYAT.length}"><small>← Previous</small><span>Ayah ${AYAT.length}</span></a>
           <a class="next" href="#quiz"><small>Next →</small><span>Quiz</span></a>
         </nav>`;
     }
@@ -1344,15 +3778,121 @@
 
     function renderScore() {
       const pct = score / QUIZ.length;
-      const msg = pct === 1 ? 'All correct. Well done.'
-        : pct >= 0.7 ? 'Good work. Go back to the ayat for the ones you missed.'
-        : 'Go through the ayat again and open the answers, then try once more.';
+      const msg = pct === 1 ? 'All correct. Outstanding mastery!'
+        : pct >= 0.7 ? 'Great work! Review the ayat for the ones you missed.'
+        : 'Go through the ayat again, check the questions and word panels, then try once more.';
       quizEl.innerHTML = `
         <p class="eyebrow">Your score</p>
         <div class="score">${score} / ${QUIZ.length}</div>
         <p style="color:var(--ink-2)">${msg}</p>
         <button type="button" class="btn-primary" id="retry">Try again</button>`;
       $('#retry', quizEl).addEventListener('click', () => { qi = 0; score = 0; renderQuiz(); });
+    }
+
+    /* ───────── Directory & Modal ───────── */
+    const ayahModal = $('#ayah-modal');
+    const btnAyahChooser = $('#btn-ayah-chooser');
+    const modalCloseBtn = $('#modal-close-btn');
+    const ayahSearchInput = $('#ayah-search-input');
+    const ayahModalGrid = $('#ayah-modal-grid');
+    const surahDirGrid = $('#surah-dir-grid');
+
+    function openModal() {
+      if (!ayahModal) return;
+      ayahModal.classList.add('open');
+      if (btnAyahChooser) btnAyahChooser.setAttribute('aria-expanded', 'true');
+      $('#ayah-picker-wrap')?.classList.add('open');
+      if (ayahSearchInput) {
+        ayahSearchInput.value = '';
+        filterAyahs('');
+        setTimeout(() => ayahSearchInput.focus(), 60);
+      }
+    }
+
+    function closeModal() {
+      if (!ayahModal) return;
+      ayahModal.classList.remove('open');
+      if (btnAyahChooser) btnAyahChooser.setAttribute('aria-expanded', 'false');
+      $('#ayah-picker-wrap')?.classList.remove('open');
+    }
+
+    function filterAyahs(query) {
+      if (!ayahModalGrid) return;
+      const q = query.trim().toLowerCase();
+      const buttons = ayahModalGrid.querySelectorAll('.ayah-pick-btn');
+      buttons.forEach((btn) => {
+        const text = btn.textContent.toLowerCase();
+        const match = !q || text.includes(q);
+        btn.style.display = match ? 'flex' : 'none';
+      });
+    }
+
+    function renderDirectory() {
+      if (surahDirGrid) {
+        surahDirGrid.innerHTML = AYAT.map((a) => `
+          <a class="dir-card" href="#ayah-${a.n}">
+            <div class="dir-card-head">
+              <span class="dir-card-num">Ayah ${a.n}</span>
+              <span class="dir-card-ar" lang="ar">${toArDigits(a.n)}</span>
+            </div>
+            <div class="dir-card-title">${a.title}</div>
+            <p class="dir-card-tr">${a.tr}</p>
+          </a>
+        `).join('');
+      }
+
+      if (ayahModalGrid) {
+        ayahModalGrid.innerHTML = AYAT.map((a) => `
+          <a class="ayah-pick-btn" href="#ayah-${a.n}" data-n="${a.n}">
+            <div class="ayah-pick-top">
+              <span class="ayah-pick-num">Ayah ${a.n}</span>
+              <span class="ayah-pick-ar" lang="ar">${toArDigits(a.n)}</span>
+            </div>
+            <div class="ayah-pick-title">${a.title}</div>
+          </a>
+        `).join('');
+
+        ayahModalGrid.querySelectorAll('.ayah-pick-btn').forEach((btn) => {
+          btn.addEventListener('click', closeModal);
+        });
+      }
+    }
+
+    if (btnAyahChooser) {
+      btnAyahChooser.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (ayahModal.classList.contains('open')) closeModal();
+        else openModal();
+      });
+    }
+
+    if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeModal);
+
+    if (ayahModal) {
+      ayahModal.addEventListener('click', (e) => {
+        if (e.target === ayahModal) closeModal();
+      });
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && ayahModal?.classList.contains('open')) closeModal();
+    });
+
+    if (ayahSearchInput) {
+      ayahSearchInput.addEventListener('input', (e) => filterAyahs(e.target.value));
+    }
+
+    const prevStep = $('#btn-prev-ayah');
+    const nextStep = $('#btn-next-ayah');
+    if (prevStep) {
+      prevStep.addEventListener('click', () => {
+        if (currentAyah > 1) location.hash = `#ayah-${currentAyah - 1}`;
+      });
+    }
+    if (nextStep) {
+      nextStep.addEventListener('click', () => {
+        if (currentAyah < AYAT.length) location.hash = `#ayah-${currentAyah + 1}`;
+      });
     }
 
     /* ───────── Router ───────── */
@@ -1366,20 +3906,24 @@
 
     function route(scroll) {
       let key = location.hash.slice(1) || 'start';
-      const m = key.match(/^ayah-([1-4])$/);
-      if (!m && !['start', 'links', 'quiz'].includes(key)) key = 'start';
+      const m = key.match(/^ayah-(\d+)$/);
+      let ayahNum = m ? Number(m[1]) : 0;
+      if (ayahNum < 1 || ayahNum > AYAT.length) {
+        if (m) { key = 'start'; ayahNum = 0; }
+      }
+      if (!ayahNum && !['start', 'links', 'quiz'].includes(key)) key = 'start';
 
       Object.values(views).forEach((v) => (v.hidden = true));
 
-      if (m) {
-        renderAyah(Number(m[1]));
+      if (ayahNum >= 1 && ayahNum <= AYAT.length) {
+        renderAyah(ayahNum);
         views.ayah.hidden = false;
-        document.title = `Ayah ${m[1]} · Surah Az-Zumar 1–4`;
+        document.title = `Ayah ${ayahNum} · Surah Az-Zumar 1–14`;
       } else {
         if (key === 'links' && !linksDone) { renderLinks(); linksDone = true; }
         if (key === 'quiz' && !quizDone) { renderQuiz(); quizDone = true; }
         views[key].hidden = false;
-        document.title = `${key === 'start' ? 'Start' : key[0].toUpperCase() + key.slice(1)} · Surah Az-Zumar 1–4`;
+        document.title = `${key === 'start' ? 'Start' : key[0].toUpperCase() + key.slice(1)} · Surah Az-Zumar 1–14`;
       }
 
       document.querySelectorAll('.tab').forEach((t) => {
@@ -1390,13 +3934,14 @@
       if (scroll) window.scrollTo({ top: 0 });
     }
 
+    renderDirectory();
     window.addEventListener('hashchange', () => route(true));
     route(false);
   })();
   </script>
 
   <footer style="text-align:center;padding:20px;color:var(--ink-3);font-size:0.85rem;border-top:1px solid var(--line);margin-top:60px">
-    Surah Az-Zumar 1–4 · v2.0.01 · <a href="https://github.com/islamwell/zumar">github</a>
+    Surah Az-Zumar 1–14 · v2.1.0 (updated 2026-09-29 20:17) · <a href="https://github.com/islamwell/zumar">github</a>
   </footer>
 </body>
 </html>
