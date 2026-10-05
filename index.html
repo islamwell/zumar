@@ -700,8 +700,52 @@
     .opt:disabled { cursor: default; }
     .opt.right { border-color: var(--nasb); background: color-mix(in srgb, var(--nasb) 12%, transparent); }
     .opt.wrong { border-color: var(--jarr); background: color-mix(in srgb, var(--jarr) 12%, transparent); }
-    .feedback { margin-top: 16px; padding: 14px 16px; border-radius: 12px; background: var(--surface-2); }
-    .feedback strong { display: block; margin-bottom: 2px; }
+    .feedback {
+      margin-top: 18px;
+      padding: 18px 20px;
+      border-radius: 14px;
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+    }
+    .feedback-status {
+      font-weight: 700;
+      font-size: 0.98rem;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .feedback-status.is-right { color: var(--nasb); }
+    .feedback-status.is-wrong { color: var(--jarr); }
+    .feedback-explanation {
+      font-size: 0.93rem;
+      line-height: 1.55;
+      color: var(--ink);
+    }
+    .benefit-box {
+      background: color-mix(in srgb, var(--accent) 7%, var(--surface));
+      border: 1px solid color-mix(in srgb, var(--accent) 22%, transparent);
+      border-left: 4px solid var(--accent);
+      border-radius: 10px;
+      padding: 12px 15px;
+      margin-top: 12px;
+    }
+    .benefit-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+    .benefit-text {
+      font-size: 0.9rem;
+      line-height: 1.5;
+      color: var(--ink);
+    }
     .quiz-foot { display: flex; justify-content: flex-end; margin-top: 16px; }
     .quiz-foot .btn-primary { margin-top: 0; }
     .score { font-size: 2.6rem; font-weight: 700; color: var(--accent); }
@@ -836,9 +880,9 @@
 
     <!-- ───────── QUIZ ───────── -->
     <section class="view" id="view-quiz" hidden aria-labelledby="quiz-title">
-      <p class="eyebrow">Review</p>
-      <h1 id="quiz-title" class="ayah-title" style="font-size:1.6rem;margin-bottom:6px">Quiz</h1>
-      <p class="step-sub">Questions on the grammar, word forms, and meanings from ayat 1–14.</p>
+      <p class="eyebrow">Mindset & Life Reflections</p>
+      <h1 id="quiz-title" class="ayah-title" style="font-size:1.6rem;margin-bottom:6px">Practical Reflection Quiz</h1>
+      <p class="step-sub">Practical thinking questions testing how deeply you understand the psychological shifts, mindset, and life lessons hidden inside Surah Az-Zumar 1–14.</p>
       <div class="card quiz" id="quiz"></div>
     </section>
 
@@ -3386,169 +3430,184 @@
 
   const QUIZ = [
   {
-    "q": "{{تَنزِيل}} is the verbal noun of which form?",
+    "q": "Ayah 1 introduces the Quran as a settled fact from the Almighty, the All-Wise, with no verb or argument. When facing doubt or emotional exhaustion, how does this perspective practical help you?",
     "o": [
-      "Form I {{نَزَلَ}}",
-      "Form II {{نَزَّلَ}}",
-      "Form IV {{أَنزَلَ}}",
-      "Form V {{تَنَزَّلَ}}"
+      "It encourages debating and arguing endlessly until others concede.",
+      "It anchors your mind in an unchanging truth, freeing you from seeking validation from shifting human opinions.",
+      "It suggests faith requires no thought or reflection.",
+      "It teaches that you should avoid interacting with the world."
     ],
     "a": 1,
-    "e": "The pattern {{تَفْعِيل}} is the verbal noun of Form II. It often shows something done step by step."
+    "e": "In Arabic, Ayah 1 is a nominal sentence (jumla ismiyya) stating a timeless reality. It does not argue; it establishes a solid rock: this revelation comes directly from the Almighty, the All-Wise.",
+    "benefit": "Protects your mental peace. When you remember the source is unchanging, you stop wasting energy on self-doubt or seeking human approval, and focus on living the guidance."
   },
   {
-    "q": "Why does {{ٱلْكِتَـٰبِ}} end in -i in ayah 1?",
+    "q": "In Ayah 2, {{مُخْلِصًا}} describes an active condition while worshipping: 'being sincere.' Why is sincerity framed as an active state rather than a one-time badge you earn?",
     "o": [
-      "It is the object",
-      "It is the \"of\" word after {{تَنزِيلُ}}",
-      "It is the subject",
-      "It is plural"
+      "Because sincerity is a temporary feeling that only matters on special holidays.",
+      "Because human intentions naturally drift, requiring you to actively reset your motive before and during every deed.",
+      "Because worship is only accepted if you announce your good intentions publicly.",
+      "Because you can only be sincere if you never make a single mistake."
     ],
     "a": 1,
-    "e": "\"The sending down of the Book\": {{ٱلْكِتَـٰبِ}} is the mudaf ilayh, so it ends in -i."
+    "e": "{{مُخْلِصًا}} is a state (haal) describing the worshipper in the middle of action. Sincerity is not a title you keep; it is a live filter you must continuously renew to prevent ego and showing off from creeping into your heart.",
+    "benefit": "Keeps your deeds safe from vanity. Pausing for three seconds before praying, giving charity, or helping someone to whisper 'this is for Allah alone' transforms routine tasks into sacred worship."
   },
   {
-    "q": "What is the job of {{مُخْلِصًا}} in ayah 2?",
+    "q": "In Ayah 3, the idolaters claimed: 'We only worship them so they bring us closer to Allah.' What subtle psychological trap does this expose in our modern lives?",
     "o": [
-      "Subject",
-      "A state (haal) describing the worshipper",
-      "A verb",
-      "A preposition"
+      "The danger of subconsciously relying on our money, status, or influential contacts as our ultimate saviors, instead of directly turning to Allah.",
+      "It only applies to people bowing down to stone idols in ancient history.",
+      "Seeking medical treatment from a doctor is forbidden.",
+      "Asking someone for everyday advice is a form of polytheism."
+    ],
+    "a": 0,
+    "e": "The idolaters did not deny Allah; they believed they needed intermediaries and proxies to reach Him. In modern life, we fall into a similar trap when we place our ultimate security and peace of mind in our job title, bank balance, or social connections.",
+    "benefit": "Frees you from emotional codependency. You use practical means responsibly, but your heart rests with absolute trust in Allah alone, eliminating anxiety over losing worldly status."
+  },
+  {
+    "q": "Ayah 4 concludes that Allah is {{ٱلْوَٰحِدُ ٱلْقَهَّـٰرُ}} (the One, the All-Dominant), completely free of needing children, partners, or helpers. How does His total independence elevate your self-worth?",
+    "o": [
+      "It implies humans are worthless and should give up trying.",
+      "It frees you from the exhausting rat race of pleasing people, knowing your Creator gives unconditionally and needs nothing from you.",
+      "It means you should never ask Allah for help since He is self-sufficient.",
+      "It suggests human effort has no impact on life outcomes."
     ],
     "a": 1,
-    "e": "It is a haal. It describes your state while you worship, so it ends in -a."
+    "e": "Humans demand relationships out of weakness, loneliness, or need. Allah is completely free of all need (Ghani). When He calls you to worship Him, it is purely for your spiritual healing and dignity, not to fulfill any divine deficit.",
+    "benefit": "Cures people-pleasing and social comparison. You realize humans are needy and fickle, while your Creator provides unconditional care without demanding anything for His own benefit."
   },
   {
-    "q": "Why is {{لَهُ}} placed before {{ٱلدِّينَ}} in ayah 2?",
+    "q": "In Ayah 5, {{يُكَوِّرُ}} describes the seamless wrapping of night over day and day over night like a cloth wound smoothly around a sphere. How should this flawless rhythm calm your personal anxiety?",
     "o": [
-      "For rhyme only",
-      "To add the meaning \"for Him alone\"",
-      "Because {{ٱلدِّينَ}} is plural",
-      "It is the normal order"
+      "It teaches that life changes randomly without any underlying order.",
+      "Just as Allah transitions the darkness of night into morning light with gentle precision, He manages the seasons and transitions of your life with identical care.",
+      "It means you should only work at night and avoid day activities.",
+      "It implies your personal emotions will never change once set."
     ],
     "a": 1,
-    "e": "Moving a phrase forward (taqdim) adds the meaning of exclusivity: \"for Him alone\"."
+    "e": "The verb portrays uninterrupted, smooth wrapping with zero friction or collision. The One who transitions vast cosmic galaxies without a split-second delay is also in total command of the dark and bright seasons in your life.",
+    "benefit": "Relieves panic during overwhelming life transitions. When everything feels chaotic, looking at the night sky reminds you that the dawn of relief is arriving on a precise divine schedule."
   },
   {
-    "q": "Which word in ayah 3 shares a root with {{ٱلْحَكِيم}}?",
+    "q": "Ayah 6 reminds you that Allah fashioned you in your mother’s womb through 'three darknesses' (unseen layers of protection). What does this reveal about Allah's care during your loneliest moments?",
     "o": [
-      "{{يَهْدِي}}",
-      "{{يَخْتَلِفُونَ}}",
-      "{{يَحْكُمُ}}",
-      "{{نَعْبُدُ}}"
+      "Allah only began caring for you after you became productive in society.",
+      "Allah designed you, nurtured you, and kept your heart beating when no human eye could see or help you; He will never abandon you in your private struggles today.",
+      "Hidden struggles are proof that Allah is angry with you.",
+      "Life was safer before birth so you should avoid any difficult challenges."
+    ],
+    "a": 1,
+    "e": "Before you had a voice, strength, or ability to ask, Allah sheltered and nurtured you through three physical barriers of darkness. The One who cared for you when you were completely helpless in the dark will not neglect your silent tears today.",
+    "benefit": "Comforts feelings of deep isolation and loneliness. You realize you have never been truly alone for even one breath of your entire life."
+  },
+  {
+    "q": "Ayah 7 states that if all humanity disbelieves, Allah is completely free of need from us, yet He loves gratitude. How does realizing this protect your attitude toward worship?",
+    "o": [
+      "It proves our prayers make Allah more powerful in the universe.",
+      "It destroys spiritual arrogance, reminding you that you are never doing God a favor by praying; every good deed is a lifeline for yourself.",
+      "It implies good deeds do not matter in the hereafter.",
+      "It means you only need to show gratitude when life goes smoothly."
+    ],
+    "a": 1,
+    "e": "Disbelief harms Allah not in the slightest, and gratitude benefits your own soul. The believer never acts entitled or feels like they are doing Allah or the community a favor by practicing religion; worship is medicine we need for our own survival.",
+    "benefit": "Eliminates religious entitlement, spiritual pride, and resentment. You approach every prayer with genuine gratitude, relief, and deep humility."
+  },
+  {
+    "q": "Ayah 8 describes a person who cries desperately to Allah at the slightest brush of hardship ({{مَسَّهُ ضُرٌّ}}), but completely forgets Him once blessed with ease. How can you practically apply this mirror to your life?",
+    "o": [
+      "Avoid praying during hardships so you do not look needy.",
+      "Audit your daily routine to ensure you remember and thank Allah with the same urgency during seasons of comfort as you do in times of crisis.",
+      "Never celebrate good news to avoid falling into ingratitude.",
+      "Only pray when you feel overwhelmed by panic or stress."
+    ],
+    "a": 1,
+    "e": "{{مَسَّ}} means the lightest touch. Humans often panic at minor distress and pray fervently, yet revert to self-centered neglect the moment relief arrives. Recognizing this pattern breaks the cycle of opportunistic, fair-weather faith.",
+    "benefit": "Builds emotional resilience and consistency. When you cultivate regular gratitude during comfortable days, you build a spiritual fortress that keeps you calm when trials hit."
+  },
+  {
+    "q": "In Ayah 9, the night worshipper is described as prostrating ({{سَاجِدًا}}) before standing, balancing reverent fear and hope. What emotional wisdom does this teach us?",
+    "o": [
+      "Fear should completely paralyze you so you live in perpetual dread.",
+      "Hope should make you careless so you ignore your mistakes.",
+      "Healthy faith balances reverent awareness that stops carelessness with joyful hope that prevents despair.",
+      "Spiritual growth is only possible if you completely give up sleep."
     ],
     "a": 2,
-    "e": "Both come from {{ح ك م}}: to judge, to be wise."
+    "e": "The believer’s heart travels like a bird with two balanced wings: awe and reverence of accountability keep you from recklessness, while trust and longing for mercy keep you from giving up. Prostration (sujud) is the posture of closest intimacy.",
+    "benefit": "Prevents religious burnout and despair. When you feel down about your mistakes, hope lifts you; when you feel tempted to become lazy, reverent awareness snaps you back to focus."
   },
   {
-    "q": "Why does ayah 4 use {{لَوْ}} and not {{إِنْ}}?",
+    "q": "Ayah 10 promises that the patient will receive their reward {{بِغَيْرِ حِسَابٍ}} (without measure, with no ceiling). How does this promise help you endure chronic hardship?",
     "o": [
-      "{{لَوْ}} is for things that will not happen",
-      "{{لَوْ}} is more polite",
-      "They mean exactly the same",
-      "{{إِنْ}} is only for the past"
-    ],
-    "a": 0,
-    "e": "{{لَوْ}} marks the idea of Allah taking a child as impossible from the first word."
-  },
-  {
-    "q": "What does the verb {{يُكَوِّرُ}} in ayah 5 physically describe?",
-    "o": [
-      "Splitting something in two",
-      "Winding a cloth smoothly around a curved sphere",
-      "Making light bright",
-      "Stopping time"
+      "It promises that all difficulties will disappear within twenty-four hours.",
+      "When hardship feels open-ended and unmeasured, Allah’s compensation will equally have no limit, no meter, and no calculation.",
+      "It means you should never take practical steps to improve your situation.",
+      "It implies patience is only rewarded for financial losses."
     ],
     "a": 1,
-    "e": "Root {{ك و ر}} means winding a turban around a head. It portrays continuous wrapping of night and day around a curved earth."
+    "e": "Standard good deeds have defined multipliers (from 10 to 700 times), but patience (sabr) through prolonged grief, illness, or trial receives an uncounted, boundless outpouring of divine reward.",
+    "benefit": "Replaces bitterness with quiet dignity. When a painful trial drags on, remembering that every second of silent endurance unlocks unmeasured treasures gives you the strength to keep going."
   },
   {
-    "q": "Why does {{ٱلسَّمَـٰوَٰتِ}} end in -i in ayah 5 even though it is an object?",
+    "q": "In Ayats 11 and 12, the Prophet was commanded to announce his own sincere surrender first ('to be the first of those who submit'). What practical leadership lesson does this give you?",
     "o": [
-      "It comes after a preposition",
-      "Sound feminine plurals take -i instead of -a for the object",
-      "It is singular",
-      "It is an adjective"
+      "Leaders should direct others from behind while avoiding personal sacrifices.",
+      "True moral authority comes from living the standard with full sincerity yourself before asking anyone else to follow it.",
+      "Leadership is strictly about enforcing rules and asserting dominance.",
+      "You should only mentor others if you receive public praise for it."
     ],
     "a": 1,
-    "e": "Sound feminine plurals (ending in {{ـَات}}) never take a fatha (-a). In the object role (nasb), they take a kasra (-i)."
+    "e": "The Prophet was not a detached administrator giving orders; he was commanded to lead from the front, embodying total submission and personal sacrifice before inviting anyone else.",
+    "benefit": "Transforms your parenting, mentoring, and leadership. In your home or workplace, people are moved by what you genuinely live and embody, not by lectures or hypocrisy."
   },
   {
-    "q": "In ayah 6, what are the \"three darknesses\" in which human creation takes place?",
+    "q": "In Ayah 13, the Messenger himself states: 'Indeed, I fear, if I disobey my Lord, the punishment of a Tremendous Day.' Why is it vital for every believer to remember this?",
     "o": [
-      "Night, clouds, and sea",
-      "The abdominal wall, uterine wall, and amniotic sac",
-      "Past, present, and future",
-      "Clay, water, and dust"
+      "It implies that no good deed has any real impact.",
+      "It shatters spiritual entitlement—no one, regardless of status or piety, is above divine boundaries or free from accountability.",
+      "It suggests fear is the only valid emotion toward God.",
+      "It indicates religious leaders are more prone to wrongdoing."
     ],
     "a": 1,
-    "e": "Commentators explain them as the three physical barriers sheltering the developing embryo: belly wall, womb, and amniotic membrane."
+    "e": "If the most beloved human being possessed such deep, humble awareness of accountability, none of us has an excuse for moral complacency, double standards, or thinking we are exempt from God's laws.",
+    "benefit": "Protects your integrity in private. It stops you from rationalizing hidden misdeeds and keeps your character honest when no one else is watching."
   },
   {
-    "q": "Why does ayah 7 contrast disbelief ({{تَكْفُرُوا}}) with gratitude ({{تَشْكُرُوا}})?",
+    "q": "In Ayah 14, the wording shifts from the general 'the religion' ({{ٱلدِّينَ}}) to personal 'my religion' ({{دِينِى}}). What inner shift does this demand from you?",
     "o": [
-      "By accident",
-      "Because {{كُفْر}} is fundamentally covering up favors and ingratitude",
-      "Because belief is not mentioned in the Quran",
-      "They mean the same thing"
+      "Faith should be reshaped according to whatever feels convenient.",
+      "Faith must transition from an inherited cultural label into your personal daily identity, choices, and heartfelt allegiance.",
+      "You should keep your beliefs completely hidden from everyone.",
+      "It means other people's well-being is of no concern to you."
     ],
     "a": 1,
-    "e": "{{كُفْر}} literally means to cover up. Denying God is denying His favors; therefore, true faith is living gratitude ({{شُكْر}})."
+    "e": "Anyone can talk about 'religion' as an abstract philosophical topic or cultural inheritance. But saying {{دِينِي}} ('my religion') means: 'This is my personal life. My daily decisions, my business ethics, and my heart belong wholly to Him.'",
+    "benefit": "Turns mechanical rituals into passionate living. You stop practicing faith out of social pressure, and start living with conscious purpose and inner dignity."
   },
   {
-    "q": "In ayah 8, what does the verb {{مَسَّ}} (\"touched\") reveal about human nature?",
+    "q": "Ayah 3 warns against the person who is {{كَفَّارٌ}} (constantly denying favors), while Ayah 5 reveals that Allah is {{ٱلْغَفَّـٰرُ}} (boundlessly, perpetually forgiving). What does this contrast provide your heart?",
     "o": [
-      "Adversity is always huge",
-      "Even the lightest brush of difficulty breaks proud arrogance",
-      "Man never prays",
-      "God never tests humans"
+      "It means forgiveness is only granted once in a lifetime.",
+      "No matter how many times you stumble or repeat a mistake, Allah’s capacity to forgive is always ready to exceed and embrace your sincere return.",
+      "It implies mistakes have no consequence so you need not worry.",
+      "It suggests people can never break free from negative habits."
     ],
     "a": 1,
-    "e": "{{مَسَّ}} means the lightest touch. Even a slight distress makes the proud sinner panic and plead with God."
+    "e": "Both words share the intensive pattern (fa''al) meaning repeated and abundant action. Humans repeatedly fall short and forget blessings (kaffar), but Allah repeatedly and boundlessly forgives (ghaffar) whenever we turn back with sincerity.",
+    "benefit": "Crushes hopelessness and guilt paralysis. Whenever you feel you have failed too many times, this contrast reminds you that Allah’s door of mercy never locks."
   },
   {
-    "q": "Why does ayah 9 mention prostrating ({{سَاجِدًا}}) before standing ({{قَائِمًا}})?",
+    "q": "Looking at Ayats 1–14 together—from the cosmic balance of night and day to the quiet devotee prostrating in the dark—what is the central mindset shift Surah Az-Zumar creates in you?",
     "o": [
-      "Sujūd is the closest station to Allah, prioritizing spiritual intimacy",
-      "Standing is not part of prayer",
-      "To fit the rhyme",
-      "It was a typo"
-    ],
-    "a": 0,
-    "e": "Prostration (sujūd) is where the servant is closest to their Lord, highlighting supreme humility."
-  },
-  {
-    "q": "In ayah 10, how is the reward of the patient ({{ٱلصَّـٰبِرُونَ}}) measured?",
-    "o": [
-      "Double the normal reward",
-      "Ten times",
-      "Without account ({{بِغَيْرِ حِسَابٍ}}), with no limit",
-      "Equal to one year"
-    ],
-    "a": 2,
-    "e": "Every other deed has a measured multiplier, but patience in trial receives an uncounted, boundless outpouring of reward."
-  },
-  {
-    "q": "Why is {{ٱللَّهَ}} fronted before {{أَعْبُدُ}} in ayah 14 ({{ٱللَّهَ أَعْبُدُ}})?",
-    "o": [
-      "To make it plural",
-      "Fronting the object declares absolute exclusivity: \"Allah ALONE I worship\"",
-      "It is the subject",
-      "No reason"
+      "To memorize technical terminology for intellectual debates.",
+      "To strip away all illusions of self-sufficiency, aligning your whole life around the reality that Allah alone is your ultimate Refuge, Guide, and Sustainer.",
+      "To disconnect completely from society and abandon daily responsibilities.",
+      "To focus purely on critiquing other people's flaws."
     ],
     "a": 1,
-    "e": "Moving the object before the verb (taqdīm) specifies exclusivity (ḥaṣr): \"Allah ALONE I worship.\""
-  },
-  {
-    "q": "What shifts between {{ٱلدِّينَ}} in ayah 11 and {{دِينِى}} in ayah 14?",
-    "o": [
-      "It changes from \"the religion\" to personal \"my religion\"",
-      "It becomes past tense",
-      "It becomes plural",
-      "It refers to someone else"
-    ],
-    "a": 0,
-    "e": "Ayah 14 makes it deeply personal: {{دِينِي}}, \"my religion\" — not just an abstract concept, but my personal life and soul dedicated to Him."
+    "e": "Az-Zumar systematically dissolves every false crutch—idols, wealth, cosmic randomness, and spiritual pride—leaving the heart clear and unburdened: you are held by the Almighty, All-Wise Creator who asks only for pure, undivided sincerity.",
+    "benefit": "Brings clarity and focus to your life. You wake up knowing who you are, who holds your future, and where your ultimate allegiance lies, giving you unshakeable peace."
   }
 ];
   </script>
@@ -3752,7 +3811,7 @@
       if (qi >= QUIZ.length) return renderScore();
       const Q = QUIZ[qi];
       quizEl.innerHTML = `
-        <p class="eyebrow">Question ${qi + 1} of ${QUIZ.length}</p>
+        <p class="eyebrow">Reflection ${qi + 1} of ${QUIZ.length}</p>
         <div class="quiz-bar" role="progressbar" aria-valuemin="0" aria-valuemax="${QUIZ.length}" aria-valuenow="${qi}"><i style="width:${(qi / QUIZ.length) * 100}%"></i></div>
         <h3>${ar(Q.q)}</h3>
         <div class="opts">${Q.o.map((o, i) => `<button type="button" class="opt" data-i="${i}">${ar(o)}</button>`).join('')}</div>
@@ -3767,9 +3826,20 @@
           if (i === Q.a) o.classList.add('right');
           else if (i === pick) o.classList.add('wrong');
         });
+        const statusClass = right ? 'is-right' : 'is-wrong';
+        const statusText = right ? '✓ Correct reflection!' : '✕ Not quite — reflect on this:';
         $('#fb', quizEl).innerHTML = `
-          <div class="feedback"><strong>${right ? 'Correct.' : 'Not quite.'}</strong>${ar(Q.e)}</div>
-          <div class="quiz-foot"><button type="button" class="btn-primary" id="nextQ">${qi === QUIZ.length - 1 ? 'See score' : 'Next question →'}</button></div>`;
+          <div class="feedback">
+            <div class="feedback-status ${statusClass}">${statusText}</div>
+            <div class="feedback-explanation">${ar(Q.e)}</div>
+            ${Q.benefit ? `
+              <div class="benefit-box">
+                <div class="benefit-tag">💡 Practical Benefit for You</div>
+                <div class="benefit-text">${ar(Q.benefit)}</div>
+              </div>
+            ` : ''}
+          </div>
+          <div class="quiz-foot"><button type="button" class="btn-primary" id="nextQ">${qi === QUIZ.length - 1 ? 'See reflection summary' : 'Next question →'}</button></div>`;
         const nextBtn = $('#nextQ', quizEl);
         nextBtn.addEventListener('click', () => { qi++; renderQuiz(); $('.opt, .btn-primary', quizEl)?.focus(); });
         nextBtn.focus();
@@ -3778,14 +3848,19 @@
 
     function renderScore() {
       const pct = score / QUIZ.length;
-      const msg = pct === 1 ? 'All correct. Outstanding mastery!'
-        : pct >= 0.7 ? 'Great work! Review the ayat for the ones you missed.'
-        : 'Go through the ayat again, check the questions and word panels, then try once more.';
+      const msg = pct === 1
+        ? 'Flawless! You have deeply internalized the practical mindset and spiritual reflections of Surah Az-Zumar 1–14.'
+        : pct >= 0.7
+        ? 'Insightful reflection! You connected with the core psychological and spiritual lessons. Review the remaining ayat to deepen your practice.'
+        : 'A thoughtful start. Revisit the ayat, reflect on the questions and word breakdowns, and let each verse transform your daily mindset.';
       quizEl.innerHTML = `
-        <p class="eyebrow">Your score</p>
+        <p class="eyebrow">Reflection Completed</p>
         <div class="score">${score} / ${QUIZ.length}</div>
-        <p style="color:var(--ink-2)">${msg}</p>
-        <button type="button" class="btn-primary" id="retry">Try again</button>`;
+        <p style="color:var(--ink-2);max-width:560px;line-height:1.55;margin-bottom:22px">${msg}</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button type="button" class="btn-primary" id="retry">Reflect again</button>
+          <a href="#ayah-1" class="tab" style="padding:10px 18px;border:1px solid var(--line);border-radius:999px;text-decoration:none;display:inline-grid;place-items:center;color:var(--ink)">Review from Ayah 1 →</a>
+        </div>`;
       $('#retry', quizEl).addEventListener('click', () => { qi = 0; score = 0; renderQuiz(); });
     }
 
@@ -3941,7 +4016,7 @@
   </script>
 
   <footer style="text-align:center;padding:20px;color:var(--ink-3);font-size:0.85rem;border-top:1px solid var(--line);margin-top:60px">
-    Surah Az-Zumar 1–14 · v2.1.0 (updated 2026-09-29 20:17) · <a href="https://github.com/islamwell/zumar">github</a>
+    Surah Az-Zumar 1–14 · v2.1.1 (updated 2026-10-05 16:35) · <a href="https://github.com/islamwell/zumar">github</a>
   </footer>
 </body>
 </html>
