@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Surah Az-Zumar 1–14 · Grammar, Word Forms & Deep Reflection</title>
+  <title>Surah Az-Zumar 1–35 · Grammar, Word Forms & Deep Reflection</title>
   <meta name="description" content="Study Surah Az-Zumar ayat 1–14 word by word. Tap a word to see its grammar role, ending, root, and form. Then explore deep linguistic reflection questions and connections.">
   <meta name="theme-color" content="#f7f4ee" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#14171b" media="(prefers-color-scheme: dark)">
@@ -789,6 +789,104 @@
     .quiz-foot .btn-primary { margin-top: 0; }
     .score { font-size: 2.6rem; font-weight: 700; color: var(--accent); }
 
+    /* ───────── Toast Notification ───────── */
+    .toast-container {
+      position: fixed;
+      top: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      width: calc(100% - 32px);
+      max-width: 440px;
+    }
+    .toast {
+      pointer-events: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 12px 20px;
+      border-radius: 999px;
+      box-shadow: 0 14px 36px rgb(0 0 0 / 0.24);
+      font-size: 0.92rem;
+      font-weight: 600;
+      animation: toastIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .toast.toast-right {
+      background: color-mix(in srgb, var(--nasb) 16%, var(--surface));
+      border: 1.5px solid var(--nasb);
+      color: var(--ink);
+    }
+    .toast.toast-wrong {
+      background: color-mix(in srgb, var(--jarr) 16%, var(--surface));
+      border: 1.5px solid var(--jarr);
+      color: var(--ink);
+    }
+    .toast-msg {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .toast-icon {
+      font-size: 1.15rem;
+      line-height: 1;
+    }
+    .toast-time {
+      font-size: 0.8rem;
+      color: var(--ink-2);
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: var(--surface-2);
+      white-space: nowrap;
+      border: 1px solid var(--line);
+    }
+    @keyframes toastIn {
+      from { opacity: 0; transform: translateY(-16px) scale(0.95); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* ───────── 23-second Auto-advance Timer Bar ───────── */
+    .quiz-autoadvance {
+      margin-top: 14px;
+      padding: 12px 16px;
+      border-radius: 12px;
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+    }
+    .quiz-autoadvance-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.84rem;
+      color: var(--ink-2);
+      margin-bottom: 8px;
+    }
+    .quiz-autoadvance-head b {
+      color: var(--accent);
+      font-feature-settings: "tnum";
+      font-variant-numeric: tabular-nums;
+    }
+    .quiz-timer-track {
+      height: 6px;
+      background: color-mix(in srgb, var(--line) 80%, transparent);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .quiz-timer-fill {
+      height: 100%;
+      background: var(--accent);
+      width: 100%;
+      transition: width 0.1s linear;
+    }
+
     @media (prefers-reduced-motion: reduce) {
       * { transition: none !important; scroll-behavior: auto !important; }
     }
@@ -921,7 +1019,7 @@
     <section class="view" id="view-quiz" hidden aria-labelledby="quiz-title">
       <p class="eyebrow">Mindset & Life Reflections</p>
       <h1 id="quiz-title" class="ayah-title" style="font-size:1.6rem;margin-bottom:6px">Practical Reflection Quiz</h1>
-      <p class="step-sub">Practical thinking questions testing how deeply you understand the psychological shifts, mindset, and life lessons hidden inside Surah Az-Zumar 1–14.</p>
+      <p class="step-sub">Practical thinking questions testing how deeply you understand the psychological shifts, mindset, and life lessons hidden inside Surah Az-Zumar 1–35.</p>
       <div class="card quiz" id="quiz"></div>
     </section>
 
@@ -8151,7 +8249,41 @@
     const quizEl = $('#quiz');
     let qi = 0, score = 0;
 
+let quizInterval = null;
+
+    function clearAutoAdvance() {
+      if (quizInterval) {
+        clearInterval(quizInterval);
+        quizInterval = null;
+      }
+    }
+
+    function showToast(isRight, secondsLeft) {
+      let toastContainer = document.getElementById('toast-container');
+      if (!toastContainer) {
+        toastContainer = document.createElement('div');
+        toastContainer.id = 'toast-container';
+        toastContainer.className = 'toast-container';
+        document.body.appendChild(toastContainer);
+      }
+      toastContainer.innerHTML = `
+        <div class="toast ${isRight ? 'toast-right' : 'toast-wrong'}" role="alert">
+          <span class="toast-msg">
+            <span class="toast-icon">${isRight ? '✓' : '💡'}</span>
+            <span>${isRight ? 'Correct reflection!' : 'Contemplate the insight below'}</span>
+          </span>
+          <span class="toast-time">Next in <span id="toast-countdown">${secondsLeft}</span>s</span>
+        </div>`;
+    }
+
+    function removeToast() {
+      const toastContainer = document.getElementById('toast-container');
+      if (toastContainer) toastContainer.innerHTML = '';
+    }
+
     function renderQuiz() {
+      clearAutoAdvance();
+      removeToast();
       if (qi >= QUIZ.length) return renderScore();
       const Q = QUIZ[qi];
       quizEl.innerHTML = `
@@ -8162,6 +8294,7 @@
         <div id="fb" aria-live="polite"></div>`;
 
       quizEl.querySelectorAll('.opt').forEach((b) => b.addEventListener('click', () => {
+        clearAutoAdvance();
         const pick = Number(b.dataset.i);
         const right = pick === Q.a;
         if (right) score++;
@@ -8170,8 +8303,17 @@
           if (i === Q.a) o.classList.add('right');
           else if (i === pick) o.classList.add('wrong');
         });
+
         const statusClass = right ? 'is-right' : 'is-wrong';
         const statusText = right ? '✓ Correct reflection!' : '✕ Not quite — reflect on this:';
+
+        // 23 seconds countdown
+        const DURATION_SEC = 23;
+        const totalMs = DURATION_SEC * 1000;
+        const startTime = Date.now();
+
+        showToast(right, DURATION_SEC);
+
         $('#fb', quizEl).innerHTML = `
           <div class="feedback">
             <div class="feedback-status ${statusClass}">${statusText}</div>
@@ -8183,17 +8325,56 @@
               </div>
             ` : ''}
           </div>
-          <div class="quiz-foot"><button type="button" class="btn-primary" id="nextQ">${qi === QUIZ.length - 1 ? 'See reflection summary' : 'Next question →'}</button></div>`;
+          <div class="quiz-autoadvance">
+            <div class="quiz-autoadvance-head">
+              <span>Auto-proceeding to next question in <b id="timer-sec">${DURATION_SEC}s</b></span>
+              <small style="color:var(--ink-3)">Read the benefit or click below to skip</small>
+            </div>
+            <div class="quiz-timer-track">
+              <div class="quiz-timer-fill" id="timer-bar" style="width:100%"></div>
+            </div>
+          </div>
+          <div class="quiz-foot"><button type="button" class="btn-primary" id="nextQ">${qi === QUIZ.length - 1 ? 'See reflection summary →' : 'Next question →'}</button></div>`;
+
+        function advance() {
+          clearAutoAdvance();
+          removeToast();
+          qi++;
+          renderQuiz();
+          $('.opt, .btn-primary', quizEl)?.focus();
+        }
+
         const nextBtn = $('#nextQ', quizEl);
-        nextBtn.addEventListener('click', () => { qi++; renderQuiz(); $('.opt, .btn-primary', quizEl)?.focus(); });
+        nextBtn.addEventListener('click', advance);
         nextBtn.focus();
+
+        quizInterval = setInterval(() => {
+          const elapsed = Date.now() - startTime;
+          const remaining = Math.max(0, totalMs - elapsed);
+          const pct = (remaining / totalMs) * 100;
+          const sec = Math.ceil(remaining / 1000);
+
+          const bar = document.getElementById('timer-bar');
+          if (bar) bar.style.width = pct + '%';
+          const secLabel = document.getElementById('timer-sec');
+          if (secLabel) secLabel.textContent = sec + 's';
+          const toastSec = document.getElementById('toast-countdown');
+          if (toastSec) toastSec.textContent = sec;
+
+          if (remaining <= 0) {
+            clearAutoAdvance();
+            advance();
+          }
+        }, 100);
       }));
     }
 
     function renderScore() {
+      clearAutoAdvance();
+      removeToast();
       const pct = score / QUIZ.length;
       const msg = pct === 1
-        ? 'Flawless! You have deeply internalized the practical mindset and spiritual reflections of Surah Az-Zumar 1–14.'
+        ? 'Flawless! You have deeply internalized the practical mindset and spiritual reflections of Surah Az-Zumar.'
         : pct >= 0.7
         ? 'Insightful reflection! You connected with the core psychological and spiritual lessons. Review the remaining ayat to deepen your practice.'
         : 'A thoughtful start. Revisit the ayat, reflect on the questions and word breakdowns, and let each verse transform your daily mindset.';
@@ -8324,6 +8505,8 @@
     let linksDone = false, quizDone = false;
 
     function route(scroll) {
+      clearAutoAdvance();
+      removeToast();
       let key = location.hash.slice(1) || 'start';
       const m = key.match(/^ayah-(\d+)$/);
       let ayahNum = m ? Number(m[1]) : 0;
@@ -8337,12 +8520,12 @@
       if (ayahNum >= 1 && ayahNum <= AYAT.length) {
         renderAyah(ayahNum);
         views.ayah.hidden = false;
-        document.title = `Ayah ${ayahNum} · Surah Az-Zumar 1–14`;
+        document.title = `Ayah ${ayahNum} · Surah Az-Zumar 1–35`;
       } else {
         if (key === 'links' && !linksDone) { renderLinks(); linksDone = true; }
         if (key === 'quiz' && !quizDone) { renderQuiz(); quizDone = true; }
         views[key].hidden = false;
-        document.title = `${key === 'start' ? 'Start' : key[0].toUpperCase() + key.slice(1)} · Surah Az-Zumar 1–14`;
+        document.title = `${key === 'start' ? 'Start' : key[0].toUpperCase() + key.slice(1)} · Surah Az-Zumar 1–35`;
       }
 
       document.querySelectorAll('.tab').forEach((t) => {
@@ -8360,7 +8543,7 @@
   </script>
 
   <footer style="text-align:center;padding:20px;color:var(--ink-3);font-size:0.85rem;border-top:1px solid var(--line);margin-top:60px">
-    Surah Az-Zumar 1–35 · v2.3.0 (updated 2026-10-06 21:21) · <a href="https://github.com/islamwell/zumar">github</a>
+    Surah Az-Zumar 1–35 · v2.3.1 (updated 2026-10-06 21:27) · <a href="https://github.com/islamwell/zumar">github</a>
   </footer>
 </body>
 </html>
