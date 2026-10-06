@@ -450,6 +450,83 @@
     .table .ar { font-size: 1.35em; }
     .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 8px; vertical-align: middle; }
 
+    
+    /* ───────── Audio Play Button (Qari Nasser Al-Qatami) ───────── */
+    .ayah-audio-ctrl {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .btn-audio-play {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--ink);
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      overflow: hidden;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+    .btn-audio-play:hover {
+      background: var(--accent-subtle);
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-1px);
+    }
+    .btn-audio-play.is-playing {
+      background: color-mix(in srgb, var(--accent) 15%, var(--surface));
+      border-color: var(--accent);
+      color: var(--accent);
+      box-shadow: 0 4px 12px color-mix(in srgb, var(--accent) 25%, transparent);
+    }
+    .audio-play-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+    }
+    .audio-wave {
+      display: inline-flex;
+      align-items: center;
+      gap: 2.5px;
+      height: 14px;
+      margin-left: 2px;
+    }
+    .audio-wave span {
+      display: inline-block;
+      width: 2.5px;
+      height: 100%;
+      background: currentColor;
+      border-radius: 2px;
+      animation: audioWaveBar 0.9s ease-in-out infinite alternate;
+    }
+    .audio-wave span:nth-child(1) { animation-delay: 0.1s; }
+    .audio-wave span:nth-child(2) { animation-delay: 0.35s; }
+    .audio-wave span:nth-child(3) { animation-delay: 0.6s; }
+
+    @keyframes audioWaveBar {
+      0% { height: 3px; }
+      100% { height: 14px; }
+    }
+
+    .audio-progress-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 3px;
+      background: var(--accent);
+      transition: width 0.1s linear;
+      pointer-events: none;
+    }
+
     /* ───────── Ayah card ───────── */
     .ayah-card { padding: 24px 24px 20px; }
     .ayah-top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
@@ -901,11 +978,10 @@
         <span class="brand-en">Ayat 1–75 (Complete)</span>
       </a>
       <div class="nav-controls">
-        <a class="tab" href="#start">Start</a>
         <div class="ayah-picker-wrap" id="ayah-picker-wrap">
           <button type="button" class="ayah-step-btn" id="btn-prev-ayah" title="Previous Ayah" aria-label="Previous Ayah">‹</button>
           <button type="button" class="ayah-select-btn" id="btn-ayah-chooser" aria-haspopup="dialog" aria-expanded="false" title="Choose Ayah">
-            <span id="current-ayah-label">Ayah 1 of 14</span>
+            <span id="current-ayah-label">Ayah 1 of 75</span>
             <span class="ayah-select-chevron">▾</span>
           </button>
           <button type="button" class="ayah-step-btn" id="btn-next-ayah" title="Next Ayah" aria-label="Next Ayah">›</button>
@@ -940,7 +1016,7 @@
       <div class="card intro">
         <p class="eyebrow">Surah Az-Zumar · 39:1–75 (Complete Surah)</p>
         <h1 id="start-title">Ask why each word is there</h1>
-        <p class="lead">Go through the first thirty-five ayat one at a time. Look at each word, then think about why Allah chose that word, that form, and that order.</p>
+        <p class="lead">Explore all seventy-five ayat one at a time with word-by-word grammar, roots, forms, audio recitation, and practical reflection questions.</p>
 
         <ol class="how">
           <li><span class="step-num">1</span><span><strong>Read the ayah.</strong> Read the Arabic and the meaning.</span></li>
@@ -949,8 +1025,6 @@
         </ol>
 
         <p class="credit">The questions follow the classical way of linguistic Quranic reflection: ask why this word, why this form, why this order. The answers are concise, clear study notes.</p>
-
-        <a class="btn-primary" href="#ayah-1">Start with ayah 1 →</a>
       </div>
 
       <h2 class="step-title">What you need to know first</h2>
@@ -14824,6 +14898,90 @@ const QUIZ = [
 
     let currentAyah = 1;
 
+    
+    /* ───────── Audio Playback (Qari Nasser Al-Qatami) ───────── */
+    let currentAudio = null;
+    let currentPlayingAyah = null;
+
+    function stopAudio() {
+      if (currentAudio) {
+        currentAudio.pause();
+        currentAudio.currentTime = 0;
+        currentAudio = null;
+      }
+      currentPlayingAyah = null;
+      updateAudioButtonUi();
+    }
+
+    function updateAudioButtonUi() {
+      const btn = document.querySelector('#btn-audio-play');
+      if (!btn) return;
+      const isPlaying = currentAudio && !currentAudio.paused && currentPlayingAyah === currentAyah;
+      btn.classList.toggle('is-playing', isPlaying);
+      const iconPlay = btn.querySelector('.icon-play');
+      const iconPause = btn.querySelector('.icon-pause');
+      const wave = btn.querySelector('.audio-wave');
+      const label = btn.querySelector('.audio-btn-text');
+      const prog = btn.querySelector('#audio-progress-bar');
+      if (iconPlay) iconPlay.style.display = isPlaying ? 'none' : 'inline-block';
+      if (iconPause) iconPause.style.display = isPlaying ? 'inline-block' : 'none';
+      if (wave) wave.style.display = isPlaying ? 'inline-flex' : 'none';
+      if (label) label.textContent = isPlaying ? 'Playing · ناصر القطامي' : 'Listen · ناصر القطامي';
+      if (!isPlaying && prog && (!currentAudio || currentAudio.ended)) {
+        prog.style.width = '0%';
+      }
+    }
+
+    function toggleAudio(n) {
+      if (currentAudio && currentPlayingAyah === n) {
+        if (currentAudio.paused) {
+          currentAudio.play().catch(e => console.warn('Audio play failed:', e));
+        } else {
+          currentAudio.pause();
+        }
+        updateAudioButtonUi();
+        return;
+      }
+
+      if (currentAudio) {
+        currentAudio.pause();
+        currentAudio.currentTime = 0;
+        currentAudio = null;
+      }
+
+      const ayahPad = String(n).padStart(3, '0');
+      const audioUrl = `https://everyayah.com/data/Nasser_Alqatami_128kbps/039${ayahPad}.mp3`;
+      currentAudio = new Audio(audioUrl);
+      currentPlayingAyah = n;
+
+      currentAudio.addEventListener('play', () => updateAudioButtonUi());
+      currentAudio.addEventListener('pause', () => updateAudioButtonUi());
+      currentAudio.addEventListener('ended', () => {
+        currentPlayingAyah = null;
+        currentAudio = null;
+        updateAudioButtonUi();
+      });
+      currentAudio.addEventListener('timeupdate', () => {
+        if (currentAudio && currentAudio.duration) {
+          const pct = Math.min(100, (currentAudio.currentTime / currentAudio.duration) * 100);
+          const prog = document.querySelector('#audio-progress-bar');
+          if (prog) prog.style.width = pct + '%';
+        }
+      });
+      currentAudio.addEventListener('error', (err) => {
+        console.warn('Audio load error:', err);
+        currentAudio = null;
+        currentPlayingAyah = null;
+        updateAudioButtonUi();
+      });
+
+      currentAudio.play().catch(e => {
+        console.warn('Playback error or blocked by browser:', e);
+        updateAudioButtonUi();
+      });
+      updateAudioButtonUi();
+    }
+
     /* ───────── Ayah view ───────── */
     const viewAyah = $('#view-ayah');
 
@@ -14875,7 +15033,7 @@ const QUIZ = [
         </article>`).join('');
 
       const prev = n === 1
-        ? `<a class="prev" href="#start"><small>← Back</small><span>Start</span></a>`
+        ? `<a class="prev" href="#start"><small>← Back</small><span>Directory</span></a>`
         : `<a class="prev" href="#ayah-${n - 1}"><small>← Previous</small><span>Ayah ${n - 1}</span></a>`;
       const next = n === AYAT.length
         ? `<a class="next" href="#links"><small>Next →</small><span>Connections</span></a>`
@@ -14887,6 +15045,19 @@ const QUIZ = [
             <div>
               <p class="eyebrow">Ayah ${n} of ${AYAT.length} · 39:${n}</p>
               <h1 class="ayah-title">${A.title}</h1>
+            </div>
+            <div class="ayah-audio-ctrl">
+              <button type="button" class="btn-audio-play" id="btn-audio-play" aria-label="Play recitation of Ayah ${n} by Qari Nasser Al-Qatami" title="Listen (Qari Nasser Al-Qatami · ناصر القطامي)">
+                <span class="audio-play-icon">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" class="icon-play" aria-hidden="true"><polygon points="6 4 20 12 6 20 6 4"/></svg>
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" class="icon-pause" style="display:none" aria-hidden="true"><rect x="5" y="4" width="4" height="16" rx="1"/><rect x="15" y="4" width="4" height="16" rx="1"/></svg>
+                </span>
+                <span class="audio-btn-text">Listen · ناصر القطامي</span>
+                <span class="audio-wave" aria-hidden="true" style="display:none">
+                  <span></span><span></span><span></span>
+                </span>
+                <div class="audio-progress-bar" id="audio-progress-bar" style="width:0%"></div>
+              </button>
             </div>
           </div>
           <p class="ayah" lang="ar" dir="rtl">${tokens}<span class="ayah-no" aria-hidden="true">${toArDigits(n)}</span></p>
@@ -14903,6 +15074,12 @@ const QUIZ = [
         <div class="qs">${qs}</div>
 
         <nav class="pager" aria-label="Ayah navigation">${prev}${next}</nav>`;
+
+      const playBtn = viewAyah.querySelector('#btn-audio-play');
+      if (playBtn) {
+        playBtn.addEventListener('click', () => toggleAudio(n));
+        updateAudioButtonUi();
+      }
 
       const buttons = [...viewAyah.querySelectorAll('.w')];
       const panel = $('#panel', viewAyah);
@@ -15260,6 +15437,12 @@ let quizInterval = null;
     function route(scroll) {
       clearAutoAdvance();
       removeToast();
+      const nextKey = location.hash.slice(1) || 'start';
+      const mMatch = nextKey.match(/^ayah-(\d+)$/);
+      const targetAyah = mMatch ? Number(mMatch[1]) : 0;
+      if (targetAyah !== currentPlayingAyah) {
+        stopAudio();
+      }
       let key = location.hash.slice(1) || 'start';
       const m = key.match(/^ayah-(\d+)$/);
       let ayahNum = m ? Number(m[1]) : 0;
@@ -15296,7 +15479,7 @@ let quizInterval = null;
   </script>
 
   <footer style="text-align:center;padding:20px;color:var(--ink-3);font-size:0.85rem;border-top:1px solid var(--line);margin-top:60px">
-    Surah Az-Zumar 1–75 (Complete Surah) · v2.4.0 (updated 2026-10-06 21:45) · <a href="https://github.com/islamwell/zumar">github</a>
+    Surah Az-Zumar 1–75 (Complete Surah) · v2.4.1 (updated 2026-10-06 22:42) · <a href="https://github.com/islamwell/zumar">github</a>
   </footer>
 </body>
 </html>
