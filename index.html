@@ -529,7 +529,7 @@
 
     /* ───────── Ayah card ───────── */
     .ayah-card { padding: 24px 24px 20px; }
-    .ayah-top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+    .ayah-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
     .ayah-title { font-size: 1.35rem; font-weight: 700; margin-top: 2px; }
     .ayah {
       direction: rtl;
@@ -14916,8 +14916,10 @@ const QUIZ = [
     function updateAudioButtonUi() {
       const btn = document.querySelector('#btn-audio-play');
       if (!btn) return;
-      const isPlaying = currentAudio && !currentAudio.paused && currentPlayingAyah === currentAyah;
+      const isPlaying = Boolean(currentAudio && !currentAudio.paused && currentPlayingAyah === currentAyah);
       btn.classList.toggle('is-playing', isPlaying);
+      btn.setAttribute('aria-pressed', String(isPlaying));
+      btn.setAttribute('aria-label', `${isPlaying ? 'Pause' : 'Play'} recitation of Ayah ${currentAyah} by Qari Nasser Al-Qatami`);
       const iconPlay = btn.querySelector('.icon-play');
       const iconPause = btn.querySelector('.icon-pause');
       const wave = btn.querySelector('.audio-wave');
@@ -14969,10 +14971,25 @@ const QUIZ = [
         }
       });
       currentAudio.addEventListener('error', (err) => {
-        console.warn('Audio load error:', err);
+        console.warn('Audio load error for Ayah', n, err);
         currentAudio = null;
         currentPlayingAyah = null;
         updateAudioButtonUi();
+        let toastContainer = document.getElementById('toast-container');
+        if (!toastContainer) {
+          toastContainer = document.createElement('div');
+          toastContainer.id = 'toast-container';
+          toastContainer.className = 'toast-container';
+          document.body.appendChild(toastContainer);
+        }
+        toastContainer.innerHTML = `
+          <div class="toast toast-wrong" role="alert">
+            <span class="toast-msg">
+              <span class="toast-icon">⚠️</span>
+              <span>Audio recitation temporarily unavailable.</span>
+            </span>
+          </div>`;
+        setTimeout(() => removeToast(), 4000);
       });
 
       currentAudio.play().catch(e => {
@@ -15351,7 +15368,7 @@ let quizInterval = null;
       const q = query.trim().toLowerCase();
       const buttons = ayahModalGrid.querySelectorAll('.ayah-pick-btn');
       buttons.forEach((btn) => {
-        const text = btn.textContent.toLowerCase();
+        const text = (btn.dataset.search || btn.textContent).toLowerCase();
         const match = !q || text.includes(q);
         btn.style.display = match ? 'flex' : 'none';
       });
@@ -15373,7 +15390,7 @@ let quizInterval = null;
 
       if (ayahModalGrid) {
         ayahModalGrid.innerHTML = AYAT.map((a) => `
-          <a class="ayah-pick-btn" href="#ayah-${a.n}" data-n="${a.n}">
+          <a class="ayah-pick-btn" href="#ayah-${a.n}" data-n="${a.n}" data-search="ayah ${a.n} ${toArDigits(a.n)} ${a.title} ${a.tr}">
             <div class="ayah-pick-top">
               <span class="ayah-pick-num">Ayah ${a.n}</span>
               <span class="ayah-pick-ar" lang="ar">${toArDigits(a.n)}</span>
@@ -15437,15 +15454,12 @@ let quizInterval = null;
     function route(scroll) {
       clearAutoAdvance();
       removeToast();
-      const nextKey = location.hash.slice(1) || 'start';
-      const mMatch = nextKey.match(/^ayah-(\d+)$/);
-      const targetAyah = mMatch ? Number(mMatch[1]) : 0;
-      if (targetAyah !== currentPlayingAyah) {
-        stopAudio();
-      }
       let key = location.hash.slice(1) || 'start';
       const m = key.match(/^ayah-(\d+)$/);
       let ayahNum = m ? Number(m[1]) : 0;
+      if (ayahNum !== currentPlayingAyah) {
+        stopAudio();
+      }
       if (ayahNum < 1 || ayahNum > AYAT.length) {
         if (m) { key = 'start'; ayahNum = 0; }
       }
@@ -15479,7 +15493,7 @@ let quizInterval = null;
   </script>
 
   <footer style="text-align:center;padding:20px;color:var(--ink-3);font-size:0.85rem;border-top:1px solid var(--line);margin-top:60px">
-    Surah Az-Zumar 1–75 (Complete Surah) · v2.4.1 (updated 2026-10-06 22:42) · <a href="https://github.com/islamwell/zumar">github</a>
+    Surah Az-Zumar 1–75 (Complete Surah) · v2.4.2 (updated 2026-10-13 23:55) · <a href="https://github.com/islamwell/zumar">github</a>
   </footer>
 </body>
 </html>
