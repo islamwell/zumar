@@ -457,75 +457,70 @@
       align-items: center;
       gap: 10px;
     }
-    .btn-audio-play {
+    /* ── Circular ring audio button ── */
+    .btn-audio-ring {
       position: relative;
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 8px 16px;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      background: var(--surface);
-      color: var(--ink);
-      font-size: 0.88rem;
-      font-weight: 600;
+      justify-content: center;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      border: none;
+      background: transparent;
       cursor: pointer;
-      overflow: hidden;
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      padding: 0;
+      flex-shrink: 0;
     }
-    .btn-audio-play:hover {
-      background: var(--accent-subtle);
-      border-color: var(--accent);
-      color: var(--accent);
-      transform: translateY(-1px);
+    .btn-audio-ring:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
     }
-    .btn-audio-play.is-playing {
-      background: color-mix(in srgb, var(--accent) 15%, var(--surface));
-      border-color: var(--accent);
-      color: var(--accent);
-      box-shadow: 0 4px 12px color-mix(in srgb, var(--accent) 25%, transparent);
+    /* SVG ring sits behind the icon */
+    .audio-ring-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg); /* start fill from top */
     }
-    .audio-play-icon {
-      display: inline-flex;
+    /* Background circle (track) */
+    .audio-ring-bg {
+      fill: none;
+      stroke: #e0e0e0;
+      stroke-width: 3;
+    }
+    /* Foreground fill — red when paused, green when playing */
+    .audio-ring-fill {
+      fill: none;
+      stroke: #e53935;          /* red = stopped/paused */
+      stroke-width: 3;
+      stroke-linecap: round;
+      stroke-dasharray: 113.097; /* 2π × 18 */
+      stroke-dashoffset: 113.097;
+      transition: stroke-dashoffset 0.15s linear, stroke 0.25s ease;
+    }
+    .btn-audio-ring.is-playing .audio-ring-fill {
+      stroke: #43a047;           /* green = playing */
+    }
+    /* Icon sits on top, centred */
+    .audio-ring-icon {
+      position: relative;
+      z-index: 1;
+      display: flex;
       align-items: center;
       justify-content: center;
-      width: 18px;
-      height: 18px;
+      color: #e53935;            /* red when paused */
+      transition: color 0.25s ease;
     }
-    .audio-wave {
-      display: inline-flex;
-      align-items: center;
-      gap: 2.5px;
-      height: 14px;
-      margin-left: 2px;
+    .btn-audio-ring.is-playing .audio-ring-icon {
+      color: #43a047;            /* green when playing */
     }
-    .audio-wave span {
-      display: inline-block;
-      width: 2.5px;
-      height: 100%;
-      background: currentColor;
-      border-radius: 2px;
-      animation: audioWaveBar 0.9s ease-in-out infinite alternate;
-    }
-    .audio-wave span:nth-child(1) { animation-delay: 0.1s; }
-    .audio-wave span:nth-child(2) { animation-delay: 0.35s; }
-    .audio-wave span:nth-child(3) { animation-delay: 0.6s; }
-
-    @keyframes audioWaveBar {
-      0% { height: 3px; }
-      100% { height: 14px; }
-    }
-
-    .audio-progress-bar {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      height: 3px;
-      background: var(--accent);
-      transition: width 0.1s linear;
-      pointer-events: none;
-    }
+    .audio-ring-icon .icon-play,
+    .audio-ring-icon .icon-pause { display: block; }
+    .audio-ring-icon .icon-pause { display: none; }
+    .btn-audio-ring.is-playing .audio-ring-icon .icon-play  { display: none; }
+    .btn-audio-ring.is-playing .audio-ring-icon .icon-pause { display: block; }
 
     /* ───────── Ayah card ───────── */
     .ayah-card { padding: 24px 24px 20px; }
@@ -14919,18 +14914,13 @@ const QUIZ = [
       const isPlaying = Boolean(currentAudio && !currentAudio.paused && currentPlayingAyah === currentAyah);
       btn.classList.toggle('is-playing', isPlaying);
       btn.setAttribute('aria-pressed', String(isPlaying));
-      btn.setAttribute('aria-label', `${isPlaying ? 'Pause' : 'Play'} recitation of Ayah ${currentAyah} by Qari Nasser Al-Qatami`);
-      const iconPlay = btn.querySelector('.icon-play');
-      const iconPause = btn.querySelector('.icon-pause');
-      const wave = btn.querySelector('.audio-wave');
-      const label = btn.querySelector('.audio-btn-text');
-      const prog = btn.querySelector('#audio-progress-bar');
-      if (iconPlay) iconPlay.style.display = isPlaying ? 'none' : 'inline-block';
-      if (iconPause) iconPause.style.display = isPlaying ? 'inline-block' : 'none';
-      if (wave) wave.style.display = isPlaying ? 'inline-flex' : 'none';
-      if (label) label.textContent = isPlaying ? 'Playing · ناصر القطامي' : 'Listen · ناصر القطامي';
-      if (!isPlaying && prog && (!currentAudio || currentAudio.ended)) {
-        prog.style.width = '0%';
+      btn.setAttribute('aria-label', `${isPlaying ? 'Pause' : 'Play'} recitation of Ayah ${currentAyah}`);
+      // Reset ring to 0 when stopped/ended
+      if (!isPlaying) {
+        const ring = document.querySelector('#audio-ring-fill');
+        if (ring && (!currentAudio || currentAudio.ended || currentPlayingAyah !== currentAyah)) {
+          ring.style.strokeDashoffset = '113.097';
+        }
       }
     }
 
@@ -14961,13 +14951,18 @@ const QUIZ = [
       currentAudio.addEventListener('ended', () => {
         currentPlayingAyah = null;
         currentAudio = null;
+        const ring = document.querySelector('#audio-ring-fill');
+        if (ring) ring.style.strokeDashoffset = '113.097';
         updateAudioButtonUi();
       });
       currentAudio.addEventListener('timeupdate', () => {
         if (currentAudio && currentAudio.duration) {
           const pct = Math.min(100, (currentAudio.currentTime / currentAudio.duration) * 100);
-          const prog = document.querySelector('#audio-progress-bar');
-          if (prog) prog.style.width = pct + '%';
+          const ring = document.querySelector('#audio-ring-fill');
+          if (ring) {
+            const circumference = 113.097;
+            ring.style.strokeDashoffset = circumference - (pct / 100) * circumference;
+          }
         }
       });
       currentAudio.addEventListener('error', (err) => {
@@ -15064,16 +15059,18 @@ const QUIZ = [
               <h1 class="ayah-title">${A.title}</h1>
             </div>
             <div class="ayah-audio-ctrl">
-              <button type="button" class="btn-audio-play" id="btn-audio-play" aria-label="Play recitation of Ayah ${n} by Qari Nasser Al-Qatami" title="Listen (Qari Nasser Al-Qatami · ناصر القطامي)">
-                <span class="audio-play-icon">
-                  <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" class="icon-play" aria-hidden="true"><polygon points="6 4 20 12 6 20 6 4"/></svg>
-                  <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" class="icon-pause" style="display:none" aria-hidden="true"><rect x="5" y="4" width="4" height="16" rx="1"/><rect x="15" y="4" width="4" height="16" rx="1"/></svg>
+              <button type="button" class="btn-audio-ring" id="btn-audio-play" aria-label="Play recitation of Ayah ${n}" aria-pressed="false">
+                <!-- Circular progress ring -->
+                <svg class="audio-ring-svg" viewBox="0 0 46 46" aria-hidden="true">
+                  <circle class="audio-ring-bg"   cx="23" cy="23" r="18"/>
+                  <circle class="audio-ring-fill" id="audio-ring-fill" cx="23" cy="23" r="18"
+                    stroke-dasharray="113.097" stroke-dashoffset="113.097"/>
+                </svg>
+                <!-- Play / Pause icon -->
+                <span class="audio-ring-icon" aria-hidden="true">
+                  <svg class="icon-play"  viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><polygon points="7 4 21 12 7 20 7 4"/></svg>
+                  <svg class="icon-pause" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><rect x="5" y="4" width="4" height="16" rx="1"/><rect x="15" y="4" width="4" height="16" rx="1"/></svg>
                 </span>
-                <span class="audio-btn-text">Listen · ناصر القطامي</span>
-                <span class="audio-wave" aria-hidden="true" style="display:none">
-                  <span></span><span></span><span></span>
-                </span>
-                <div class="audio-progress-bar" id="audio-progress-bar" style="width:0%"></div>
               </button>
             </div>
           </div>
@@ -15493,7 +15490,7 @@ let quizInterval = null;
   </script>
 
   <footer style="text-align:center;padding:20px;color:var(--ink-3);font-size:0.85rem;border-top:1px solid var(--line);margin-top:60px">
-    Surah Az-Zumar 1–75 (Complete Surah) · v2.4.2 (updated 2026-10-13 23:55) · <a href="https://github.com/islamwell/zumar">github</a>
+    Surah Az-Zumar 1–75 (Complete Surah) · v2.4.3 (updated 2026-10-21 13:15) · <a href="https://github.com/islamwell/zumar">github</a>
   </footer>
 </body>
 </html>
